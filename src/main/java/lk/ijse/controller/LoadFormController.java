@@ -63,7 +63,7 @@ public class LoadFormController  implements Initializable {
                 stage1.close();
 
                 Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/mainWindow_Form.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainWindow_From.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
