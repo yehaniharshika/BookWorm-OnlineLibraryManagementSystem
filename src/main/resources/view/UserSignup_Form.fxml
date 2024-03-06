@@ -1,14 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.controller.UserSignupFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserSignupFormController">
+   <children>
+      <ImageView fitHeight="900.0" fitWidth="1400.0">
+         <image>
+            <Image url="@../../../../../../../Downloads/main.jpg" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutX="795.0" layoutY="97.0" prefHeight="771.0" prefWidth="536.0" style="-fx-background-color: #f5f6fa; -fx-background-radius: 2;">
+         <children>
+            <TextField fx:id="txtUserID" layoutX="93.0" layoutY="60.0" prefHeight="50.0" prefWidth="351.0" promptText="User ID" style="-fx-background-color: #1B97B0;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtFristname" layoutX="93.0" layoutY="127.0" prefHeight="50.0" prefWidth="351.0" promptText="Frist Name" style="-fx-background-color: #1B97B0;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtLastname" layoutX="93.0" layoutY="192.0" prefHeight="50.0" prefWidth="351.0" promptText="Last name" style="-fx-background-color: #1B97B0;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtNIC" layoutX="93.0" layoutY="260.0" prefHeight="50.0" prefWidth="351.0" promptText="NIC Number" style="-fx-background-color: #1B97B0;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtEmailAddress" layoutX="93.0" layoutY="329.0" prefHeight="50.0" prefWidth="351.0" promptText="Email Address" style="-fx-background-color: #1B97B0;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtPassword" layoutX="93.0" layoutY="467.0" prefHeight="50.0" prefWidth="351.0" promptText="Password" style="-fx-background-color: #1B97B0;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtUserName" layoutX="93.0" layoutY="397.0" prefHeight="50.0" prefWidth="351.0" promptText="User Name" style="-fx-background-color: #1B97B0;">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </TextField>
+            <JFXButton layoutX="148.0" layoutY="544.0" onAction="#btnCreateAccountOnAction" prefHeight="47.0" prefWidth="214.0" style="-fx-background-color: #2d3436; -fx-background-radius: 22; -fx-border-radius: 22; -fx-border-color: #ffffff;" text="CREATE ACCOUNT" textFill="#fcfafa">
+               <font>
+                  <Font name="Gidugu" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label layoutX="110.0" layoutY="602.0" prefHeight="21.0" prefWidth="214.0" text="Already have an account?" textFill="#636e72">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="324.0" layoutY="600.0" onAction="#hyperLoginHereOnAction" prefHeight="24.0" prefWidth="102.0" text="Login here">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Hyperlink>
+            <Label layoutX="114.0" layoutY="712.0" prefHeight="33.0" prefWidth="340.0" text="Books are a uniquely portable magic !!!!" textFill="#b51616">
+               <font>
+                  <Font name="MathJax_Main-Bold" size="17.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="69.0" layoutY="641.0" onAction="#btnUpdateAccountOnAction" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="UPDATE ACCOUNT" textFill="#fcfafa">
+               <font>
+                  <Font name="Gidugu" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="284.0" layoutY="641.0" onAction="#btnDeleteAccountOnAction" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="DELETE ACCOUNT" textFill="#fcfafa">
+               <font>
+                  <Font name="Gidugu" size="20.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
 </AnchorPane>
