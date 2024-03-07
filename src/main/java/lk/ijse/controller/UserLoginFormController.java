@@ -3,6 +3,7 @@ package lk.ijse.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -38,8 +39,17 @@ public class UserLoginFormController {
     }
 
     @FXML
-    void hyperSignUpOnAction(ActionEvent event) {
+    void hyperSignUpOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/UserSignup_Form.fxml"));
 
+        Scene scene = new Scene(rootNode);
+
+        UserRoot.getScene().getWindow();
+        Stage primaryStage = (Stage) UserRoot.getScene().getWindow();
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Signup Form");
+        primaryStage.show();
     }
 
 }
