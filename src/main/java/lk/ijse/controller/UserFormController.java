@@ -1,9 +1,18 @@
 package lk.ijse.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.UserSignupBOImpl;
+import lk.ijse.dao.tm.UserSignupTM;
+import lk.ijse.dto.UserSignupDTO;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class UserFormController {
 
@@ -32,6 +41,46 @@ public class UserFormController {
     private AnchorPane root;
 
     @FXML
-    private TableView<?> tblUserDetails;
+    private TableView<UserSignupTM> tblUserDetails;
+
+    public UserSignupBOImpl userSignupBO = new UserSignupBOImpl();
+
+    public void initialize(){
+        loadAllUsers();
+        setCellValueFactory();
+    }
+
+    private void setCellValueFactory() {
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colFristName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        colNICNumber.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colEmailAddress.setCellValueFactory(new PropertyValueFactory<>("emailAddress"));
+        colUserName.setCellValueFactory(new PropertyValueFactory<>("username"));
+        colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+    }
+
+    private void loadAllUsers() {
+        ObservableList<UserSignupTM> obList = FXCollections.observableArrayList();
+
+        try {
+
+            List<UserSignupDTO> userList = userSignupBO.getAllUsers();
+
+            for (UserSignupDTO dto : userList){
+                obList.add(new UserSignupTM(
+                        dto.getUserID(),
+                        dto.getFirstName(),
+                        dto.getLastName(),
+                        dto.getNic(),
+                        dto.getEmailAddress(),
+                        dto.getUsername(),
+                        dto.getPassword()));
+            }
+            tblUserDetails.setItems(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
