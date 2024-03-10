@@ -1,4 +1,4 @@
-package lk.ijse.dao.tm;
+package lk.ijse.dto;
 
 import lombok.*;
 
@@ -7,8 +7,8 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class UserSignupTM {
-    private String userID;
+public class AdminSignupDTO {
+    private String adminID;
     private String firstName;
     private String lastName;
     private String nic;

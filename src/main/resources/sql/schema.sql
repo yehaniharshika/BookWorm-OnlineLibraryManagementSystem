@@ -2,6 +2,17 @@ drop database if exists BookWarm;
 create database if not exists BookWarm;
 use BookWarm;
 
+create table admin(
+    adminID varchar(20) primary key ,
+    firstName varchar(200) not null,
+    lastName varchar(250) not null,
+    nic varchar(20) not null ,
+    emailAddress text not null ,
+    username varchar(30) not null ,
+    password varchar(20) not null
+);
+
+
 create table user(
     userID varchar(15) primary key ,
     firstName varchar(200) not null,
@@ -10,22 +21,24 @@ create table user(
     emailAddress text not null ,
     username varchar(30) not null ,
     password varchar(20) not null
-
 );
 
 
 create table libraryBranch(
-
+    branchId varchar(15) primary key,
+    branchName varchar(200) not null ,
+    location varchar(200) not null ,
+    description text not null ,
+    constraint foreign key(adminID) references admin(adminID) on update cascade on DELETE cascade
 );
 
+
 create  table book(
-     ISBN varchar(10) primary key ,
+     bookID varchar(15) primary key ,
      bookName varchar(100) not null ,
      category varchar(20) not null,
      qtyOnHand int not null,
-     rackCode varchar(10),
-     authorId varchar(10),
-     constraint foreign key(rackCode) references bookRack(rackCode) on update cascade on delete cascade,
-     constraint foreign key(authorId) references  author(authorId) on update cascade on delete cascade
+
+
 );
 

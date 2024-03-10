@@ -28,13 +28,13 @@ public class UserSignupBOImpl implements UserSignUpBo{
     @Override
     public boolean updateUser(UserSignupDTO dto) throws SQLException {
         return userSignUpDAO.update(new User(
+                dto.getUserID(),
                 dto.getFirstName(),
                 dto.getLastName(),
                 dto.getNic(),
                 dto.getEmailAddress(),
                 dto.getUsername(),
-                dto.getPassword(),
-                dto.getUserID())
+                dto.getPassword())
         );
     }
 

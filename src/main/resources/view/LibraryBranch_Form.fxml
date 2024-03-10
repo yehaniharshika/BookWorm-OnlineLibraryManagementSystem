@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="childpane" prefHeight="887.0" prefWidth="1256.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #c8d6e5;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LibraryBranchFormController">
+   <children>
+      <TextField fx:id="txtBranchId" layoutX="50.0" layoutY="207.0" onAction="#txtBranchIdOnAction" prefHeight="49.0" prefWidth="343.0" promptText="Branch ID" style="-fx-border-color: #2d3436;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtBranchName" layoutX="50.0" layoutY="268.0" prefHeight="49.0" prefWidth="343.0" promptText="Branch Name" style="-fx-border-color: #2d3436;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtLocation" layoutX="50.0" layoutY="330.0" prefHeight="49.0" prefWidth="343.0" promptText="Location" style="-fx-border-color: #2d3436;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextArea fx:id="txtDescription" layoutX="50.0" layoutY="392.0" prefHeight="215.0" prefWidth="343.0" promptText="Description" style="-fx-border-color: #222f3e;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextArea>
+      <TableView fx:id="tblLibraryBranch" layoutX="414.0" layoutY="151.0" prefHeight="719.0" prefWidth="822.0">
+        <columns>
+          <TableColumn fx:id="colBranchId" prefWidth="135.0" text="Branch ID" />
+          <TableColumn fx:id="colBranchName" prefWidth="174.0" text="Branch Name" />
+            <TableColumn fx:id="colLocation" prefWidth="225.0" text="Location" />
+            <TableColumn fx:id="colDescription" prefWidth="287.0" text="Description" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btnSave" layoutX="56.0" layoutY="630.0" onAction="#btnSaveOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #e84393; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="  SAVE" textFill="#f5f3f3">
+         <font>
+            <Font name="KacstOne Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnUpdate" layoutX="56.0" layoutY="694.0" onAction="#btnUpdateOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #192a56; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="UPDATE" textFill="#f5f3f3">
+         <font>
+            <Font name="KacstOne Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnDelete" layoutX="56.0" layoutY="758.0" onAction="#btnDeleteOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #b71540; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="DELETE" textFill="#f5f3f3">
+         <font>
+            <Font name="KacstOne Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnClear" layoutX="56.0" layoutY="818.0" onAction="#btnClearOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #2d3436; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="CLEAR" textFill="#f5f3f3">
+         <font>
+            <Font name="KacstOne Bold" size="15.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="cmbAdminId" layoutX="169.0" layoutY="153.0" onAction="#cmbAdminOnAction" prefHeight="37.0" prefWidth="223.0" />
+      <Label layoutX="50.0" layoutY="159.0" prefHeight="41.0" prefWidth="108.0" text="Admin ID :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

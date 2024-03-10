@@ -8,8 +8,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.UserSignupBOImpl;
-import lk.ijse.dao.tm.UserSignupTM;
 import lk.ijse.dto.UserSignupDTO;
+import lk.ijse.dto.tm.UserSignupTM;
 
 import java.sql.SQLException;
 import java.util.List;

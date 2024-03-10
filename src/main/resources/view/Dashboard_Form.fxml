@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainRoot" prefHeight="900.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.DashboardFormController">
+<AnchorPane fx:id="MainRoot" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.DashboardFormController">
    <children>
       <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="887.0" prefWidth="323.0" style="-fx-background-color: #81ecec; -fx-background-radius: 8;">
          <children>
@@ -54,9 +54,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <AnchorPane fx:id="Root" layoutX="338.0" layoutY="7.0" prefHeight="887.0" prefWidth="1154.0" style="-fx-background-color: #a4b0be; -fx-background-radius: 8;">
+      <AnchorPane fx:id="Root" layoutX="338.0" layoutY="7.0" prefHeight="887.0" prefWidth="1256.0" style="-fx-background-color: #a4b0be; -fx-background-radius: 8;">
          <children>
-            <AnchorPane layoutX="27.0" layoutY="22.0" prefHeight="257.0" prefWidth="1097.0" style="-fx-background-color: #95a5a6; -fx-border-color: #222f3e;">
+            <AnchorPane layoutX="27.0" layoutY="22.0" prefHeight="257.0" prefWidth="1200.0" style="-fx-background-color: #95a5a6; -fx-border-color: #222f3e;">
                <children>
                   <AnchorPane layoutX="29.0" layoutY="26.0" prefHeight="185.0" prefWidth="216.0" style="-fx-background-color: #1B97B0; -fx-background-radius: 10;">
                      <children>

@@ -33,8 +33,17 @@ public class AdminLoginFormController {
     }
 
     @FXML
-    void hyperSignUpOnAction(ActionEvent event) {
+    void hyperSignUpOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/AdminSignup_Form.fxml"));
 
+        Scene scene = new Scene(rootNode);
+
+        adminRoot.getScene().getWindow();
+        Stage primaryStage = (Stage) adminRoot.getScene().getWindow();
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Signup Form");
+        primaryStage.show();
     }
 
     @FXML

@@ -40,8 +40,6 @@ public class MainWindowFromController  implements Initializable {
     @FXML
     private Label lblMenu;
 
-
-
     @FXML
     private void navigate(MouseEvent event) throws IOException {
         if (event.getSource() instanceof ImageView) {
@@ -51,7 +49,7 @@ public class MainWindowFromController  implements Initializable {
 
             switch (imageView.getId()) {
                 case "imgAdmin":
-                    root = FXMLLoader.load(this.getClass().getResource("/view/AdminLogin_Form.fxml"));
+                    root = FXMLLoader.load(this.getClass().getResource("/view/Dashboard_Form.fxml"));
                     break;
                 case "imgUser":
                     root = FXMLLoader.load(this.getClass().getResource("/view/UserLogin_Form.fxml"));
