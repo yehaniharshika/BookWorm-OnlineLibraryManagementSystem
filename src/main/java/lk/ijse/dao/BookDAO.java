@@ -1,4 +1,6 @@
 package lk.ijse.dao;
 
-public interface BookDAO {
+import lk.ijse.entity.Book;
+
+public interface BookDAO extends crudDAO<Book> {
 }

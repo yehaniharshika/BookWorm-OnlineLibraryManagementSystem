@@ -23,6 +23,8 @@ create table user(
     password varchar(20) not null
 );
 
+insert into admin values("AD001","Gagani","Bandara","200279602914","gagani@gmail.com","gagani","12");
+select * from admin where adminID="AD001" and  username="gagani" and password="12";
 
 create table libraryBranch(
     branchId varchar(15) primary key,
@@ -35,10 +37,9 @@ create table libraryBranch(
 
 create  table book(
      bookID varchar(15) primary key ,
-     bookName varchar(100) not null ,
-     category varchar(20) not null,
-     qtyOnHand int not null,
-
-
+     bookName varchar(300) not null ,
+     authorName varchar(300) not null,
+     bookGenre varchar(200) not null,
+     qty int not null
 );
 
