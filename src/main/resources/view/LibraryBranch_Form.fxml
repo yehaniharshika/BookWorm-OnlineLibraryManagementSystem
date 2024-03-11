@@ -13,7 +13,7 @@
 
 <AnchorPane fx:id="childpane" prefHeight="887.0" prefWidth="1256.0" style="-fx-background-radius: 8; -fx-border-radius: 8; -fx-background-color: #c8d6e5;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LibraryBranchFormController">
    <children>
-      <TextField fx:id="txtBranchId" layoutX="50.0" layoutY="207.0" onAction="#txtBranchIdOnAction" prefHeight="49.0" prefWidth="343.0" promptText="Branch ID" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtBranchId" layoutX="50.0" layoutY="207.0" onAction="#txtSearchOnAction" prefHeight="49.0" prefWidth="343.0" promptText="Branch ID" style="-fx-border-color: #2d3436;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

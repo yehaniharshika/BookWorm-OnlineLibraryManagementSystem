@@ -1,6 +1,7 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom.impl;
 
-import lk.ijse.dao.LibraryBranchDAOImpl;
+import lk.ijse.bo.custom.LibraryBranchBO;
+import lk.ijse.dao.custom.impl.LibraryBranchDAOImpl;
 import lk.ijse.dto.LibraryBranchDTO;
 import lk.ijse.entity.LibraryBranch;
 
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryBranchBOImpl implements LibraryBranchBO{
+public class LibraryBranchBOImpl implements LibraryBranchBO {
 
     public LibraryBranchDAOImpl libraryBranchDAO = new LibraryBranchDAOImpl();
 
@@ -49,12 +50,10 @@ public class LibraryBranchBOImpl implements LibraryBranchBO{
 
         LibraryBranch libraryBranch = libraryBranchDAO.search(branchID);
 
-        if (libraryBranch == null){
+        if (libraryBranch != null){
             return new LibraryBranchDTO(libraryBranch);
-        }else {
-            return null;
         }
-
+            return null;
     }
 
     @Override

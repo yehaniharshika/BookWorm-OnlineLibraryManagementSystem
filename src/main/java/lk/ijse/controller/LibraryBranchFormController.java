@@ -7,11 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.bo.AdminSignupBOImpl;
-import lk.ijse.bo.LibraryBranchBOImpl;
+import lk.ijse.bo.custom.impl.AdminSignupBOImpl;
+import lk.ijse.bo.custom.impl.LibraryBranchBOImpl;
 import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.dto.LibraryBranchDTO;
+import lk.ijse.dto.tm.LibraryBranchTM;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class LibraryBranchFormController {
     private TableColumn<?, ?> colLocation;
 
     @FXML
-    private TableView<?> tblLibraryBranch;
+    private TableView<LibraryBranchTM> tblLibraryBranch;
 
     @FXML
     private TextField txtBranchId;
@@ -68,6 +70,38 @@ public class LibraryBranchFormController {
 
     public void initialize(){
         loadAllAdminIds();
+        getAllLibraryBranches();
+        setCellValueFactory();
+    }
+
+    private void setCellValueFactory() {
+        colBranchId.setCellValueFactory(new PropertyValueFactory<>("branchID"));
+        colBranchName.setCellValueFactory(new PropertyValueFactory<>("branchName"));
+        colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+
+    }
+
+    private void getAllLibraryBranches() {
+        ObservableList<LibraryBranchTM> obList = FXCollections.observableArrayList();
+
+        try {
+            ArrayList<LibraryBranchDTO> libraryBranchList = libraryBranchBO.getAllLibraryBranches();
+
+            for (LibraryBranchDTO dto : libraryBranchList){
+                obList.add(new LibraryBranchTM(
+                        dto.getBranchID(),
+                        dto.getBranchName(),
+                        dto.getLocation(),
+                        dto.getDescription(),
+                        dto.getAdminID()
+                ));
+            }
+            tblLibraryBranch.setItems(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void loadAllAdminIds() {
@@ -95,12 +129,24 @@ public class LibraryBranchFormController {
         txtBranchName.setText("");
         txtLocation.setText("");
         txtDescription.setText("");
-        cmbAdminId.setItems(null);
+        cmbAdminId.setValue("");
     }
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        String branchID = txtBranchId.getText();
 
+        try {
+            boolean isDeleted = libraryBranchBO.deleteLibraryBranch(branchID);
+
+            if (isDeleted){
+                new Alert(Alert.AlertType.INFORMATION,"deleted !!").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"not deleted !!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -109,7 +155,7 @@ public class LibraryBranchFormController {
         String branchName = txtBranchName.getText();
         String location = txtLocation.getText();
         String description = txtDescription.getText();
-        String adminID = cmbAdminId.getId();
+        String adminID = cmbAdminId.getValue();
 
         var dto = new LibraryBranchDTO(branchID,branchName,location,description,adminID);
 
@@ -133,7 +179,7 @@ public class LibraryBranchFormController {
         String branchName = txtBranchName.getText();
         String location = txtLocation.getText();
         String description = txtDescription.getText();
-        String adminID = cmbAdminId.getId();
+        String adminID = cmbAdminId.getValue();
 
         var dto = new LibraryBranchDTO(branchID,branchName,location,description,adminID);
 
@@ -153,12 +199,26 @@ public class LibraryBranchFormController {
 
     @FXML
     void cmbAdminOnAction(ActionEvent event) {
-
+        String adminID = cmbAdminId.getValue();
     }
 
     @FXML
-    void txtBranchIdOnAction(ActionEvent event) {
+    void txtSearchOnAction(ActionEvent event) {
+        String branchID = txtBranchId.getText();
 
+        try {
+            LibraryBranchDTO dto = libraryBranchBO.searchLibraryBranch(branchID);
+
+            if (dto != null){
+                txtBranchId.setText(dto.getBranchID());
+                txtBranchName.setText(dto.getBranchName());
+                txtLocation.setText(dto.getLocation());
+                txtDescription.setText(dto.getDescription());
+                cmbAdminId.setValue(dto.getAdminID());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }
