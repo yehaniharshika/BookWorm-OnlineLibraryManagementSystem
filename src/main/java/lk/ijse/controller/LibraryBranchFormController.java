@@ -118,9 +118,12 @@ public class LibraryBranchFormController {
 
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
+                clearFields();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"adding not successfully!!!").show();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
