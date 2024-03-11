@@ -1,4 +1,6 @@
 package lk.ijse.dao;
 
-public interface LibraryBranchDAO extends crudDAO{
+import lk.ijse.entity.LibraryBranch;
+
+public interface LibraryBranchDAO extends crudDAO<LibraryBranch>{
 }

@@ -27,10 +27,11 @@ insert into admin values("AD001","Gagani","Bandara","200279602914","gagani@gmail
 select * from admin where adminID="AD001" and  username="gagani" and password="12";
 
 create table libraryBranch(
-    branchId varchar(15) primary key,
+    branchID varchar(15) primary key,
     branchName varchar(200) not null ,
     location varchar(200) not null ,
     description text not null ,
+    adminID varchar(15),
     constraint foreign key(adminID) references admin(adminID) on update cascade on DELETE cascade
 );
 
@@ -40,6 +41,9 @@ create  table book(
      bookName varchar(300) not null ,
      authorName varchar(300) not null,
      bookGenre varchar(200) not null,
-     qty int not null
+     qty int not null,
+     branchID varchar(15),
+     constraint foreign key(branchID) references libraryBranch(branchID) on update cascade on delete cascade
+
 );
 
