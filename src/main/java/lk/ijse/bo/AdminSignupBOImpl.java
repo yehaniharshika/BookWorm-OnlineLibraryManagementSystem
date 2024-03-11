@@ -7,6 +7,8 @@ import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.entity.Admin;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AdminSignupBOImpl implements AdminSignupBO{
 
@@ -46,5 +48,24 @@ public class AdminSignupBOImpl implements AdminSignupBO{
     @Override
     public UserSignupDTO searchAdmin(String adminID) throws SQLException {
         return null;
+    }
+
+    @Override
+    public ArrayList<AdminSignupDTO> getAllAdmins() throws SQLException {
+        List<Admin> AllAdminList = adminSignupDAO.getAll();
+        ArrayList<AdminSignupDTO> adminSignupDTOS = new ArrayList<>();
+
+        for (Admin admin : AllAdminList){
+            adminSignupDTOS.add(new AdminSignupDTO(
+                    admin.getAdminID(),
+                    admin.getFirstName(),
+                    admin.getLastName(),
+                    admin.getNic(),
+                    admin.getEmailAddress(),
+                    admin.getUsername(),
+                    admin.getPassword()
+            ));
+        }
+        return adminSignupDTOS;
     }
 }

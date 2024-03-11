@@ -3,6 +3,7 @@ package lk.ijse.dao;
 import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.entity.Admin;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -55,6 +56,21 @@ public class AdminSignupDAOImpl implements AdminSignupDAO {
 
     @Override
     public ArrayList<Admin> getAll() throws SQLException {
-        return null;
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM admin");
+
+        ArrayList<Admin> adminList = new ArrayList<>();
+
+        while (resultSet.next()){
+            adminList.add(new Admin(
+                  resultSet.getString(1),
+                  resultSet.getString(2),
+                  resultSet.getString(3),
+                  resultSet.getString(4),
+                  resultSet.getString(5),
+                  resultSet.getString(6),
+                  resultSet.getString(7)
+            ));
+        }
+        return adminList;
     }
 }
