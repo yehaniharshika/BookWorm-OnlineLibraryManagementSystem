@@ -129,7 +129,26 @@ public class LibraryBranchFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        String branchID = txtBranchId.getText();
+        String branchName = txtBranchName.getText();
+        String location = txtLocation.getText();
+        String description = txtDescription.getText();
+        String adminID = cmbAdminId.getId();
 
+        var dto = new LibraryBranchDTO(branchID,branchName,location,description,adminID);
+
+        try {
+            boolean isUpdated = libraryBranchBO.updateLibraryBranch(dto);
+
+            if (isUpdated){
+                new Alert(Alert.AlertType.CONFIRMATION,"Updated!!!").show();
+                clearFields();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"not Updated!!!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
