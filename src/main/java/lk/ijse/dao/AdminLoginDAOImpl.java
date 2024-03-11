@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class AdminLoginDAOImpl implements AdminLoginDAO{
     @Override
     public  boolean checkAdminCredentials(String adminID,String  username,String password) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM librarian WHERE adminID =?  and username=?  and password=?",adminID,username,password);
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM admin WHERE adminID =?  and username=?  and password=?",adminID,username,password);
 
         String AdminID = null;
         String UserName = null;

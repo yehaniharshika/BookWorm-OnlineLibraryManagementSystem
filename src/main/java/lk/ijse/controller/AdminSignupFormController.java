@@ -3,12 +3,18 @@ package lk.ijse.controller;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lk.ijse.bo.AdminSignupBOImpl;
 import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.dto.UserSignupDTO;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class AdminSignupFormController {
@@ -42,6 +48,8 @@ public class AdminSignupFormController {
 
     @FXML
     private TextField txtUserName;
+    @FXML
+    private AnchorPane root;
 
     public AdminSignupBOImpl adminSignupBO = new AdminSignupBOImpl();
 
@@ -110,8 +118,16 @@ public class AdminSignupFormController {
     }
 
     @FXML
-    void hyperLoginHereOnAction(ActionEvent event) {
+    void hyperLoginHereOnAction(ActionEvent event) throws IOException {
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/AdminLogin_Form.fxml"));
 
+        Scene scene = new Scene(rootNode);
+
+        root.getScene().getWindow();
+        Stage primaryStage = (Stage) root.getScene().getWindow();
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Login Form");
     }
 
     @FXML

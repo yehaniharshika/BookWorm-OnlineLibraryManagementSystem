@@ -1,5 +1,6 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,13 @@ public class AdminDashboardFormController {
     private AnchorPane Root;
 
     @FXML
+    private JFXButton btnBook;
+
+    @FXML
+    private JFXButton btnLibraryBranch;
+
+
+    @FXML
     private Label lblAuthorCount;
 
     @FXML
@@ -32,6 +40,23 @@ public class AdminDashboardFormController {
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
 
+    }
+
+    @FXML
+    void btnBookOnAction(ActionEvent event) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/Book_Form.fxml"));
+
+        this.Root.getChildren().clear();
+        this.Root.getChildren().add(node);
+    }
+
+
+    @FXML
+    void btnLibraryBranchOnAction(ActionEvent event) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/LibraryBranch_Form.fxml"));
+
+        this.Root.getChildren().clear();
+        this.Root.getChildren().add(node);
     }
 
     @FXML

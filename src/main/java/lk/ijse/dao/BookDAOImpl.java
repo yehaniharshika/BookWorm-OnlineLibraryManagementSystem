@@ -30,7 +30,7 @@ public class BookDAOImpl implements BookDAO{
 
     @Override
     public boolean update(Book entity) throws SQLException {
-        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qty=?",
+        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qty=? WHERE bookID=?",
                 entity.getBookName(),
                 entity.getAuthorName(),
                 entity.getBookGenre(),

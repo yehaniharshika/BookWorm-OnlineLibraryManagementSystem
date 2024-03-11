@@ -48,9 +48,30 @@ public class BookFormController {
 
     public BookBOImpl bookBO =  new BookBOImpl();
 
+    public void initialize(){
+        setAvailability();
+    }
+
+    private void setAvailability() {
+
+        if(txtQty == null){
+            txtAvailability.setText("Non Availability");
+        }else{
+            txtAvailability.setText("Availability");
+        }
+    }
+
     @FXML
     void btnClearOnAction(ActionEvent event) {
+        clearFields();
+    }
 
+    private void clearFields() {
+        txtBookId.setText("");
+        txtBookName.setText("");
+        txtAuthorName.setText("");
+        txtGenre.setText("");
+        txtQty.setText("");
     }
 
     @FXML
@@ -84,6 +105,7 @@ public class BookFormController {
             boolean isSaved = bookBO.saveBook(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
+                clearFields();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
             }
@@ -106,6 +128,7 @@ public class BookFormController {
             boolean isUpdated= bookBO.updateBook(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"updated!!!").show();
+                clearFields();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
             }
@@ -118,6 +141,23 @@ public class BookFormController {
     void txtBookIDOnAction(ActionEvent event) {
         String bookID  = txtBookId.getText();
 
+        try {
+            BookDTO dto = bookBO.searchBook(bookID);
+
+            if (dto!= null){
+                txtBookId.setText(dto.getBookID());
+                txtBookName.setText(dto.getBookName());
+                txtAuthorName.setText(dto.getAuthorName());
+                txtGenre.setText(dto.getBookGenre());
+                txtQty.setText(String.valueOf(dto.getQty()));
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Book not found!!!").show();
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

@@ -20,7 +20,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="31.0" layoutY="254.0" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="            Book ">
+            <JFXButton fx:id="btnBook" layoutX="31.0" layoutY="254.0" onAction="#btnBookOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="            Book ">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -36,7 +36,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="31.0" layoutY="175.0" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="Library Branch">
+            <JFXButton fx:id="btnLibraryBranch" layoutX="31.0" layoutY="175.0" onAction="#btnLibraryBranchOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="Library Branch">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
