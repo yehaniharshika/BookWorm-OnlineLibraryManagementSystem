@@ -1,6 +1,7 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom.impl;
 
-import lk.ijse.dao.BookDAOImpl;
+import lk.ijse.bo.custom.BookBO;
+import lk.ijse.dao.custom.impl.BookDAOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.entity.Book;
 
@@ -8,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookBOImpl implements BookBO{
+public class BookBOImpl implements BookBO {
 
     public BookDAOImpl bookDAO = new BookDAOImpl();
     @Override
@@ -18,7 +19,8 @@ public class BookBOImpl implements BookBO{
                 dto.getBookName(),
                 dto.getAuthorName(),
                 dto.getBookGenre(),
-                dto.getQty()
+                dto.getQty(),
+                dto.getBranchID()
         ));
     }
 
@@ -29,7 +31,8 @@ public class BookBOImpl implements BookBO{
                 dto.getBookName(),
                 dto.getAuthorName(),
                 dto.getBookGenre(),
-                dto.getQty()
+                dto.getQty(),
+                dto.getBranchID()
         ));
     }
 
@@ -60,7 +63,8 @@ public class BookBOImpl implements BookBO{
                     book.getBookName(),
                     book.getAuthorName(),
                     book.getBookGenre(),
-                    book.getQty()
+                    book.getQty(),
+                    book.getBranchID()
             ));
         }
         return bookDTOS;

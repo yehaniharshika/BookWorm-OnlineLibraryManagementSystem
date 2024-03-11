@@ -1,12 +1,14 @@
-package lk.ijse.dao;
+package lk.ijse.dao.custom.impl;
 
+import lk.ijse.dao.SQLUtil;
+import lk.ijse.dao.custom.BookDAO;
 import lk.ijse.entity.Book;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BookDAOImpl implements BookDAO{
+public class BookDAOImpl implements BookDAO {
     @Override
     public String getCount() throws SQLException {
         return "";
@@ -19,22 +21,24 @@ public class BookDAOImpl implements BookDAO{
 
     @Override
     public boolean save(Book entity) throws SQLException {
-        return SQLUtil.execute("INSERT INTO book VALUES(?,?,?,?,?)",
+        return SQLUtil.execute("INSERT INTO book VALUES(?,?,?,?,?,?)",
                 entity.getBookID(),
                 entity.getBookName(),
                 entity.getAuthorName(),
                 entity.getBookGenre(),
-                entity.getQty()
+                entity.getQty(),
+                entity.getBranchID()
         );
     }
 
     @Override
     public boolean update(Book entity) throws SQLException {
-        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qty=? WHERE bookID=?",
+        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qty=?,branchID=? WHERE bookID=?",
                 entity.getBookName(),
                 entity.getAuthorName(),
                 entity.getBookGenre(),
                 entity.getQty(),
+                entity.getBranchID(),
                 entity.getBookID()
         );
     }
@@ -55,7 +59,8 @@ public class BookDAOImpl implements BookDAO{
                     resultSet.getString("bookName"),
                     resultSet.getString("authorName"),
                     resultSet.getString("bookGenre"),
-                    resultSet.getInt("qty")
+                    resultSet.getInt("qty"),
+                    resultSet.getString("branchID")
             );
         }
         return entity;
@@ -73,7 +78,8 @@ public class BookDAOImpl implements BookDAO{
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getInt(5)
+                    resultSet.getInt(5),
+                    resultSet.getString(6)
             ));
         }
         return bookList;

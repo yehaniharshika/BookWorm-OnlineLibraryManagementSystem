@@ -1,17 +1,27 @@
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.bo.BookBOImpl;
+import lk.ijse.bo.custom.impl.BookBOImpl;
+import lk.ijse.bo.custom.impl.LibraryBranchBOImpl;
 import lk.ijse.dto.BookDTO;
+import lk.ijse.dto.LibraryBranchDTO;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class BookFormController {
+
+    @FXML
+    private JFXComboBox<String> cmbBranchId;
 
     @FXML
     private JFXButton btnClear;
@@ -24,6 +34,9 @@ public class BookFormController {
 
     @FXML
     private JFXButton btnUpdate;
+
+    @FXML
+    private Label lblBranchName;
 
     @FXML
     private AnchorPane miniRoot;
@@ -47,23 +60,32 @@ public class BookFormController {
     private TextField txtQty;
 
     public BookBOImpl bookBO =  new BookBOImpl();
+    public LibraryBranchBOImpl libraryBranchBO = new LibraryBranchBOImpl();
 
-    public void initialize(){
-        setAvailability();
-    }
-
-    private void setAvailability() {
-
-        if(txtQty == null){
-            txtAvailability.setText("Non Availability");
-        }else{
-            txtAvailability.setText("Availability");
-        }
-    }
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
         clearFields();
+    }
+
+    public void  initialize(){
+        loadAllBranchIDs();
+    }
+
+    private void loadAllBranchIDs() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            ArrayList<LibraryBranchDTO> idList = libraryBranchBO.getAllLibraryBranches();
+
+            for (LibraryBranchDTO dto : idList){
+                obList.add(dto.getBranchID());
+            }
+            cmbBranchId.setItems(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void clearFields() {
@@ -72,6 +94,8 @@ public class BookFormController {
         txtAuthorName.setText("");
         txtGenre.setText("");
         txtQty.setText("");
+        cmbBranchId.setValue("");
+        lblBranchName.setText("");
     }
 
     @FXML
@@ -98,8 +122,9 @@ public class BookFormController {
         String authorName = txtAuthorName.getText();
         String bookGenre = txtGenre.getText();
         int qty = Integer.parseInt(txtQty.getText());
+        String branchID = cmbBranchId.getValue();
 
-        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qty);
+        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qty,branchID);
 
         try {
             boolean isSaved = bookBO.saveBook(dto);
@@ -121,8 +146,9 @@ public class BookFormController {
         String authorName = txtAuthorName.getText();
         String bookGenre = txtGenre.getText();
         int qty = Integer.parseInt(txtQty.getText());
+        String branchID = cmbBranchId.getValue();
 
-        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qty);
+        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qty,branchID);
 
         try {
             boolean isUpdated= bookBO.updateBook(dto);
@@ -137,8 +163,25 @@ public class BookFormController {
         }
     }
 
+
     @FXML
-    void txtBookIDOnAction(ActionEvent event) {
+    void cmbBranchOnAction(ActionEvent event) {
+        String branchID = cmbBranchId.getValue();
+
+        try {
+            LibraryBranchDTO libraryBranchDTO = libraryBranchBO.searchLibraryBranch(branchID);
+            if (libraryBranchDTO!= null){
+                lblBranchName.setText(String.valueOf(libraryBranchDTO.getBranchName()));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void txtSearchOnAction(ActionEvent event) {
         String bookID  = txtBookId.getText();
 
         try {
@@ -150,6 +193,7 @@ public class BookFormController {
                 txtAuthorName.setText(dto.getAuthorName());
                 txtGenre.setText(dto.getBookGenre());
                 txtQty.setText(String.valueOf(dto.getQty()));
+                cmbBranchId.setValue(dto.getBranchID());
             }else{
                 new Alert(Alert.AlertType.ERROR,"Book not found!!!").show();
 
@@ -158,7 +202,6 @@ public class BookFormController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }

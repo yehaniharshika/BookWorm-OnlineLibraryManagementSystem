@@ -5,8 +5,8 @@ import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @Setter
+@Getter
 @ToString
 public class BookDTO {
     private String bookID;
@@ -14,6 +14,7 @@ public class BookDTO {
     private String authorName;
     private String bookGenre;
     private int qty;
+    private String branchID;
 
     public BookDTO(Book book) {
         this.bookID = book.getBookID();
@@ -21,5 +22,6 @@ public class BookDTO {
         this.authorName = book.getAuthorName();
         this.bookGenre = book.getBookGenre();
         this.qty = book.getQty();
+        this.branchID = book.getBranchID();
     }
 }
