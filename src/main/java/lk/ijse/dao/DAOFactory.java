@@ -1,5 +1,7 @@
 package lk.ijse.dao;
 
+import lk.ijse.dao.custom.impl.UserSignupDAOImpl;
+
 public class DAOFactory {
 
     private static DAOFactory daoFactory;

@@ -7,7 +7,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.bo.UserSignupBOImpl;
+import lk.ijse.bo.custom.impl.UserSignupBOImpl;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.dto.tm.UserSignupTM;
 

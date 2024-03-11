@@ -1,9 +1,9 @@
-package lk.ijse.dao;
+package lk.ijse.dao.custom.impl;
 
-import lk.ijse.dto.UserSignupDTO;
+import lk.ijse.dao.SQLUtil;
+import lk.ijse.dao.custom.UserSignUpDAO;
 import lk.ijse.entity.User;
 
-import javax.swing.text.html.parser.Entity;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

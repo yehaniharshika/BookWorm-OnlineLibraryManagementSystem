@@ -12,7 +12,7 @@
    <children>
       <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="887.0" prefWidth="323.0" style="-fx-background-color: #81ecec; -fx-background-radius: 8;">
          <children>
-            <JFXButton layoutX="31.0" layoutY="584.0" onAction="#btnDashboardOnAction" prefHeight="54.0" prefWidth="276.0" style="-fx-background-color: #2d3436;" text="LOG OUT" textFill="#fffcfc">
+            <JFXButton layoutX="24.0" layoutY="606.0" onAction="#btnDashboardOnAction" prefHeight="54.0" prefWidth="276.0" style="-fx-background-color: #2d3436;" text="LOG OUT" textFill="#fffcfc">
                <font>
                   <Font name="Gidugu" size="24.0" />
                </font>
@@ -20,7 +20,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnBook" layoutX="31.0" layoutY="254.0" onAction="#btnBookOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="            Book ">
+            <JFXButton fx:id="btnBook" layoutX="24.0" layoutY="290.0" onAction="#btnBookOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="            Book ">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -28,7 +28,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="31.0" layoutY="407.0" onAction="#btnUserInformationOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="User Information">
+            <JFXButton layoutX="24.0" layoutY="384.0" onAction="#btnUserInformationOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="User Information">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -36,9 +36,25 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnLibraryBranch" layoutX="31.0" layoutY="175.0" onAction="#btnLibraryBranchOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="Library Branch">
+            <JFXButton fx:id="btnLibraryBranch" layoutX="24.0" layoutY="198.0" onAction="#btnLibraryBranchOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="Library Branch">
                <font>
                   <Font name="System Bold" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnUserTransaction" layoutX="24.0" layoutY="477.0" onAction="#btnUserTransactionOnAction" prefHeight="60.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="User Transaction">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="24.0" layoutY="77.0" prefHeight="54.0" prefWidth="276.0" style="-fx-background-color: #2d3436;" text="         DASHBOARD" textFill="#fffcfc">
+               <font>
+                  <Font name="Gidugu" size="24.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -46,14 +62,6 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <JFXButton layoutX="41.0" layoutY="67.0" prefHeight="54.0" prefWidth="276.0" style="-fx-background-color: #2d3436;" text="         DASHBOARD" textFill="#fffcfc">
-         <font>
-            <Font name="Gidugu" size="24.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
       <AnchorPane fx:id="Root" layoutX="338.0" layoutY="7.0" prefHeight="887.0" prefWidth="1256.0" style="-fx-background-color: #a4b0be; -fx-background-radius: 8;">
          <children>
             <AnchorPane layoutX="27.0" layoutY="22.0" prefHeight="257.0" prefWidth="1200.0" style="-fx-background-color: #95a5a6; -fx-border-color: #222f3e;">

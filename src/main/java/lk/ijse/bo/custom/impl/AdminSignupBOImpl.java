@@ -1,7 +1,8 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom.impl;
 
-import lk.ijse.dao.AdminSignupDAO;
-import lk.ijse.dao.AdminSignupDAOImpl;
+import lk.ijse.bo.custom.AdminSignupBO;
+import lk.ijse.dao.custom.AdminSignupDAO;
+import lk.ijse.dao.custom.impl.AdminSignupDAOImpl;
 import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.entity.Admin;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminSignupBOImpl implements AdminSignupBO{
+public class AdminSignupBOImpl implements AdminSignupBO {
 
     private AdminSignupDAO adminSignupDAO = new AdminSignupDAOImpl();
 

@@ -1,10 +1,11 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom.impl;
 
-import lk.ijse.dao.UserLoginDAOImpl;
+import lk.ijse.bo.custom.UserLoginBO;
+import lk.ijse.dao.custom.impl.UserLoginDAOImpl;
 
 import java.sql.SQLException;
 
-public class UserLoginBoImpl implements UserLoginBO{
+public class UserLoginBoImpl implements UserLoginBO {
 
     public UserLoginDAOImpl userLoginDAO = new UserLoginDAOImpl();
     @Override

@@ -1,6 +1,7 @@
-package lk.ijse.dao;
+package lk.ijse.dao.custom.impl;
 
-import lk.ijse.dto.AdminSignupDTO;
+import lk.ijse.dao.SQLUtil;
+import lk.ijse.dao.custom.AdminSignupDAO;
 import lk.ijse.entity.Admin;
 
 import java.sql.ResultSet;

@@ -10,8 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.bo.UserSignupBOImpl;
-import lk.ijse.dao.UserSignupDAOImpl;
+import lk.ijse.bo.custom.impl.UserSignupBOImpl;
 import lk.ijse.dto.UserSignupDTO;
 
 import java.io.IOException;

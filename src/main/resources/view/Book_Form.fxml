@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="miniRoot" prefHeight="887.0" prefWidth="1156.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.BookFormController">
+<AnchorPane fx:id="miniRoot" prefHeight="887.0" prefWidth="1256.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.BookFormController">
    <children>
-      <TextField fx:id="txtBookId" layoutX="419.0" layoutY="163.0" onAction="#txtBookIDOnAction" prefHeight="48.0" prefWidth="432.0" promptText="Book ID" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtBookId" layoutX="419.0" layoutY="237.0" onAction="#txtSearchOnAction" prefHeight="48.0" prefWidth="432.0" promptText="Book ID" style="-fx-border-color: #2d3436;">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -17,7 +18,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtBookName" layoutX="419.0" layoutY="227.0" prefHeight="48.0" prefWidth="432.0" promptText="Book Name" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtBookName" layoutX="419.0" layoutY="305.0" prefHeight="48.0" prefWidth="432.0" promptText="Book Name" style="-fx-border-color: #2d3436;">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -25,7 +26,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtAuthorName" layoutX="419.0" layoutY="291.0" prefHeight="48.0" prefWidth="432.0" promptText="Author" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtAuthorName" layoutX="419.0" layoutY="371.0" prefHeight="48.0" prefWidth="432.0" promptText="Author" style="-fx-border-color: #2d3436;">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -33,7 +34,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtGenre" layoutX="419.0" layoutY="357.0" prefHeight="48.0" prefWidth="432.0" promptText="Book Genre" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtGenre" layoutX="419.0" layoutY="434.0" prefHeight="48.0" prefWidth="432.0" promptText="Book Genre" style="-fx-border-color: #2d3436;">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -41,7 +42,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtAvailability" layoutX="419.0" layoutY="483.0" prefHeight="48.0" prefWidth="432.0" promptText="availability_status" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtAvailability" layoutX="419.0" layoutY="563.0" prefHeight="48.0" prefWidth="432.0" promptText="availability_status" style="-fx-border-color: #2d3436;">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -49,7 +50,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtQty" layoutX="419.0" layoutY="420.0" prefHeight="48.0" prefWidth="432.0" promptText="Qty" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtQty" layoutX="419.0" layoutY="497.0" prefHeight="48.0" prefWidth="432.0" promptText="Qty" style="-fx-border-color: #2d3436;">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -57,37 +58,37 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <Label layoutX="262.0" layoutY="173.0" prefHeight="28.0" prefWidth="94.0" text="Book ID :">
+      <Label layoutX="250.0" layoutY="247.0" prefHeight="28.0" prefWidth="94.0" text="Book ID :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="262.0" layoutY="237.0" prefHeight="28.0" prefWidth="94.0" text="Book Name :">
+      <Label layoutX="250.0" layoutY="315.0" prefHeight="28.0" prefWidth="94.0" text="Book Name :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="262.0" layoutY="301.0" prefHeight="28.0" prefWidth="115.0" text="Author name : ">
+      <Label layoutX="247.0" layoutY="381.0" prefHeight="28.0" prefWidth="115.0" text="Author name : ">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="262.0" layoutY="430.0" prefHeight="28.0" prefWidth="94.0" text="Book Qty :">
+      <Label layoutX="250.0" layoutY="507.0" prefHeight="28.0" prefWidth="94.0" text="Book Qty :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="262.0" layoutY="493.0" prefHeight="28.0" prefWidth="160.0" text="Availability Status :">
+      <Label layoutX="252.0" layoutY="573.0" prefHeight="28.0" prefWidth="160.0" text="Availability Status :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="262.0" layoutY="367.0" prefHeight="28.0" prefWidth="109.0" text="Book Genre :">
+      <Label layoutX="250.0" layoutY="444.0" prefHeight="28.0" prefWidth="109.0" text="Book Genre :">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnSave" layoutX="170.0" layoutY="616.0" onAction="#btnSaveOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #e84393; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="  SAVE" textFill="#f5f3f3">
+      <JFXButton fx:id="btnSave" layoutX="191.0" layoutY="692.0" onAction="#btnSaveOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #e84393; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="  SAVE" textFill="#f5f3f3">
          <font>
             <Font name="KacstOne Bold" size="15.0" />
          </font>
@@ -95,7 +96,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnUpdate" layoutX="391.0" layoutY="616.0" onAction="#btnUpdateOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #192a56; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="UPDATE" textFill="#f5f3f3">
+      <JFXButton fx:id="btnUpdate" layoutX="401.0" layoutY="692.0" onAction="#btnUpdateOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #192a56; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="UPDATE" textFill="#f5f3f3">
          <font>
             <Font name="KacstOne Bold" size="15.0" />
          </font>
@@ -103,7 +104,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" layoutX="616.0" layoutY="616.0" onAction="#btnDeleteOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #b71540; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="DELETE" textFill="#f5f3f3">
+      <JFXButton fx:id="btnDelete" layoutX="626.0" layoutY="692.0" onAction="#btnDeleteOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #b71540; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="DELETE" textFill="#f5f3f3">
          <font>
             <Font name="KacstOne Bold" size="15.0" />
          </font>
@@ -111,7 +112,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton fx:id="btnClear" layoutX="828.0" layoutY="616.0" onAction="#btnClearOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #2d3436; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="CLEAR" textFill="#f5f3f3">
+      <JFXButton fx:id="btnClear" layoutX="832.0" layoutY="692.0" onAction="#btnClearOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #2d3436; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="CLEAR" textFill="#f5f3f3">
          <font>
             <Font name="KacstOne Bold" size="15.0" />
          </font>
@@ -119,5 +120,21 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <JFXComboBox fx:id="cmbBranchId" layoutX="419.0" layoutY="88.0" onAction="#cmbBranchOnAction" prefHeight="48.0" prefWidth="394.0" />
+      <Label layoutX="247.0" layoutY="99.0" prefHeight="37.0" prefWidth="115.0" text="Branch ID :">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="247.0" layoutY="166.0" prefHeight="37.0" prefWidth="143.0" text="Branch Name :">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblBranchName" layoutX="419.0" layoutY="161.0" prefHeight="48.0" prefWidth="239.0" textFill="#c31818">
+         <font>
+            <Font name="System Bold" size="17.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

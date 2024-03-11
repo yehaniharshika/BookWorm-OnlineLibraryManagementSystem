@@ -1,12 +1,9 @@
-package lk.ijse.dao;
+package lk.ijse.dao.custom;
 
-import lk.ijse.dto.UserSignupDTO;
+import lk.ijse.dao.crudDAO;
 import lk.ijse.entity.User;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-public interface UserSignUpDAO extends crudDAO<User>{
+public interface UserSignUpDAO extends crudDAO<User> {
    /* boolean saveUser(UserSignupDTO dto) throws SQLException;
     boolean updateUser(UserSignupDTO dto) throws SQLException;
     boolean deleteUser(String userID) throws SQLException;

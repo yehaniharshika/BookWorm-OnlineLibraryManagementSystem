@@ -1,6 +1,5 @@
 package lk.ijse.controller;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +9,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import lk.ijse.bo.AdminLoginBOImpl;
+import lk.ijse.bo.custom.impl.AdminLoginBOImpl;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 
 public class AdminLoginFormController {

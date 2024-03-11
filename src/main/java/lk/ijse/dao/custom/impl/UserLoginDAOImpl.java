@@ -1,9 +1,12 @@
-package lk.ijse.dao;
+package lk.ijse.dao.custom.impl;
+
+import lk.ijse.dao.SQLUtil;
+import lk.ijse.dao.custom.UserLoginDAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserLoginDAOImpl implements UserLoginDAO{
+public class UserLoginDAOImpl implements UserLoginDAO {
 
     @Override
     public boolean checkUserCredentials(String username,String password) throws SQLException {

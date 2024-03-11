@@ -1,10 +1,8 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom;
 
 import lk.ijse.dto.UserSignupDTO;
-import lk.ijse.entity.User;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface UserSignUpBo {

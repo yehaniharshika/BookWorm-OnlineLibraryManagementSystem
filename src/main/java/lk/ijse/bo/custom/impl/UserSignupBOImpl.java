@@ -1,7 +1,8 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom.impl;
 
-import lk.ijse.dao.UserSignUpDAO;
-import lk.ijse.dao.UserSignupDAOImpl;
+import lk.ijse.bo.custom.UserSignUpBo;
+import lk.ijse.dao.custom.UserSignUpDAO;
+import lk.ijse.dao.custom.impl.UserSignupDAOImpl;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.entity.User;
 
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserSignupBOImpl implements UserSignUpBo{
+public class UserSignupBOImpl implements UserSignUpBo {
 
     public UserSignUpDAO userSignUpDAO = new UserSignupDAOImpl();
     @Override

@@ -1,4 +1,4 @@
-package lk.ijse.bo;
+package lk.ijse.bo.custom;
 
 import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.dto.UserSignupDTO;

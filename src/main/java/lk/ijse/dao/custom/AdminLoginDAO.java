@@ -1,7 +1,7 @@
-package lk.ijse.bo;
+package lk.ijse.dao.custom;
 
 import java.sql.SQLException;
 
-public interface AdminLoginBO {
+public interface AdminLoginDAO {
     boolean checkAdminCredentials(String adminID,String  username,String password) throws SQLException;
 }

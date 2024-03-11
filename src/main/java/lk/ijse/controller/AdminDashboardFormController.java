@@ -19,6 +19,9 @@ public class AdminDashboardFormController {
     private AnchorPane Root;
 
     @FXML
+    private JFXButton btnUserTransaction;
+
+    @FXML
     private JFXButton btnBook;
 
     @FXML
@@ -36,6 +39,8 @@ public class AdminDashboardFormController {
 
     @FXML
     private Label lblMemberCount;
+
+
 
     @FXML
     void btnDashboardOnAction(ActionEvent event) {
@@ -65,7 +70,12 @@ public class AdminDashboardFormController {
 
         this.Root.getChildren().clear();
         this.Root.getChildren().add(node);
+    }
+
+    @FXML
+    void btnUserTransactionOnAction(ActionEvent event) {
 
     }
+
 
 }
