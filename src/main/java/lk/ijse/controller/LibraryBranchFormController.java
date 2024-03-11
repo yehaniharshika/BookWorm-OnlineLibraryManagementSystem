@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.AdminSignupBOImpl;
 import lk.ijse.bo.LibraryBranchBOImpl;
@@ -90,7 +87,15 @@ public class LibraryBranchFormController {
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
+        clearFields();
+    }
 
+    private void clearFields() {
+        txtBranchId.setText("");
+        txtBranchName.setText("");
+        txtLocation.setText("");
+        txtDescription.setText("");
+        cmbAdminId.setItems(null);
     }
 
     @FXML
@@ -105,6 +110,18 @@ public class LibraryBranchFormController {
         String location = txtLocation.getText();
         String description = txtDescription.getText();
         String adminID = cmbAdminId.getId();
+
+        var dto = new LibraryBranchDTO(branchID,branchName,location,description,adminID);
+
+        try {
+            boolean isSaved = libraryBranchBO.saveLibraryBranch(dto);
+
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
