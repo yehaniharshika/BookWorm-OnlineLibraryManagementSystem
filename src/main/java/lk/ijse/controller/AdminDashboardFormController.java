@@ -73,8 +73,11 @@ public class AdminDashboardFormController {
     }
 
     @FXML
-    void btnUserTransactionOnAction(ActionEvent event) {
+    void btnUserTransactionOnAction(ActionEvent event) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/Transaction_From.fxml"));
 
+        this.Root.getChildren().clear();
+        this.Root.getChildren().add(node);
     }
 
 
