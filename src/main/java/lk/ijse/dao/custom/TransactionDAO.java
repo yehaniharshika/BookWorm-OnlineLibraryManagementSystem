@@ -7,5 +7,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface TransactionDAO {
-    boolean saveTransactionDetail(PlaceTransactionDTO placeTransactions) throws SQLException;
+    boolean saveTransaction(PlaceTransactionDTO dto) throws SQLException;
 }

@@ -9,15 +9,16 @@ import java.sql.SQLException;
 public class TransactionDAOImpl implements TransactionDAO {
 
     @Override
-    public boolean saveTransactionDetail(PlaceTransactionDTO placeTransactions) throws SQLException {
-        return SQLUtil.execute("INSERT INTO transaction  (transactionID,userID,bookID,bookName,borrowedDate,dueDate,bookReturnDate,qty) VALUES (?,?,?,?,?,?,?,?)",
-                placeTransactions.getTransactionID(),
-                placeTransactions.getUserID(),
-                placeTransactions.getBookID(),
-                placeTransactions.getBookName(),
-                placeTransactions.getBorrowedDate(),
-                placeTransactions.getDueDate(),
-                placeTransactions.getBookReturnDate());
+    public boolean saveTransaction(PlaceTransactionDTO dto) throws SQLException {
+        return SQLUtil.execute("INSERT INTO transaction  (transactionID,borrowedDate,dueDate,bookReturnDate,qty,userID,bookID) VALUES (?,?,?,?,?,?,?)",
+                dto.getTransactionID(),
+                dto.getBorrowedDate(),
+                dto.getDueDate(),
+                dto.getBookReturnDate(),
+                dto.getQty(),
+                dto.getUserID(),
+                dto.getBookID()
+        );
 
     }
 }
