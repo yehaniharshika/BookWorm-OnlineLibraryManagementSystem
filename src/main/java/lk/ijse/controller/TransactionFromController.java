@@ -15,6 +15,7 @@ import lk.ijse.dto.PlaceTransactionDTO;
 import lk.ijse.dto.UserSignupDTO;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,6 +83,8 @@ public class TransactionFromController {
     public void initialize(){
         loadAllUserIDs();
         loadAllBookIDs();
+        setDate();
+
     }
 
     private void loadAllBookIDs() {
@@ -158,8 +161,23 @@ public class TransactionFromController {
 
     }
 
+    private void setDate() {
+        txtBorrowedDate.setText(String.valueOf(LocalDate.now()));
+    }
+
     @FXML
     void cmbUserOnAction(ActionEvent event) {
+        String userID = cmbUserId.getValue();
+
+        try {
+            UserSignupDTO dto = placeTransactionBo.searchUser(userID);
+
+            if (dto != null){
+                lblMemberName.setText(dto.getFirstName()+" "+dto.getLastName());
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

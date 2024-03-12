@@ -10,7 +10,7 @@ public class TransactionDAOImpl implements TransactionDAO {
 
     @Override
     public boolean saveTransaction(PlaceTransactionDTO dto) throws SQLException {
-        return SQLUtil.execute("INSERT INTO transaction  (transactionID,borrowedDate,dueDate,bookReturnDate,qty,userID,bookID) VALUES (?,?,?,?,?,?,?)",
+        return SQLUtil.execute("INSERT INTO transaction VALUES (?,?,?,?,?,?,?)",
                 dto.getTransactionID(),
                 dto.getBorrowedDate(),
                 dto.getDueDate(),

@@ -26,7 +26,7 @@ public class BookListFormController {
     private TableColumn<?, ?> colBranchId;
 
     @FXML
-    private TableColumn<?, ?> colQty;
+    private TableColumn<?, ?> colQtyOnHand;
 
     @FXML
     private AnchorPane root;
@@ -35,4 +35,5 @@ public class BookListFormController {
     private TableView<?> tblBookDetails;
 
 }
+
 
