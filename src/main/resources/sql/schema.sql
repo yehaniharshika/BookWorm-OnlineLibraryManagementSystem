@@ -41,9 +41,22 @@ create  table book(
      bookName varchar(300) not null ,
      authorName varchar(300) not null,
      bookGenre varchar(200) not null,
-     qty int not null,
+     qtyOnHand int not null,
      branchID varchar(15) not null ,
      constraint foreign key(branchID) references libraryBranch(branchID) on update cascade on delete cascade
 
 );
+
+create  table  transaction(
+    transactionID varchar(15),
+    borrowedDate date not null ,
+    dueDate date,
+    bookReturnDate date ,
+    qty int not null ,
+    userID varchar(15) not null ,
+    bookID varchar(15) not null ,
+    constraint foreign key (userID) references user(userID) on update cascade on delete cascade ,
+    constraint foreign key (bookID) references book(bookID) on update cascade  on delete cascade
+);
+
 

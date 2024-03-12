@@ -19,7 +19,7 @@ public class BookBOImpl implements BookBO {
                 dto.getBookName(),
                 dto.getAuthorName(),
                 dto.getBookGenre(),
-                dto.getQty(),
+                dto.getQtyOnHand(),
                 dto.getBranchID()
         ));
     }
@@ -31,7 +31,7 @@ public class BookBOImpl implements BookBO {
                 dto.getBookName(),
                 dto.getAuthorName(),
                 dto.getBookGenre(),
-                dto.getQty(),
+                dto.getQtyOnHand(),
                 dto.getBranchID()
         ));
     }
@@ -63,7 +63,7 @@ public class BookBOImpl implements BookBO {
                     book.getBookName(),
                     book.getAuthorName(),
                     book.getBookGenre(),
-                    book.getQty(),
+                    book.getQtyOnHand(),
                     book.getBranchID()
             ));
         }

@@ -26,18 +26,18 @@ public class BookDAOImpl implements BookDAO {
                 entity.getBookName(),
                 entity.getAuthorName(),
                 entity.getBookGenre(),
-                entity.getQty(),
+                entity.getQtyOnHand(),
                 entity.getBranchID()
         );
     }
 
     @Override
     public boolean update(Book entity) throws SQLException {
-        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qty=?,branchID=? WHERE bookID=?",
+        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qtyOnHand=?,branchID=? WHERE bookID=?",
                 entity.getBookName(),
                 entity.getAuthorName(),
                 entity.getBookGenre(),
-                entity.getQty(),
+                entity.getQtyOnHand(),
                 entity.getBranchID(),
                 entity.getBookID()
         );
@@ -59,7 +59,7 @@ public class BookDAOImpl implements BookDAO {
                     resultSet.getString("bookName"),
                     resultSet.getString("authorName"),
                     resultSet.getString("bookGenre"),
-                    resultSet.getInt("qty"),
+                    resultSet.getInt("qtyOnHand"),
                     resultSet.getString("branchID")
             );
         }
