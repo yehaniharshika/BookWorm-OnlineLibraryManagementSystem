@@ -84,4 +84,13 @@ public class BookDAOImpl implements BookDAO {
         }
         return bookList;
     }
+
+    @Override
+    public boolean updateQtyBooks(String bookID,int qtyOnHand) throws SQLException {
+        return SQLUtil.execute("UPDATE book SET qtyOnHand = qtyOnHand -  CAST(? AS SIGNED) WHERE bookID = ?",
+                qtyOnHand, bookID
+        );
+
+
+    }
 }

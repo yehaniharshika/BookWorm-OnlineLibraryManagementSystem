@@ -12,7 +12,7 @@
    <children>
       <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="887.0" prefWidth="323.0" style="-fx-background-color: #81ecec; -fx-background-radius: 8;">
          <children>
-            <JFXButton layoutX="24.0" layoutY="606.0" onAction="#btnDashboardOnAction" prefHeight="54.0" prefWidth="276.0" style="-fx-background-color: #2d3436;" text="LOG OUT" textFill="#fffcfc">
+            <JFXButton layoutX="24.0" layoutY="606.0" onAction="#btnLogoutOnAction" prefHeight="54.0" prefWidth="276.0" style="-fx-background-color: #2d3436;" text="LOG OUT" textFill="#fffcfc">
                <font>
                   <Font name="Gidugu" size="24.0" />
                </font>

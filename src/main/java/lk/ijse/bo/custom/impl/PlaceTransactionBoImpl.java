@@ -24,7 +24,7 @@ public class PlaceTransactionBoImpl implements PlaceTransactionBo {
     public TransactionDAOImpl transactionDAO = new TransactionDAOImpl();
 
 
-    @Override
+    /*@Override
     public boolean placeTransaction(List<PlaceTransactionDTO> placeTransactions) throws SQLException {
         Connection connection = null;
         connection = DBConnection.getInstance().getConnection();
@@ -70,7 +70,7 @@ public class PlaceTransactionBoImpl implements PlaceTransactionBo {
     public BookDTO findBook(String bookID) throws SQLException, ClassNotFoundException {
         Book book = bookDAO.search(bookID);
         return new BookDTO(book.getBookID(), book.getBookName(), book.getAuthorName(),book.getBookGenre(),book.getQtyOnHand(),book.getBranchID());
-    }
+    }*/
 
     @Override
     public List<UserSignupDTO> getAllUsers() throws SQLException {
@@ -107,6 +107,44 @@ public class PlaceTransactionBoImpl implements PlaceTransactionBo {
             );
         }
         return bookDtos;
+    }
+
+    @Override
+    public boolean updateQtyBooks(String bookID, int qtyOnHand) throws SQLException {
+        return bookDAO.updateQtyBooks(bookID, qtyOnHand);
+    }
+
+
+    @Override
+    public boolean saveTransactionDetail(PlaceTransactionDTO dto) throws SQLException {
+        return  transactionDAO.saveTransaction(new PlaceTransactionDTO(
+                dto.getTransactionID(),
+                dto.getBorrowedDate(),
+                dto.getDueDate(),
+                dto.getBookReturnDate(),
+                dto.getQty(),
+                dto.getUserID(),
+                dto.getBookID()
+        ));
+    }
+
+    @Override
+    public UserSignupDTO searchUser(String userID) throws SQLException {
+        User user = userSignupDAO.search(userID);
+        if (user != null){
+            return new UserSignupDTO(user);
+        }
+        return null;
+    }
+
+    @Override
+    public BookDTO searchBook(String bookID) throws SQLException {
+        Book book = bookDAO.search(bookID);
+
+        if (book != null){
+            return new BookDTO(book);
+        }
+        return null;
     }
 
     @Override
