@@ -192,7 +192,7 @@ public class BookFormController {
                 txtBookName.setText(dto.getBookName());
                 txtAuthorName.setText(dto.getAuthorName());
                 txtGenre.setText(dto.getBookGenre());
-                txtQty.setText(String.valueOf(dto.getQty()));
+                txtQty.setText(String.valueOf(dto.getQtyOnHand()));
                 cmbBranchId.setValue(dto.getBranchID());
             }else{
                 new Alert(Alert.AlertType.ERROR,"Book not found!!!").show();

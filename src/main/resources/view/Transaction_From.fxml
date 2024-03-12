@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="miniRoot" prefHeight="887.0" prefWidth="1256.0" style="-fx-background-color: #c8d6e5;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.TransactionFromController">
    <children>
       <JFXComboBox fx:id="cmbUserId" layoutX="237.0" layoutY="128.0" onAction="#cmbUserOnAction" prefHeight="37.0" prefWidth="243.0" />
@@ -36,7 +35,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="848.0" layoutY="210.0" prefHeight="33.0" prefWidth="138.0" text="Book Qty :">
+      <Label layoutX="848.0" layoutY="210.0" prefHeight="33.0" prefWidth="167.0" text="Book QtyOnHand :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -51,7 +50,7 @@
             <Font name="System Bold" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="lblBookName1" layoutX="863.0" layoutY="241.0" prefHeight="41.0" prefWidth="59.0" textFill="#c4272a">
+      <Label fx:id="lblQtyOnHand" layoutX="863.0" layoutY="241.0" prefHeight="41.0" prefWidth="59.0" textFill="#c4272a">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
@@ -82,7 +81,7 @@
             <TableColumn fx:id="colBookID" prefWidth="277.0" text="Book ID" />
          </columns>
       </TableView>
-      <JFXButton fx:id="btnAddReservation" layoutX="498.0" layoutY="437.0" onAction="#btnAddReservationOnAction" prefHeight="48.0" prefWidth="232.0" style="-fx-background-color: #30336b; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="ADD TO RESERVATION" textFill="#faf8f8">
+      <JFXButton fx:id="btnAddReservation" layoutX="856.0" layoutY="434.0" onAction="#btnAddReservationOnAction" prefHeight="48.0" prefWidth="232.0" style="-fx-background-color: #30336b; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="ADD TO RESERVATION" textFill="#faf8f8">
          <font>
             <Font name="KacstOne Bold" size="13.0" />
          </font>
@@ -90,5 +89,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <TextField fx:id="txtQty" layoutX="134.0" layoutY="437.0" onAction="#txtQty_OnAction" prefHeight="41.0" prefWidth="379.0" promptText="Qty.">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

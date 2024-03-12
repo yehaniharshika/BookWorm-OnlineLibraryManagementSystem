@@ -44,10 +44,10 @@ public class TransactionFromController {
     private Label lblBookName;
 
     @FXML
-    private Label lblBookName1;
+    private Label lblMemberName;
 
     @FXML
-    private Label lblMemberName;
+    private Label lblQtyOnHand;
 
     @FXML
     private AnchorPane miniRoot;
@@ -60,6 +60,9 @@ public class TransactionFromController {
 
     @FXML
     private DatePicker txtDueDate;
+
+    @FXML
+    private TextField txtQty;
 
     @FXML
     private TextField txtReturnDate;
@@ -83,8 +86,14 @@ public class TransactionFromController {
     }
 
     @FXML
+    void txtQty_OnAction(ActionEvent event) {
+
+    }
+
+    @FXML
     void txtTransactionIdOnAction(ActionEvent event) {
 
     }
 
 }
+
