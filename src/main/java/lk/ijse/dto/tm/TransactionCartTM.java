@@ -9,12 +9,10 @@ import lombok.*;
 @Setter
 @ToString
 public class TransactionCartTM {
-    private String transactionID;
     private String borrowedDate;
     private String dueDate;
     private String bookReturnDate;
-    private int qty;
-    private String userID;
     private String bookID;
+    private String bookName;
 
 }

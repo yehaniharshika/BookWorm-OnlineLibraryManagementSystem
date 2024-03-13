@@ -7,16 +7,15 @@ import lombok.*;
 @Getter
 @Setter
 @ToString
-public class PlaceTransactionDTO {
-    private String transactionID;
+public class BookReservationDetailsDTO {
+
     private String borrowedDate;
     private  String  dueDate;
     private String bookReturnDate;
-    private int qty;
-    private String userID;
+    //private int qty;
     private String bookID;
 
-    public PlaceTransactionDTO(PlaceTransactionDTO dto) {
+    /*public bookReservationDetailsDTO(bookReservationDetailsDTO dto) {
         this.transactionID = dto.transactionID;
         this.borrowedDate = dto.borrowedDate;
         this.dueDate = dto.dueDate;
@@ -24,5 +23,5 @@ public class PlaceTransactionDTO {
         this.qty = dto.qty;
         this.userID = dto.userID;
         this.bookID = dto.bookID;
-    }
+    }*/
 }

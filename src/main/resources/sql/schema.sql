@@ -60,4 +60,11 @@ create  table  transaction(
     constraint foreign key (bookID) references book(bookID) on update cascade  on delete cascade
 );
 
+create table reservation(
+    reservationID varchar(15) primary key ,
+    borrowDate date,
+    userID varchar(15) not null ,
+    constraint foreign key (userID) references user(userID) on update cascade  on delete cascade
+)
+
 

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="LoadPane" prefHeight="1000.0" prefWidth="1800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoadFormController">
+<AnchorPane fx:id="LoadPane" prefHeight="929.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoadFormController">
    <children>
       <ImageView fitHeight="204.0" fitWidth="223.0" layoutX="484.0" layoutY="345.0">
          <image>
@@ -19,6 +19,6 @@
             <Font name="MathJax_Main-Bold" size="70.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="progress" disable="true" layoutY="986.0" prefHeight="18.0" prefWidth="1800.0" progress="0.0" style="-fx-background-color: lightpink;" />
+      <ProgressBar fx:id="progress" disable="true" layoutY="909.0" prefHeight="18.0" prefWidth="1400.0" progress="0.0" style="-fx-background-color: lightpink;" />
    </children>
 </AnchorPane>
