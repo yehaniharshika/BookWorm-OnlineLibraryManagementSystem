@@ -42,6 +42,9 @@ public class AdminDashboardFormController {
     @FXML
     private Label lblMemberCount;
 
+    @FXML
+    private JFXButton btnBookList;
+
 
 
     @FXML
@@ -91,6 +94,15 @@ public class AdminDashboardFormController {
         stage.setTitle("BookWorm");
         stage.centerOnScreen();
     }
+
+    @FXML
+    void btnViewBookListOnAction(ActionEvent event) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/BookList_Form.fxml"));
+
+        this.Root.getChildren().clear();
+        this.Root.getChildren().add(node);
+    }
+
 
 
 

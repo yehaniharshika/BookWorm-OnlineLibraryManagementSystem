@@ -11,4 +11,7 @@ public interface BookBO {
     boolean deleteBook(String bookID) throws SQLException;
     BookDTO searchBook(String bookID) throws  SQLException;
     List<BookDTO> getAllBooks() throws SQLException;
+    String generateNextBookId() throws SQLException;
+
+
 }

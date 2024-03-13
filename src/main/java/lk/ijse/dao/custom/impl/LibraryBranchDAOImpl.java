@@ -18,34 +18,35 @@ public class LibraryBranchDAOImpl implements LibraryBranchDAO {
 
     @Override
     public String generateNextId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT branchID FROM libraryBranch ORDER BY branchID DESC LIMIT 1;");
-
-        if (resultSet.next()){
-
-            return splitLibraryBranchId(resultSet.getString("authorId"));
+        ResultSet rst = SQLUtil.execute("SELECT branchID FROM libraryBranch ORDER BY branchID DESC LIMIT 1;");
+        if (rst.next()) {
+            String id = rst.getString("branchID");
+            int newItemId = Integer.parseInt(id.replace("L00-", "")) + 1;
+            return String.format("L00-%03d", newItemId);
+        } else {
+            return "L00-001";
         }
-        return splitLibraryBranchId(null);
     }
 
-    private String splitLibraryBranchId(String currentBranchId) {
+   /* private String splitLibraryBranchId(String currentBranchId) {
         if(currentBranchId != null) {
-            String[] strings =currentBranchId.split("B0");
+            String[] strings =currentBranchId.split("LB0");
             int branchID = Integer.parseInt(strings[1]);
             branchID++;
             String ID = String.valueOf(branchID);
             int length = ID.length();
             if (length < 2){
-                return "B00"+branchID;
+                return "LB00"+branchID;
             }else {
                 if (length < 3){
-                    return "B0"+branchID;
+                    return "LB0"+branchID;
                 }else {
-                    return "B"+branchID;
+                    return "LB"+branchID;
                 }
             }
         }
-        return "B001";
-    }
+        return "LB001";
+    }*/
 
     @Override
     public boolean save(LibraryBranch entity) throws SQLException {

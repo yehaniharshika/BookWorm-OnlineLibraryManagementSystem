@@ -42,7 +42,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtAvailability" layoutX="419.0" layoutY="563.0" prefHeight="48.0" prefWidth="432.0" promptText="availability_status" style="-fx-border-color: #2d3436;">
+      <TextField fx:id="txtAvailability" layoutX="419.0" layoutY="563.0" prefHeight="48.0" prefWidth="432.0" promptText="availability_status" style="-fx-border-color: #2d3436; -fx-font-color: red;">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>

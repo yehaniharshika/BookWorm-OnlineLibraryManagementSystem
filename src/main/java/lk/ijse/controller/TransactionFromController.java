@@ -7,16 +7,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.custom.impl.PlaceTransactionBoImpl;
-import lk.ijse.bo.custom.impl.UserLoginBoImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.PlaceTransactionDTO;
 import lk.ijse.dto.UserSignupDTO;
+import lk.ijse.dto.tm.TransactionCartTM;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionFromController {
@@ -29,6 +29,9 @@ public class TransactionFromController {
 
     @FXML
     private JFXComboBox<String> cmbUserId;
+
+    @FXML
+    private JFXButton btnBookReturn;
 
     @FXML
     private TableColumn<?, ?> colBookID;
@@ -46,7 +49,7 @@ public class TransactionFromController {
     private TableColumn<?, ?> colMemberId;
 
     @FXML
-    private TableColumn<?, ?> colReservationId;
+    private TableColumn<?, ?> colTransactionId;
 
     @FXML
     private Label lblBookName;
@@ -61,7 +64,7 @@ public class TransactionFromController {
     private AnchorPane miniRoot;
 
     @FXML
-    private TableView<?> tblTransaction;
+    private TableView<TransactionCartTM> tblTransaction;
 
     @FXML
     private TextField txtBorrowedDate;
@@ -80,11 +83,56 @@ public class TransactionFromController {
 
     public PlaceTransactionBoImpl placeTransactionBo = new PlaceTransactionBoImpl();
 
-    public void initialize(){
+    public void initialize() throws SQLException {
         loadAllUserIDs();
         loadAllBookIDs();
         setDate();
+        generateNextTransactionID();
+        loadAllTransactions();
+        setCellValueFactory();
 
+    }
+
+    private void setCellValueFactory() {
+        colTransactionId.setCellValueFactory(new PropertyValueFactory<>("transactionID"));
+        colBorrowedDate.setCellValueFactory(new PropertyValueFactory<>("borrowedDate"));
+        colDueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        colBookReturnDate.setCellValueFactory(new PropertyValueFactory<>("bookReturnDate"));
+        colMemberId.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colBookID.setCellValueFactory(new PropertyValueFactory<>("bookID"));
+    }
+
+    private void loadAllTransactions() {
+        ObservableList<TransactionCartTM> obList = FXCollections.observableArrayList();
+
+        try {
+            List<PlaceTransactionDTO> allTransactions = placeTransactionBo.getAllTransactionDetails();
+
+            for (PlaceTransactionDTO dto : allTransactions){
+                obList.add(new TransactionCartTM(
+                        dto.getTransactionID(),
+                        dto.getBorrowedDate(),
+                        dto.getDueDate(),
+                        dto.getBookReturnDate(),
+                        dto.getQty(),
+                        dto.getUserID(),
+                        dto.getBookID()
+                ));
+            }
+            tblTransaction.setItems(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void generateNextTransactionID() {
+        try {
+            String transactionID = placeTransactionBo.generateNextTransactionId();
+            txtTransactionId.setText(transactionID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void loadAllBookIDs() {
@@ -136,12 +184,26 @@ public class TransactionFromController {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Adding transaction successfully!!!").show();
                 placeTransactionBo.updateQtyBooks(bookID,qty);
+                loadAllTransactions();
+                setCellValueFactory();
+                clearFields();
+                setDate();
+                generateNextTransactionID();
 
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    private void clearFields() {
+        txtTransactionId.setText("");
+        txtBorrowedDate.setText("");
+        txtReturnDate.setText("");
+        txtQty.setText("");
+        cmbUserId.setValue("");
+        cmbBookId.setValue("");
     }
 
     @FXML
@@ -188,6 +250,53 @@ public class TransactionFromController {
 
     @FXML
     void txtTransactionIdOnAction(ActionEvent event) {
+        String transactionID = txtTransactionId.getText();
+
+        try {
+            PlaceTransactionDTO dto = placeTransactionBo.searchTransactions(transactionID);
+
+            if (dto != null){
+                txtTransactionId.setText(dto.getTransactionID());
+                txtBorrowedDate.setText(dto.getBorrowedDate());
+                txtDueDate.setValue(LocalDate.parse(dto.getDueDate()));
+                txtReturnDate.setText(dto.getBookReturnDate());
+                txtQty.setText(String.valueOf(dto.getQty()));
+                cmbUserId.setValue(dto.getUserID());
+                cmbBookId.setValue(dto.getBookID());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void btnBookReturnOnAction(ActionEvent event) {
+        String transactionID = txtTransactionId.getText();
+        String borrowedDate = txtBorrowedDate.getText();
+        String dueDate = String.valueOf(txtDueDate.getValue());
+        String bookReturnDate = txtReturnDate.getText();
+        int qty = Integer.parseInt(txtQty.getText());
+        String userID = cmbUserId.getValue();
+        String bookID = cmbBookId.getValue();
+
+        var dto = new PlaceTransactionDTO(transactionID,borrowedDate,dueDate,bookReturnDate,qty,userID,bookID);
+
+        try{
+            boolean isUpdated = placeTransactionBo.updateTransactionDetail(dto);
+            if (isUpdated){
+                new Alert(Alert.AlertType.CONFIRMATION,"Book return Successfully").show();
+                placeTransactionBo.updateQtyBooks(bookID,qty);
+                loadAllTransactions();
+                setCellValueFactory();
+                clearFields();
+                setDate();
+                generateNextTransactionID();
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

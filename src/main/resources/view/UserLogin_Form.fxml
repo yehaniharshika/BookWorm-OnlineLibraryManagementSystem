@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="UserRoot" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserLoginFormController">
+<AnchorPane fx:id="userRoot" prefHeight="900.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserLoginFormController">
    <children>
       <ImageView fitHeight="900.0" fitWidth="1400.0">
          <image>
             <Image url="@../assets/main.jpg" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="735.0" layoutY="194.0" prefHeight="512.0" prefWidth="527.0" style="-fx-background-color: #ffffff; -fx-background-radius: 2;">
+      <AnchorPane layoutX="683.0" layoutY="194.0" prefHeight="512.0" prefWidth="527.0" style="-fx-background-color: #ffffff; -fx-background-radius: 2;">
          <children>
-            <TextField fx:id="txtUserName" layoutX="66.0" layoutY="75.0" prefHeight="50.0" prefWidth="396.0" promptText="User Name" style="-fx-background-color: #1B97B0;">
+            <TextField fx:id="txtUserName" layoutX="62.0" layoutY="132.0" prefHeight="50.0" prefWidth="404.0" promptText="User Name" style="-fx-background-color: #1B97B0;">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TextField>
-            <TextField fx:id="txtPassword" layoutX="66.0" layoutY="143.0" prefHeight="50.0" prefWidth="396.0" promptText="Password" style="-fx-background-color: #1B97B0;">
+            <TextField fx:id="txtPassword" layoutX="62.0" layoutY="198.0" prefHeight="50.0" prefWidth="404.0" promptText="Password" style="-fx-background-color: #1B97B0;">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -35,7 +35,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </TextField>
-            <JFXButton layoutX="66.0" layoutY="256.0" onAction="#btnLoginOnAction" prefHeight="50.0" prefWidth="176.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #f5f6fa;" text="LOGIN" textFill="#fcfafa">
+            <JFXButton layoutX="59.0" layoutY="302.0" onAction="#btnLoginOnAction" prefHeight="50.0" prefWidth="192.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #f5f6fa;" text="LOGIN" textFill="#fcfafa">
                <font>
                   <Font name="Gidugu" size="20.0" />
                </font>
@@ -58,7 +58,7 @@
                   <Font name="MathJax_Main-Bold" size="18.0" />
                </font>
             </Label>
-            <JFXButton layoutX="278.0" layoutY="256.0" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="176.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #f5f6fa;" text="BACK" textFill="#fcfafa">
+            <JFXButton layoutX="277.0" layoutY="302.0" onAction="#btnBackOnAction" prefHeight="50.0" prefWidth="192.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #f5f6fa;" text="BACK" textFill="#fcfafa">
                <font>
                   <Font name="Gidugu" size="20.0" />
                </font>

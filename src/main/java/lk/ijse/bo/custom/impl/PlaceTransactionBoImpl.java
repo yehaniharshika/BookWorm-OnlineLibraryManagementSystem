@@ -103,10 +103,16 @@ public class PlaceTransactionBoImpl implements PlaceTransactionBo {
                     book.getAuthorName(),
                     book.getBookGenre(),
                     book.getQtyOnHand(),
+                    book.getAvailability(),
                     book.getBranchID())
             );
         }
         return bookDtos;
+    }
+
+    @Override
+    public List<PlaceTransactionDTO> getAllTransactionDetails() throws SQLException {
+        return transactionDAO.getAllTransactions();
     }
 
     @Override
@@ -118,6 +124,19 @@ public class PlaceTransactionBoImpl implements PlaceTransactionBo {
     @Override
     public boolean saveTransactionDetail(PlaceTransactionDTO dto) throws SQLException {
         return  transactionDAO.saveTransaction(new PlaceTransactionDTO(
+                dto.getTransactionID(),
+                dto.getBorrowedDate(),
+                dto.getDueDate(),
+                dto.getBookReturnDate(),
+                dto.getQty(),
+                dto.getUserID(),
+                dto.getBookID()
+        ));
+    }
+
+    @Override
+    public boolean updateTransactionDetail(PlaceTransactionDTO dto) throws SQLException {
+        return transactionDAO.updateTransaction(new PlaceTransactionDTO(
                 dto.getTransactionID(),
                 dto.getBorrowedDate(),
                 dto.getDueDate(),
@@ -148,7 +167,17 @@ public class PlaceTransactionBoImpl implements PlaceTransactionBo {
     }
 
     @Override
+    public PlaceTransactionDTO searchTransactions(String transactionID) throws SQLException {
+        PlaceTransactionDTO  dto=  transactionDAO.searchTransaction(transactionID);
+
+        if (dto != null){
+            return new PlaceTransactionDTO(dto);
+        }
+        return null;
+    }
+
+    @Override
     public String generateNextTransactionId() throws SQLException {
-        return "";
+        return transactionDAO.generateNextId();
     }
 }

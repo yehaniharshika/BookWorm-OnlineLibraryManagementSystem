@@ -15,5 +15,6 @@ public class Book {
     private String authorName;
     private String bookGenre;
     private int qtyOnHand;
+    private String availability;
     private String branchID;
 }

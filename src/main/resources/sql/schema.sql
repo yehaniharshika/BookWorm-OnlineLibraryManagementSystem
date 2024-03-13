@@ -42,6 +42,7 @@ create  table book(
      authorName varchar(300) not null,
      bookGenre varchar(200) not null,
      qtyOnHand int not null,
+     availabilityStatus text not null ,
      branchID varchar(15) not null ,
      constraint foreign key(branchID) references libraryBranch(branchID) on update cascade on delete cascade
 

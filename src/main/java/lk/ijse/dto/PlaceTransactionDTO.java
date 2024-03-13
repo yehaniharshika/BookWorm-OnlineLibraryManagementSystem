@@ -15,4 +15,14 @@ public class PlaceTransactionDTO {
     private int qty;
     private String userID;
     private String bookID;
+
+    public PlaceTransactionDTO(PlaceTransactionDTO dto) {
+        this.transactionID = dto.transactionID;
+        this.borrowedDate = dto.borrowedDate;
+        this.dueDate = dto.dueDate;
+        this.bookReturnDate = dto.bookReturnDate;
+        this.qty = dto.qty;
+        this.userID = dto.userID;
+        this.bookID = dto.bookID;
+    }
 }

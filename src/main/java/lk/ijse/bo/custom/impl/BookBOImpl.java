@@ -20,6 +20,7 @@ public class BookBOImpl implements BookBO {
                 dto.getAuthorName(),
                 dto.getBookGenre(),
                 dto.getQtyOnHand(),
+                dto.getAvailability(),
                 dto.getBranchID()
         ));
     }
@@ -32,6 +33,7 @@ public class BookBOImpl implements BookBO {
                 dto.getAuthorName(),
                 dto.getBookGenre(),
                 dto.getQtyOnHand(),
+                dto.getAvailability(),
                 dto.getBranchID()
         ));
     }
@@ -64,12 +66,17 @@ public class BookBOImpl implements BookBO {
                     book.getAuthorName(),
                     book.getBookGenre(),
                     book.getQtyOnHand(),
+                    book.getAvailability(),
                     book.getBranchID()
             ));
         }
         return bookDTOS;
     }
 
+    @Override
+    public String generateNextBookId() throws SQLException {
+        return  bookDAO.generateNextId();
+    }
 
 
 }

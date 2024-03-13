@@ -16,28 +16,39 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public String generateNextId() throws SQLException {
-        return "";
+        ResultSet resultSet = SQLUtil.execute("SELECT bookID FROM book ORDER BY bookID DESC LIMIT 1;");
+
+        if (resultSet.next()){
+            String id = resultSet.getString("bookID");
+            int newItemId = Integer.parseInt(id.replace("B00-", "")) + 1;
+            return String.format("B00-%03d", newItemId);
+        }else {
+            return "B00-001";
+        }
     }
+
 
     @Override
     public boolean save(Book entity) throws SQLException {
-        return SQLUtil.execute("INSERT INTO book VALUES(?,?,?,?,?,?)",
+        return SQLUtil.execute("INSERT INTO book VALUES(?,?,?,?,?,?,?)",
                 entity.getBookID(),
                 entity.getBookName(),
                 entity.getAuthorName(),
                 entity.getBookGenre(),
                 entity.getQtyOnHand(),
+                entity.getAvailability(),
                 entity.getBranchID()
         );
     }
 
     @Override
     public boolean update(Book entity) throws SQLException {
-        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qtyOnHand=?,branchID=? WHERE bookID=?",
+        return SQLUtil.execute("UPDATE book SET bookName=?,authorName=?,bookGenre=?,qtyOnHand=?, availabilityStatus=?,branchID=? WHERE bookID=?",
                 entity.getBookName(),
                 entity.getAuthorName(),
                 entity.getBookGenre(),
                 entity.getQtyOnHand(),
+                entity.getAvailability(),
                 entity.getBranchID(),
                 entity.getBookID()
         );
@@ -50,7 +61,7 @@ public class BookDAOImpl implements BookDAO {
 
     @Override
     public Book search(String bookID) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM book WHERE bookID=?",bookID);
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM book WHERE bookID=?", bookID);
 
         Book entity = null;
         if (resultSet.next()){
@@ -60,6 +71,7 @@ public class BookDAOImpl implements BookDAO {
                     resultSet.getString("authorName"),
                     resultSet.getString("bookGenre"),
                     resultSet.getInt("qtyOnHand"),
+                    resultSet.getString("availabilityStatus"),
                     resultSet.getString("branchID")
             );
         }
@@ -79,7 +91,8 @@ public class BookDAOImpl implements BookDAO {
                     resultSet.getString(3),
                     resultSet.getString(4),
                     resultSet.getInt(5),
-                    resultSet.getString(6)
+                    resultSet.getString(6),
+                    resultSet.getString(7)
             ));
         }
         return bookList;

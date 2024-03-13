@@ -70,7 +70,41 @@ public class BookFormController {
 
     public void  initialize(){
         loadAllBranchIDs();
+        setAvailabilityStatus();
+        generateNextBookID();
+
+        txtQty.textProperty().addListener((observable, oldValue, newValue) -> {
+            setAvailabilityStatus();
+        });
+
+
     }
+
+    private void generateNextBookID() {
+        try {
+            String branchID = bookBO.generateNextBookId();
+            txtBookId.setText(branchID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setAvailabilityStatus() {
+        String qtyText = txtQty.getText();
+
+        if (!qtyText.isEmpty()) {
+            int qtyOnHand = Integer.parseInt(qtyText);
+
+            if (qtyOnHand == 0) {
+                txtAvailability.setText("Not Available");
+                txtAvailability.setStyle("-fx-text-fill: red; -fx-font-weight: bold");
+            } else {
+                txtAvailability.setText("Available");
+                txtAvailability.setStyle("-fx-text-fill: blue; -fx-font-weight: bold");
+            }
+        }
+    }
+
 
     private void loadAllBranchIDs() {
         ObservableList<String> obList = FXCollections.observableArrayList();
@@ -94,8 +128,10 @@ public class BookFormController {
         txtAuthorName.setText("");
         txtGenre.setText("");
         txtQty.setText("");
+        txtAvailability.setText("");
         cmbBranchId.setValue("");
         lblBranchName.setText("");
+
     }
 
     @FXML
@@ -107,6 +143,8 @@ public class BookFormController {
 
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION,"deleted !!!").show();
+                clearFields();
+                generateNextBookID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not deleted !!!").show();
             }
@@ -121,16 +159,18 @@ public class BookFormController {
         String bookName = txtBookName.getText();
         String authorName = txtAuthorName.getText();
         String bookGenre = txtGenre.getText();
-        int qty = Integer.parseInt(txtQty.getText());
+        int qtyOnHand = Integer.parseInt(txtQty.getText());
+        String  availabilityStatus = txtAvailability.getText();
         String branchID = cmbBranchId.getValue();
 
-        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qty,branchID);
+        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qtyOnHand,availabilityStatus,branchID);
 
         try {
             boolean isSaved = bookBO.saveBook(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
                 clearFields();
+                generateNextBookID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
             }
@@ -145,16 +185,18 @@ public class BookFormController {
         String bookName = txtBookName.getText();
         String authorName = txtAuthorName.getText();
         String bookGenre = txtGenre.getText();
-        int qty = Integer.parseInt(txtQty.getText());
+        int qtyOnHand= Integer.parseInt(txtQty.getText());
+        String  availabilityStatus = txtAvailability.getText();
         String branchID = cmbBranchId.getValue();
 
-        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qty,branchID);
+        var dto = new BookDTO(bookID,bookName,authorName,bookGenre,qtyOnHand,availabilityStatus,branchID);
 
         try {
             boolean isUpdated= bookBO.updateBook(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"updated!!!").show();
                 clearFields();
+                generateNextBookID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
             }
@@ -193,6 +235,7 @@ public class BookFormController {
                 txtAuthorName.setText(dto.getAuthorName());
                 txtGenre.setText(dto.getBookGenre());
                 txtQty.setText(String.valueOf(dto.getQtyOnHand()));
+                txtAvailability.setText(dto.getAvailability());
                 cmbBranchId.setValue(dto.getBranchID());
             }else{
                 new Alert(Alert.AlertType.ERROR,"Book not found!!!").show();

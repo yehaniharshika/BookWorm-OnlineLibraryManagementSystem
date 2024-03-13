@@ -10,7 +10,7 @@ public class UserLoginDAOImpl implements UserLoginDAO {
 
     @Override
     public boolean checkUserCredentials(String username,String password) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("select * from admin where username=? and password=?",
+        ResultSet resultSet = SQLUtil.execute("select * from user where username=? and password=?",
                 username,
                 password);
 

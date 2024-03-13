@@ -72,6 +72,25 @@ public class LibraryBranchFormController {
         loadAllAdminIds();
         getAllLibraryBranches();
         setCellValueFactory();
+        generateNextLibraryBranchID();
+        tableListener();
+    }
+
+    private void tableListener() {
+        tblLibraryBranch.getSelectionModel().selectedItemProperty().addListener((observable, oldValued, newValue) -> {
+            setData(newValue);
+
+        });
+    }
+
+    private void setData(LibraryBranchTM newValue) {
+        if (newValue != null){
+            txtBranchId.setText(newValue.getBranchID());
+            txtBranchName.setText(newValue.getBranchName());
+            txtLocation.setText(String.valueOf(newValue.getLocation()));
+            txtDescription.setText(newValue.getDescription());
+            cmbAdminId.setValue(String.valueOf(newValue.getAdminID()));
+        }
     }
 
     private void setCellValueFactory() {
@@ -80,6 +99,15 @@ public class LibraryBranchFormController {
         colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
 
+    }
+
+    private void generateNextLibraryBranchID() {
+        try {
+            String branchID = libraryBranchBO.generateNextBranchId();
+            txtBranchId.setText(branchID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getAllLibraryBranches() {
@@ -141,6 +169,10 @@ public class LibraryBranchFormController {
 
             if (isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"deleted !!").show();
+                clearFields();
+                getAllLibraryBranches();
+                setCellValueFactory();
+                generateNextLibraryBranchID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not deleted !!").show();
             }
@@ -165,6 +197,10 @@ public class LibraryBranchFormController {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
                 clearFields();
+                getAllLibraryBranches();
+                setCellValueFactory();
+                generateNextLibraryBranchID();
+
             }else {
                 new Alert(Alert.AlertType.ERROR,"adding not successfully!!!").show();
             }
@@ -189,6 +225,9 @@ public class LibraryBranchFormController {
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated!!!").show();
                 clearFields();
+                getAllLibraryBranches();
+                setCellValueFactory();
+                generateNextLibraryBranchID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not Updated!!!").show();
             }

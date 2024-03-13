@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class UserLoginFormController {
 
     @FXML
-    private AnchorPane UserRoot;
+    private AnchorPane userRoot;
 
     @FXML
     private TextField txtPassword;
@@ -29,7 +29,7 @@ public class UserLoginFormController {
     @FXML
     void btnBackOnAction(ActionEvent event) throws IOException {
         AnchorPane anchorPane = FXMLLoader.load(getClass().getResource("/view/MainWindow_From.fxml"));
-        Stage stage = (Stage) UserRoot.getScene().getWindow();
+        Stage stage = (Stage) userRoot.getScene().getWindow();
 
         stage.setScene(new Scene(anchorPane));
         stage.setTitle("Dashboard");
@@ -50,11 +50,11 @@ public class UserLoginFormController {
                 boolean dto = userLoginBo.checkUserCredentials(username,password);
 
                 if (dto) {
-                    Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/dashboard_Form.fxml"));
+                    Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/UserDashboard_Form.fxml"));
 
                     Scene scene = new Scene(rootNode);
 
-                    Stage primaryStage = (Stage) this.UserRoot.getScene().getWindow();
+                    Stage primaryStage = (Stage) this.userRoot.getScene().getWindow();
                     primaryStage.setScene(scene);
 
                     primaryStage.setTitle(" User Dashboard");
@@ -71,12 +71,12 @@ public class UserLoginFormController {
 
     @FXML
     void hyperSignUpOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/UserSignup_Form.fxml"));
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/UserRegister_Form.fxml"));
 
         Scene scene = new Scene(rootNode);
 
-        UserRoot.getScene().getWindow();
-        Stage primaryStage = (Stage) UserRoot.getScene().getWindow();
+        userRoot.getScene().getWindow();
+        Stage primaryStage = (Stage) userRoot.getScene().getWindow();
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Signup Form");

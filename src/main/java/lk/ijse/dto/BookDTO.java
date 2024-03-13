@@ -14,6 +14,7 @@ public class BookDTO {
     private String authorName;
     private String bookGenre;
     private int qtyOnHand;
+    private String availability;
     private String branchID;
 
     public BookDTO(Book book) {
@@ -22,6 +23,7 @@ public class BookDTO {
         this.authorName = book.getAuthorName();
         this.bookGenre = book.getBookGenre();
         this.qtyOnHand = book.getQtyOnHand();
+        this.availability = book.getAvailability();
         this.branchID = book.getBranchID();
     }
 }

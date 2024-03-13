@@ -8,29 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="MainRoot" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.AdminDashboardFormController">
+<AnchorPane fx:id="MainRoot" prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserDashboardFormController">
    <children>
       <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="887.0" prefWidth="323.0" style="-fx-background-color: #81ecec; -fx-background-radius: 8;">
          <children>
             <JFXButton layoutX="24.0" layoutY="739.0" onAction="#btnLogoutOnAction" prefHeight="54.0" prefWidth="276.0" style="-fx-background-color: #2d3436;" text="LOG OUT" textFill="#fffcfc">
                <font>
                   <Font name="Gidugu" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="btnBook" layoutX="24.0" layoutY="324.0" onAction="#btnBookOnAction" prefHeight="73.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="            Book ">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton layoutX="24.0" layoutY="509.0" onAction="#btnUserInformationOnAction" prefHeight="73.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="User Information">
-               <font>
-                  <Font name="System Bold" size="15.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -44,7 +28,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnUserTransaction" layoutX="24.0" layoutY="602.0" onAction="#btnUserTransactionOnAction" prefHeight="73.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="User Transaction">
+            <JFXButton fx:id="btnYourTransaction" layoutX="24.0" layoutY="602.0" onAction="#btnYourTransactionOnAction" prefHeight="73.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="Your Transaction">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -60,7 +44,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnBookList" layoutX="24.0" layoutY="417.0" onAction="#btnViewBookListOnAction" prefHeight="73.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="            Book List">
+            <JFXButton fx:id="btnBookList" layoutX="24.0" layoutY="325.0" onAction="#btnViewBookListOnAction" prefHeight="73.0" prefWidth="276.0" style="-fx-background-color: #1B97B0;" text="            Book List">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -147,7 +131,7 @@
                      <children>
                         <AnchorPane layoutY="-3.0" prefHeight="49.0" prefWidth="216.0" style="-fx-background-color: #81ecec;">
                            <children>
-                              <Label layoutX="22.0" layoutY="12.0" prefHeight="25.0" prefWidth="216.0" text="   Add New Book Count">
+                              <Label layoutX="22.0" layoutY="12.0" prefHeight="25.0" prefWidth="216.0" text="   All Book Count">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font>
