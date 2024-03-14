@@ -6,5 +6,5 @@ import lk.ijse.entity.Book;
 import java.sql.SQLException;
 
 public interface BookDAO extends crudDAO<Book> {
-    boolean updateQtyBooks(String bookID,int qtyOnHand) throws SQLException;
+    boolean setAvailability(String bookID,String availabilityStatus) throws SQLException;
 }

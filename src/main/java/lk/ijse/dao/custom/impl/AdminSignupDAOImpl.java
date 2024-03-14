@@ -1,12 +1,15 @@
 package lk.ijse.dao.custom.impl;
 
-import lk.ijse.dao.SQLUtil;
+import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.AdminSignupDAO;
 import lk.ijse.entity.Admin;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AdminSignupDAOImpl implements AdminSignupDAO {
     @Override
@@ -21,33 +24,32 @@ public class AdminSignupDAOImpl implements AdminSignupDAO {
 
     @Override
     public boolean save(Admin entity) throws SQLException {
-        return SQLUtil.execute("INSERT INTO admin VALUES(?,?,?,?,?,?,?)",
-                entity.getAdminID(),
-                entity.getFirstName(),
-                entity.getLastName(),
-                entity.getNic(),
-                entity.getEmailAddress(),
-                entity.getUsername(),
-                entity.getPassword()
-        );
+        Session session =  FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Object save = session.save(entity);
+        transaction.commit();
+        session.close();
+        return save != null;
     }
 
     @Override
     public boolean update(Admin entity) throws SQLException {
-        return SQLUtil.execute("UPDATE admin set firstName=?, lastName=?, nic=?, emailAddress=?, username=?, password=? WHERE adminID=?",
-                entity.getFirstName(),
-                entity.getLastName(),
-                entity.getNic(),
-                entity.getEmailAddress(),
-                entity.getUsername(),
-                entity.getPassword(),
-                entity.getAdminID()
-        );
+        Session session =  FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Object update = session;
+        transaction.commit();
+        session.close();
+        return update != null;
     }
 
     @Override
     public boolean delete(String adminID) throws SQLException {
-        return SQLUtil.execute("DELETE FROM user WHERE adminID=?",adminID);
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(session.get(Admin.class,adminID));
+        transaction.commit();
+        session.close();
+        return adminID != null;
     }
 
     @Override
@@ -57,21 +59,13 @@ public class AdminSignupDAOImpl implements AdminSignupDAO {
 
     @Override
     public ArrayList<Admin> getAll() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM admin");
-
-        ArrayList<Admin> adminList = new ArrayList<>();
-
-        while (resultSet.next()){
-            adminList.add(new Admin(
-                  resultSet.getString(1),
-                  resultSet.getString(2),
-                  resultSet.getString(3),
-                  resultSet.getString(4),
-                  resultSet.getString(5),
-                  resultSet.getString(6),
-                  resultSet.getString(7)
-            ));
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Query<Admin> query = session.createQuery("from Admin", Admin.class);
+            List<Admin> adminList = query.list();
+            return new ArrayList<>(adminList);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
         }
-        return adminList;
     }
 }

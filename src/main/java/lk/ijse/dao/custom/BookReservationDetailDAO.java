@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 public interface BookReservationDetailDAO extends crudDAO<BookReservationDetailsDTO> {
     boolean save(String orderId, BookReservationDetailsDTO bookReservationsDetails ) throws SQLException, ClassNotFoundException;
+    boolean update(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException;
 
     /*boolean saveTransaction(bookReservationDetailsDTO dto) throws SQLException;
 

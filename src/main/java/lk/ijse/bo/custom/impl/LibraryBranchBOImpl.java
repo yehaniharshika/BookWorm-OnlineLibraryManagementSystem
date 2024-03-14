@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryBranchBOImpl implements LibraryBranchBO {
+public class LibraryBranchBOImpl {
 
-    public LibraryBranchDAOImpl libraryBranchDAO = new LibraryBranchDAOImpl();
+  /*  public LibraryBranchDAOImpl libraryBranchDAO = new LibraryBranchDAOImpl();
 
     @Override
     public String generateNextBranchId() throws SQLException {
@@ -24,7 +24,6 @@ public class LibraryBranchBOImpl implements LibraryBranchBO {
                 dto.getBranchID(),
                 dto.getBranchName(),
                 dto.getLocation(),
-                dto.getDescription(),
                 dto.getAdminID()
         ));
     }
@@ -35,7 +34,6 @@ public class LibraryBranchBOImpl implements LibraryBranchBO {
                 dto.getBranchID(),
                 dto.getBranchName(),
                 dto.getLocation(),
-                dto.getDescription(),
                 dto.getAdminID()
         ));
     }
@@ -66,10 +64,9 @@ public class LibraryBranchBOImpl implements LibraryBranchBO {
                     libraryBranch.getBranchID(),
                     libraryBranch.getBranchName(),
                     libraryBranch.getLocation(),
-                    libraryBranch.getDescription(),
-                    libraryBranch.getAdminID()
+                    libraryBranch.getDescription()
             ));
         }
         return libraryBranchDTOS;
-    }
+    }*/
 }

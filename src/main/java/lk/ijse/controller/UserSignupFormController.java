@@ -53,6 +53,19 @@ public class UserSignupFormController {
 
     public UserSignupBOImpl userSignupBO = new UserSignupBOImpl();
 
+    public void initialize(){
+        generateNextUserID();
+    }
+
+    private void generateNextUserID() {
+        try {
+            String userID = userSignupBO.generateNextUserId();
+            txtUserID.setText(userID);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     void btnCreateAccountOnAction(ActionEvent event) {
         String userId = txtUserID.getText();
@@ -69,6 +82,7 @@ public class UserSignupFormController {
             boolean isSaved = userSignupBO.saveUser(dto);
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
+                clearFields();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
             }
@@ -76,6 +90,16 @@ public class UserSignupFormController {
            e.printStackTrace();
         }
 
+    }
+
+    private void clearFields() {
+        txtUserID.setText("");
+        txtFirstname.setText("");
+        txtLastname.setText("");
+        txtNIC.setText("");
+        txtEmailAddress.setText("");
+        txtUserName.setText("");
+        txtPassword.setText("");
     }
 
     @FXML

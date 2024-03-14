@@ -1,15 +1,15 @@
 package lk.ijse.dao.custom.impl;
 
-import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.BookReservationDetailDAO;
 import lk.ijse.dto.BookReservationDetailsDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class BookReservationDetailDAOImpl implements BookReservationDetailDAO {
-    @Override
+public class BookReservationDetailDAOImpl{
+   /* @Override
     public String getCount() throws SQLException {
         return "";
     }
@@ -43,9 +43,25 @@ public class BookReservationDetailDAOImpl implements BookReservationDetailDAO {
     }
 
     @Override
-    public BookReservationDetailsDTO search(String id) throws SQLException {
-        return null;
+    public BookReservationDetailsDTO search(String reservationID) throws SQLException {
+        ResultSet resultSet = SQLUtil.execute("SELECT * FROM BookReservationDetails WHERE reservationID = ?", reservationID);
+        BookReservationDetailsDTO entity = null;
+
+        if (resultSet.next()) {
+            // Use getDate() to retrieve LocalDate
+            LocalDate borrowDate = resultSet.getDate("borrowDate").toLocalDate();
+
+            entity = new BookReservationDetailsDTO(
+                    resultSet.getString("reservationID"),
+                    resultSet.getString("bookID"),
+                    borrowDate, // Use LocalDate instead of String
+                    resultSet.getString("dueDate"),
+                    resultSet.getString("bookReturnDate")
+            );
+        }
+        return entity;
     }
+
 
     @Override
     public ArrayList<BookReservationDetailsDTO> getAll() throws SQLException {
@@ -54,7 +70,7 @@ public class BookReservationDetailDAOImpl implements BookReservationDetailDAO {
 
     @Override
     public boolean save(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("INSERT INTO bookReservationDetails VALUES (?,?,?,?,?)",
+        return SQLUtil.execute("INSERT INTO bookReservationDetails (reservationID, bookID, borrowDate, dueDate, bookReturnDate) VALUES (?,?,?,?,?)",
                 reservationID,
                 bookReservationsDetails.getBookID(),
                 bookReservationsDetails.getBorrowedDate(),
@@ -63,99 +79,16 @@ public class BookReservationDetailDAOImpl implements BookReservationDetailDAO {
         );
     }
 
-    /*@Override
-    public boolean saveTransaction(BookReservationDetailsDTO dto) throws SQLException {
-        return SQLUtil.execute("INSERT INTO transaction VALUES (?,?,?,?,?,?,?)",
-                dto.getTransactionID(),
-                dto.getBorrowedDate(),
-                dto.getDueDate(),
-                dto.getBookReturnDate(),
-                dto.getQty(),
-                dto.getUserID(),
-                dto.getBookID()
+    public boolean update(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("UPDATE bookReservationDetails SET bookID=?,borrowDate=?,dueDate=?, bookReturnDate=? WHERE reservationID=?",
+                bookReservationsDetails.getBookID(),
+                bookReservationsDetails.getBorrowedDate(),
+                bookReservationsDetails.getDueDate(),
+                bookReservationsDetails.getBookReturnDate(),
+                reservationID
         );
 
     }
 
-    @Override
-    public boolean updateTransaction(BookReservationDetailsDTO dto) throws SQLException {
-        return SQLUtil.execute("UPDATE transaction SET borrowedDate=?,dueDate=?,bookReturnDate=?,qty=?,userID=?,bookID=? WHERE transactionID=?",
-                dto.getBorrowedDate(),
-                dto.getDueDate(),
-                dto.getBookReturnDate(),
-                dto.getQty(),
-                dto.getUserID(),
-                dto.getBookID(),
-                dto.getTransactionID()
-        );
-
-    }
-
-    @Override
-    public BookReservationDetailsDTO searchTransaction(String transactionID) throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM transaction WHERE transactionID=?",transactionID);
-        BookReservationDetailsDTO dto = null;
-
-        if (resultSet.next()){
-            dto = new BookReservationDetailsDTO(
-                    resultSet.getString("transactionID"),
-                    resultSet.getString("borrowedDate"),
-                    resultSet.getString("dueDate"),
-                    resultSet.getString("bookReturnDate"),
-                    resultSet.getInt("qty"),
-                    resultSet.getString("userID"),
-                    resultSet.getString("bookID"));
-        }
-        return dto;
-    }
-
-    @Override
-    public ArrayList<BookReservationDetailsDTO> getAllTransactions() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT * FROM transaction");
-
-        ArrayList<BookReservationDetailsDTO> transactionList = new ArrayList<>();
-
-        while (resultSet.next()){
-            transactionList.add(new BookReservationDetailsDTO(
-                    resultSet.getString("transactionID"),
-                    resultSet.getString("borrowedDate"),
-                    resultSet.getString("dueDate"),
-                    resultSet.getString("bookReturnDate"),
-                    resultSet.getInt("qty"),
-                    resultSet.getString("userID"),
-                    resultSet.getString("bookID")
-            ));
-        }
-        return transactionList;
-    }
-
-    @Override
-    public String generateNextId() throws SQLException {
-        ResultSet resultSet = SQLUtil.execute("SELECT transactionID FROM transaction ORDER BY transactionID DESC LIMIT 1");
-
-        if (resultSet.next()){
-            return splitFeeId(resultSet.getString(1));
-        }
-        return splitFeeId(null);
-    }
-
-    private String splitFeeId(String currentId) {
-        if(currentId != null) {
-            String[] strings = currentId.split("T0");
-            int id = Integer.parseInt(strings[1]);
-            id++;
-            String ID = String.valueOf(id);
-            int length = ID.length();
-            if (length < 2){
-                return "T00"+id;
-            }else {
-                if (length < 3){
-                    return "T0"+id;
-                }else {
-                    return "T"+id;
-                }
-            }
-        }
-        return "T001";
-    }*/
+*/
 }

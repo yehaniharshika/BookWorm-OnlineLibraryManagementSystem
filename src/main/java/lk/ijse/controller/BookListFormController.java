@@ -1,3 +1,4 @@
+/*
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -66,7 +67,7 @@ public class BookListFormController {
         ObservableList<BookTM> obList = FXCollections.observableArrayList();
 
         try {
-            List<BookDTO> bookList = bookBO.getAllBooks();
+            //List<BookDTO> bookList = bookBO.getAllBooks();
 
             for (BookDTO dto : bookList){
                 obList.add(new BookTM(
@@ -87,5 +88,6 @@ public class BookListFormController {
     }
 
 }
+*/
 
 

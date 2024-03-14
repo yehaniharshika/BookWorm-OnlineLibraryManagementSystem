@@ -1,6 +1,5 @@
 package lk.ijse.bo.custom.impl;
 
-import lk.ijse.Db.DBConnection;
 import lk.ijse.bo.custom.PlaceReservationBo;
 import lk.ijse.dao.custom.impl.BookDAOImpl;
 import lk.ijse.dao.custom.impl.BookReservationDetailDAOImpl;
@@ -8,6 +7,7 @@ import lk.ijse.dao.custom.impl.ReservationDAOImpl;
 import lk.ijse.dao.custom.impl.UserSignupDAOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BookReservationDetailsDTO;
+import lk.ijse.dto.ReservationDTO;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.entity.Book;
 import lk.ijse.entity.User;
@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaceReservationBoImpl implements PlaceReservationBo {
+public class PlaceReservationBoImpl  {
 
     public BookDAOImpl bookDAO = new BookDAOImpl();
     public UserSignupDAOImpl userSignupDAO = new UserSignupDAOImpl();
@@ -26,7 +26,7 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
     public BookReservationDetailDAOImpl bookReservationDetailDAO = new BookReservationDetailDAOImpl();
 
 
-    @Override
+    /*@Override
     public boolean placeReservation(String reservationID, LocalDate borrowDate, String userID, List<BookReservationDetailsDTO> bookReservationsDetails) throws SQLException,ClassNotFoundException {
         Connection connection = null;
         connection = DBConnection.getInstance().getConnection();
@@ -57,9 +57,8 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
             }
 
 
-//                //Search & Update Item
             BookDTO book = searchBook(detail.getBookID());
-            book.setAvailability("available");
+            book.setAvailability("not available");
 
             boolean isUpdateQty = bookDAO.update(new Book(book.getBookID(), book.getBookName(), book.getAuthorName(), book.getBookGenre(),book.getQtyOnHand(),book.getAvailability(), book.getBranchID()));
 
@@ -119,9 +118,7 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
         return bookDtos;
     }
 
-
-
-    /*@Override
+    *//*@Override
     public boolean updateTransactionDetail(BookReservationDetailsDTO dto) throws SQLException {
         return transactionDAO.updateTransaction(new BookReservationDetailsDTO(
                 dto.getTransactionID(),
@@ -133,7 +130,7 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
                 dto.getBookID()
         )) ;
     }
-*/
+*//*
     @Override
     public UserSignupDTO searchUser(String userID) throws SQLException {
         User user = userSignupDAO.search(userID);
@@ -153,5 +150,15 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
         return null;
     }
 
+    @Override
+    public boolean updateBookReservationDetails(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException {
+        return bookReservationDetailDAO.update(reservationID, bookReservationsDetails);
+    }
 
+    @Override
+    public ReservationDTO searchReservation(String reservationID) throws SQLException {
+        return null;
+    }
+
+*/
 }

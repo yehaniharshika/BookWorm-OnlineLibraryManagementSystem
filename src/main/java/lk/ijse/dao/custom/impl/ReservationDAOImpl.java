@@ -1,6 +1,5 @@
 package lk.ijse.dao.custom.impl;
 
-import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.ReservationDAO;
 import lk.ijse.entity.Reservation;
 
@@ -9,15 +8,22 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class ReservationDAOImpl implements ReservationDAO {
-    @Override
+public class ReservationDAOImpl{
+   /* @Override
     public String getCount() throws SQLException {
         return "";
     }
 
     @Override
     public String generateNextId() throws SQLException {
-        return "";
+        ResultSet rst = SQLUtil.execute("SELECT reservationID FROM reservation ORDER BY reservationID DESC LIMIT 1;");
+        if (rst.next()) {
+            String id = rst.getString("reservationID");
+            int newCustomerId = Integer.parseInt(id.replace("R00-", "")) + 1;
+            return String.format("R00-%03d", newCustomerId);
+        } else {
+            return "R00-001";
+        }
     }
 
     @Override
@@ -47,7 +53,7 @@ public class ReservationDAOImpl implements ReservationDAO {
 
     @Override
     public boolean exist(String reservationID ) throws SQLException{
-        ResultSet rst = SQLUtil.execute("SELECT reservationID FROM `reservation` WHERE reservationID=?",reservationID);
+        ResultSet rst = SQLUtil.execute("SELECT reservationID FROM reservation WHERE reservationID=?",reservationID);
         return rst.next();
     }
 
@@ -55,5 +61,5 @@ public class ReservationDAOImpl implements ReservationDAO {
     public boolean save(String reservationID, LocalDate borrowDate, String userID) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("INSERT INTO reservation VALUES (?,?,?)",
                reservationID ,borrowDate,userID);
-    }
+    }*/
 }

@@ -48,16 +48,13 @@ create  table book(
 
 );
 
-create  table  transaction(
-    transactionID varchar(15),
-    borrowedDate date not null ,
-    dueDate date,
+create  table bookReservationDetails(
+    reservationID varchar(15) not null,
+    bookID varchar(15) not null,
+    borrowDate date not null ,
+    dueDate date not null ,
     bookReturnDate date ,
-    qty int not null ,
-    userID varchar(15) not null ,
-    bookID varchar(15) not null ,
-    constraint foreign key (userID) references user(userID) on update cascade on delete cascade ,
-    constraint foreign key (bookID) references book(bookID) on update cascade  on delete cascade
+    constraint foreign key (bookID) references book(bookID) on update cascade on delete cascade
 );
 
 create table reservation(
@@ -65,6 +62,6 @@ create table reservation(
     borrowDate date,
     userID varchar(15) not null ,
     constraint foreign key (userID) references user(userID) on update cascade  on delete cascade
-)
+);
 
 

@@ -2,18 +2,21 @@ package lk.ijse.dto;
 
 import lombok.*;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @ToString
 public class BookReservationDetailsDTO {
-
-    private String borrowedDate;
+    private String bookID;
+    private String bookName;
+    private LocalDate borrowedDate;
     private  String  dueDate;
     private String bookReturnDate;
     //private int qty;
-    private String bookID;
+
 
     /*public bookReservationDetailsDTO(bookReservationDetailsDTO dto) {
         this.transactionID = dto.transactionID;

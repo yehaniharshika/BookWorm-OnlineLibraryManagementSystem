@@ -1,6 +1,5 @@
 package lk.ijse.dao.custom.impl;
 
-import lk.ijse.dao.SQLUtil;
 import lk.ijse.dao.custom.BookDAO;
 import lk.ijse.entity.Book;
 
@@ -8,8 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class BookDAOImpl implements BookDAO {
-    @Override
+public class BookDAOImpl {
+    /*@Override
     public String getCount() throws SQLException {
         return "";
     }
@@ -98,14 +97,18 @@ public class BookDAOImpl implements BookDAO {
         return bookList;
     }
 
-    @Override
+    *//*@Override
     public boolean updateQtyBooks(String bookID,int qtyOnHand) throws SQLException {
         return SQLUtil.execute("UPDATE book SET qtyOnHand = qtyOnHand -  CAST(? AS SIGNED) WHERE bookID = ?",
                 qtyOnHand, bookID
         );
 
 
-    }
+    }*//*
 
 
+    @Override
+    public boolean setAvailability(String bookID, String availabilityStatus) throws SQLException {
+        return false;
+    }*/
 }

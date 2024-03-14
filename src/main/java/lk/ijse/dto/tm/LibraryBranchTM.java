@@ -1,5 +1,6 @@
 package lk.ijse.dto.tm;
 
+import lk.ijse.entity.Admin;
 import lombok.*;
 
 @NoArgsConstructor
@@ -11,6 +12,7 @@ public class LibraryBranchTM {
     private String branchID;
     private String branchName;
     private String location;
-    private String description;
     private String adminID;
+
+
 }

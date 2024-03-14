@@ -9,10 +9,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookBOImpl implements BookBO {
+public class BookBOImpl {
 
     public BookDAOImpl bookDAO = new BookDAOImpl();
-    @Override
+   /* @Override
     public boolean saveBook(BookDTO dto) throws SQLException {
         return bookDAO.save(new Book(
                 dto.getBookID(),
@@ -77,6 +77,6 @@ public class BookBOImpl implements BookBO {
     public String generateNextBookId() throws SQLException {
         return  bookDAO.generateNextId();
     }
-
+*/
 
 }

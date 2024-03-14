@@ -4,7 +4,7 @@ import lk.ijse.dao.custom.impl.UserSignupDAOImpl;
 
 public class DAOFactory {
 
-    private static DAOFactory daoFactory;
+   /* private static DAOFactory daoFactory;
 
     private DAOFactory(){
 
@@ -26,5 +26,5 @@ public class DAOFactory {
             default:
                 return null;
         }
-    }
+    }*/
 }

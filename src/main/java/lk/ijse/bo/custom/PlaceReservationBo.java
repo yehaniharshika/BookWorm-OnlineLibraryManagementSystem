@@ -2,6 +2,7 @@ package lk.ijse.bo.custom;
 
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BookReservationDetailsDTO;
+import lk.ijse.dto.ReservationDTO;
 import lk.ijse.dto.UserSignupDTO;
 
 import java.sql.SQLException;
@@ -20,6 +21,11 @@ public interface PlaceReservationBo {
     UserSignupDTO searchUser(String userID) throws SQLException;
 
     BookDTO searchBook(String bookID) throws SQLException;
+
+    boolean updateBookReservationDetails(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException;
+
+    ReservationDTO searchReservation(String reservationID) throws SQLException;
+
 
     //BookReservationDetailsDTO searchTransactions(String transactionID) throws SQLException;
 }

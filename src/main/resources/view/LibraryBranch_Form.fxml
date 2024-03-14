@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -28,17 +27,11 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </TextField>
-      <TextArea fx:id="txtDescription" layoutX="50.0" layoutY="392.0" prefHeight="215.0" prefWidth="343.0" promptText="Description" style="-fx-border-color: #222f3e;">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </TextArea>
-      <TableView fx:id="tblLibraryBranch" layoutX="414.0" layoutY="151.0" prefHeight="719.0" prefWidth="822.0">
+      <TableView fx:id="tblLibraryBranch" layoutX="566.0" layoutY="147.0" prefHeight="719.0" prefWidth="531.0">
         <columns>
           <TableColumn fx:id="colBranchId" prefWidth="135.0" text="Branch ID" />
           <TableColumn fx:id="colBranchName" prefWidth="174.0" text="Branch Name" />
             <TableColumn fx:id="colLocation" prefWidth="225.0" text="Location" />
-            <TableColumn fx:id="colDescription" prefWidth="287.0" text="Description" />
         </columns>
       </TableView>
       <JFXButton fx:id="btnSave" layoutX="56.0" layoutY="630.0" onAction="#btnSaveOnAction" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #e84393; -fx-background-radius: 25; -fx-border-radius: 25; -fx-border-color: #f5f6fa;" text="  SAVE" textFill="#f5f3f3">
