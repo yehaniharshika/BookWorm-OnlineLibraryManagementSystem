@@ -83,6 +83,7 @@ public class UserSignupFormController {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
                 clearFields();
+                generateNextUserID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
             }
@@ -110,6 +111,8 @@ public class UserSignupFormController {
             boolean isDeleted = userSignupBO.deleteUser(userID);
             if (isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"Deleted !!!").show();
+                clearFields();
+                generateNextUserID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not Deleted !!!").show();
             }

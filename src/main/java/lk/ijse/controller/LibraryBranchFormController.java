@@ -1,4 +1,3 @@
-/*
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -66,7 +65,7 @@ public class LibraryBranchFormController {
 
     public void initialize(){
         loadAllAdminIds();
-        getAllLibraryBranches();
+        //getAllLibraryBranches();
         setCellValueFactory();
         generateNextLibraryBranchID();
         tableListener();
@@ -103,7 +102,7 @@ public class LibraryBranchFormController {
         }
     }
 
-    private void getAllLibraryBranches() {
+   /* private void getAllLibraryBranches() {
         ObservableList<LibraryBranchTM> obList = FXCollections.observableArrayList();
 
         try {
@@ -122,13 +121,14 @@ public class LibraryBranchFormController {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     private void loadAllAdminIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
             ArrayList<AdminSignupDTO> idList = adminSignupBO.getAllAdmins();
+
 
             for (AdminSignupDTO dto : idList){
                 obList.add(dto.getAdminID());
@@ -161,9 +161,9 @@ public class LibraryBranchFormController {
             if (isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"deleted !!").show();
                 clearFields();
-                getAllLibraryBranches();
+                //getAllLibraryBranches();
                 setCellValueFactory();
-                generateNextLibraryBranchID();
+               // generateNextLibraryBranchID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not deleted !!").show();
             }
@@ -171,6 +171,33 @@ public class LibraryBranchFormController {
             throw new RuntimeException(e);
         }
     }
+
+    /*@FXML
+    void btnSaveOnAction(ActionEvent event) {
+        String branchID = txtBranchId.getText();
+        String branchName = txtBranchName.getText();
+        String location = txtLocation.getText();
+        String adminID = cmbAdminId.getValue();
+
+        var dto = new LibraryBranchDTO(branchID,branchName,location,adminID);
+
+        try {
+            boolean isSaved = libraryBranchBO.saveLibraryBranch(adminID,dto);
+
+            if (isSaved){
+                new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
+                clearFields();
+                getAllLibraryBranches();
+                setCellValueFactory();
+                generateNextLibraryBranchID();
+
+            }else {
+                new Alert(Alert.AlertType.ERROR,"adding not successfully!!!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }*/
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
@@ -186,11 +213,6 @@ public class LibraryBranchFormController {
 
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
-                clearFields();
-                getAllLibraryBranches();
-                setCellValueFactory();
-                generateNextLibraryBranchID();
-
             }else {
                 new Alert(Alert.AlertType.ERROR,"adding not successfully!!!").show();
             }
@@ -204,18 +226,17 @@ public class LibraryBranchFormController {
         String branchID = txtBranchId.getText();
         String branchName = txtBranchName.getText();
         String location = txtLocation.getText();
-        String description = txtDescription.getText();
         String adminID = cmbAdminId.getValue();
 
-        var dto = new LibraryBranchDTO(branchID,branchName,location,description);
+        var dto = new LibraryBranchDTO(branchID,branchName,location,adminID);
 
         try {
-            boolean isUpdated = libraryBranchBO.updateLibraryBranch(dto);
+            boolean isUpdated = libraryBranchBO.updateLibraryBranch(adminID,dto);
 
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated!!!").show();
                 clearFields();
-                getAllLibraryBranches();
+                //getAllLibraryBranches();
                 setCellValueFactory();
                 generateNextLibraryBranchID();
             }else {
@@ -242,7 +263,6 @@ public class LibraryBranchFormController {
                 txtBranchId.setText(dto.getBranchID());
                 txtBranchName.setText(dto.getBranchName());
                 txtLocation.setText(dto.getLocation());
-                txtDescription.setText(dto.getDescription());
                 cmbAdminId.setValue(String.valueOf(dto.getAdminID()));
             }
         } catch (SQLException e) {
@@ -251,4 +271,3 @@ public class LibraryBranchFormController {
     }
 
 }
-*/

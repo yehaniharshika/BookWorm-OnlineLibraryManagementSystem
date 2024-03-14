@@ -27,115 +27,57 @@ public class LibraryBranchDAOImpl implements LibraryBranchDAO {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        Query query = session.createQuery("SELECT branchID FROM  LibraryBranch ORDER BY branchID DESC LIMIT 1");
-        String branchID = (String) query.getSingleResult();
-        int newbranchID = Integer.parseInt(branchID.replace("L00-", "")) + 1;
-        transaction.commit();
-        session.close();
-        return String.format("L00-%03d", newbranchID);
-
-
-    }
-
-    @Override
-    public boolean save(LibraryBranch entity) throws SQLException {
-        Session session= FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-
-        Query query = session.createQuery("INSERT INTO LibraryBranch (branchID, branchName,location,admin) SELECT :branchID, :branchName ,:location,:admin");
-        query.setParameter("branchID", entity.getBranchID());
-        query.setParameter("branchName", entity.getBranchName());
-        query.setParameter("location", entity.getLocation());
-        query.setParameter("admin", entity.getAdmin());
-
-        int i = query.executeUpdate();
+        Query query = session.createQuery("select branchID from LibraryBranch order by branchID desc limit 1");
+        String id = (String) query.uniqueResult();
 
         transaction.commit();
         session.close();
 
-        return (i == 1? true:false);
+        return splitId(id);
     }
 
-    /*@Override
-    public boolean save(LibraryBranch entity) throws SQLException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = (Transaction) session.beginTransaction();
-
-        Query query = session.createQuery("INSERT INTO libraryBranch (branchID, branchName,location,description,admin) SELECT :branchID, :branchName, :location, :description, :admin");
-        query.setParameter("BranchId", entity.getBranchId());
-        query.setParameter("Name", entity.getName());
-        query.setParameter("admin", entity.getAdmin());
-
-        int i = query.executeUpdate();
-
-        transaction.commit();
-        session.close();
-
-        return (i==1 ? true : false);
-        return false;
-    }
-*/
-    @Override
-    public boolean update(LibraryBranch entity) throws SQLException {
-        Session session= FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-
-
-        /*return SQLUtil.execute("UPDATE libraryBranch SET branchName=?,location=?,description=?,adminID=? WHERE branchID=?",
-                entity.getBranchName(),
-                entity.getLocation(),
-                entity.getDescription(),
-                entity.getAdminID(),
-                entity.getBranchID()
-        );*/
-        return false;
-    }
-
-    @Override
-    public boolean delete(String branchID) throws SQLException {
-/*
-        return SQLUtil.execute("DELETE  FROM libraryBranch WHERE branchID=?",branchID);
-*/
-        return false;
-    }
-
-    @Override
-    public LibraryBranch search(String branchID) throws SQLException {
-       /* ResultSet resultSet = SQLUtil.execute("SELECT * FROM libraryBranch WHERE branchID=?",branchID);
-
-        LibraryBranch entity = null;
-
-        if (resultSet.next()){
-            entity=new LibraryBranch(
-                    resultSet.getString("branchID"),
-                    resultSet.getString("branchName"),
-                    resultSet.getString("location"),
-                    resultSet.getString("description"),
-                    resultSet.getString("adminID")
-            );
+    private String splitId(String currentId) {
+        if(currentId != null) {
+            String[] strings = currentId.split("L0");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "L00"+id;
+            }else {
+                if (length < 3){
+                    return "L0"+id;
+                }else {
+                    return "L"+id;
+                }
+            }
         }
-        return entity;*/
+        return "L001";
+    }
+
+    @Override
+    public boolean save(LibraryBranch dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean update(LibraryBranch dto) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException {
+        return false;
+    }
+
+    @Override
+    public LibraryBranch search(String id) throws SQLException {
         return null;
     }
 
     @Override
     public ArrayList<LibraryBranch> getAll() throws SQLException {
-
-       /* ResultSet resultSet = SQLUtil.execute("SELECT * FROM libraryBranch");
-
-        ArrayList<LibraryBranch> libraryBranchesList = new ArrayList<>();
-
-        while (resultSet.next()){
-            libraryBranchesList.add(new LibraryBranch(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5)
-            ));
-        }
-        return libraryBranchesList;*/
-
         return null;
     }
 }

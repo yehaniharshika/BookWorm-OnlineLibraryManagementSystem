@@ -6,9 +6,11 @@ import jakarta.transaction.RollbackException;
 import jakarta.transaction.SystemException;
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.UserSignUpDAO;
+import lk.ijse.entity.Admin;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.sql.ResultSet;
@@ -31,18 +33,28 @@ public class UserSignupDAOImpl implements UserSignUpDAO{
 
         String hql = "select u.userID from User u order by u.userID desc limit 1";
         Query query = session.createQuery(hql);
-        query.setMaxResults(1);
-        List<String> resultList = query.getResultList();
-        if (!resultList.isEmpty()) {
-            String id = resultList.get(0);
-            int newItemId = Integer.parseInt(id.replace("U00-", "")) + 1;
-            return String.format("U00-%03d", newItemId);
-        } else {
-            transaction.commit();
-            session.close();
-            return "U00-001";
-        }
+
+        String ad_id = (String) query.getSingleResult();
+        transaction.commit();
+        session.close();
+        return splitId(ad_id);
     }
+
+    private String splitId(String currentID) {
+        if (currentID != null && currentID.startsWith("U0")) {
+            String[] strings = currentID.split("U0");
+            if (strings.length > 1) {
+                int id = Integer.parseInt(strings[1]);
+                id++;
+                return String.format("U%03d", id);
+            } else {
+                // Handle the case where splitting doesn't give the expected result
+                return "U001";
+            }
+        }
+        return "U001";
+    }
+
 
     @Override
     public boolean save(User entity) throws SQLException {
@@ -63,16 +75,6 @@ public class UserSignupDAOImpl implements UserSignUpDAO{
        transaction.commit();
        session.close();
 
-
-       /* return SQLUtil.execute("INSERT INTO user VALUES(?,?,?,?,?,?,?)",
-                entity.getUserID(),
-                entity.getFirstName(),
-                entity.getLastName(),
-                entity.getNic(),
-                entity.getEmailAddress(),
-                entity.getUsername(),
-                entity.getPassword()
-        );*/
         return (i==1? true:false);
     }
 
@@ -166,32 +168,17 @@ public class UserSignupDAOImpl implements UserSignUpDAO{
 
     @Override
     public ArrayList<User> getAll() throws SQLException {
-       Session session = FactoryConfiguration.getInstance().getSession();
-       Transaction transaction = session.beginTransaction();
+        /*Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
 
-       Query query = session.createQuery("from User ");
+        Query query = session.createQuery("FROM Branch ");
+        ArrayList<User> list = (ArrayList<Branch>) query.list();
 
-       ArrayList<User> list = (ArrayList<User>) query.list();
+        transaction.commit();
+        session.close();
 
-       transaction.commit();
-       session.close();
-       return list;
-       /* ResultSet resultSet = SQLUtil.execute("SELECT * FROM user");
-
-        ArrayList<User> userList = new ArrayList<>();
-
-        while (resultSet.next()){
-            userList.add(new User(
-                    resultSet.getString("userID"),
-                    resultSet.getString("firstName"),
-                    resultSet.getString("lastName"),
-                    resultSet.getString("nic"),
-                    resultSet.getString("emailAddress"),
-                    resultSet.getString("userName"),
-                    resultSet.getString("password")
-            ));
-        }
-        return userList;*/
+        return list;*/
+        return null;
     }
 
 

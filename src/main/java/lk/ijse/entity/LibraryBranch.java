@@ -23,9 +23,14 @@ public class LibraryBranch {
         this.location = location;
     }
 
+    public LibraryBranch(String branchID, String branchName, String location, Admin adminID) {
+
+    }
+
     public LibraryBranch() {
 
     }
+
     public Admin getAdmin() {
         return admin;
     }

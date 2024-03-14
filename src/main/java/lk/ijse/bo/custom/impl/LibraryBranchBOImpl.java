@@ -1,21 +1,26 @@
 package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.LibraryBranchBO;
+import lk.ijse.dao.custom.impl.AdminSignupDAOImpl;
 import lk.ijse.dao.custom.impl.LibraryBranchDAOImpl;
+import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.dto.LibraryBranchDTO;
+import lk.ijse.entity.Admin;
 import lk.ijse.entity.LibraryBranch;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LibraryBranchBOImpl {
+public class LibraryBranchBOImpl implements LibraryBranchBO{
 
-  /*  public LibraryBranchDAOImpl libraryBranchDAO = new LibraryBranchDAOImpl();
+  public LibraryBranchDAOImpl libraryBranchDAO = new LibraryBranchDAOImpl();
+  public AdminSignupDAOImpl adminSignupDAO = new AdminSignupDAOImpl();
 
     @Override
     public String generateNextBranchId() throws SQLException {
         return libraryBranchDAO.generateNextId();
+
     }
 
     @Override
@@ -24,17 +29,17 @@ public class LibraryBranchBOImpl {
                 dto.getBranchID(),
                 dto.getBranchName(),
                 dto.getLocation(),
-                dto.getAdminID()
+                adminSignupDAO.getAdmin(dto.getAdminID())
         ));
     }
 
     @Override
-    public boolean updateLibraryBranch(LibraryBranchDTO dto) throws SQLException {
+    public boolean updateLibraryBranch(String adminID ,LibraryBranchDTO dto) throws SQLException {
         return libraryBranchDAO.update(new LibraryBranch(
                 dto.getBranchID(),
                 dto.getBranchName(),
                 dto.getLocation(),
-                dto.getAdminID()
+                adminSignupDAO.getAdmin(adminID)
         ));
     }
 
@@ -48,25 +53,38 @@ public class LibraryBranchBOImpl {
 
         LibraryBranch libraryBranch = libraryBranchDAO.search(branchID);
 
-        if (libraryBranch != null){
+       /* if (libraryBranch != null){
             return new LibraryBranchDTO(libraryBranch);
-        }
+        }*/
             return null;
     }
 
     @Override
     public ArrayList<LibraryBranchDTO> getAllLibraryBranches() throws SQLException {
-        List<LibraryBranch> getAllLibraryBranches = libraryBranchDAO.getAll();
-        ArrayList<LibraryBranchDTO> libraryBranchDTOS = new ArrayList<>();
-        
-        for (LibraryBranch libraryBranch : getAllLibraryBranches){
-            libraryBranchDTOS.add(new LibraryBranchDTO(
-                    libraryBranch.getBranchID(),
-                    libraryBranch.getBranchName(),
-                    libraryBranch.getLocation(),
-                    libraryBranch.getDescription()
+        return null;
+    }
+
+    @Override
+    public ArrayList<AdminSignupDTO> getAllAdmins() throws SQLException {
+        List<Admin> getAlladmins = adminSignupDAO.getAll();
+        ArrayList<AdminSignupDTO> adminSignupDTOS = new ArrayList<>();
+
+        for (Admin admin : getAlladmins){
+            adminSignupDTOS.add(new AdminSignupDTO(
+                    admin.getAdminID(),
+                    admin.getFirstName(),
+                    admin.getLastName(),
+                    admin.getNic(),
+                    admin.getEmailAddress(),
+                    admin.getUsername(),
+                    admin.getPassword()
+
             ));
         }
-        return libraryBranchDTOS;
-    }*/
+        return adminSignupDTOS;
+
+    }
+
+
+
 }
