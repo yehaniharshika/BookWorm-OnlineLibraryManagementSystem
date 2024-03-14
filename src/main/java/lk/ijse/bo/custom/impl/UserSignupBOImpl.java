@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserSignupBOImpl implements UserSignUpBo {
+public class UserSignupBOImpl implements UserSignUpBo{
 
     public UserSignUpDAO userSignUpDAO = new UserSignupDAOImpl();
     @Override
@@ -71,6 +71,11 @@ public class UserSignupBOImpl implements UserSignUpBo {
             );
         }
         return userSignupDTOS;
+    }
+
+    @Override
+    public String generateNextUserId() throws SQLException {
+        return userSignUpDAO.generateNextId();
     }
 
 }

@@ -11,4 +11,6 @@ public interface UserSignUpBo {
     boolean deleteUser(String userID) throws SQLException;
     UserSignupDTO searchUser(String userID) throws  SQLException;
     List<UserSignupDTO> getAllUsers() throws SQLException;
+    String generateNextUserId() throws SQLException;
+
 }
