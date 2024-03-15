@@ -36,6 +36,30 @@ public class QueryDAOImpl implements QueryDAO{
 
     @Override
     public List<Object[]> getAllTimeOut() {
-        return List.of();
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        NativeQuery<Object[]> nativeQuery = session.createNativeQuery("SELECT \n" +
+                "u.firstName,\n" +
+                "bd.bookID,\n" +
+                "bk.bookName,\n" +
+                "bd.borrowDate,\n" +
+                "bd.bookReturnDate\n" +
+                "FROM BookReservationDetail bd\n" +
+                "JOIN Reservation r\n" +
+                "ON bd.reservationID = r.reservationID\n" +
+                "JOIN User u \n" +
+                "ON r.userID = u.userID\n" +
+                "JOIN Book bk on bd.bookID = bk.bookID\n" +
+                "WHERE bd.dueDate < bd.bookReturnDate ;");
+
+
+        List<Object[]> tran = nativeQuery.getResultList();
+
+
+        transaction.commit();
+        session.close();
+
+        return tran;
     }
 }
