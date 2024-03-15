@@ -1,5 +1,7 @@
 package lk.ijse.dao;
 
+import lk.ijse.dto.AdminSignupDTO;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 

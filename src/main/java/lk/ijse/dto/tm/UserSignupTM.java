@@ -13,6 +13,4 @@ public class UserSignupTM {
     private String lastName;
     private String nic;
     private String emailAddress;
-    private String username;
-    private String password;
 }

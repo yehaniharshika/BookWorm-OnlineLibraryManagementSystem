@@ -2,10 +2,11 @@ package lk.ijse.dao.custom.impl;
 
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.AdminSignupDAO;
+import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.entity.Admin;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.sql.SQLException;
@@ -20,7 +21,36 @@ public class AdminSignupDAOImpl implements AdminSignupDAO {
 
     @Override
     public String generateNextId() throws SQLException {
-        return "";
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("select adminID from Admin order by adminID desc limit 1");
+        String id = (String) query.uniqueResult();
+
+        transaction.commit();
+        session.close();
+
+        return splitId(id);
+    }
+
+    private String splitId(String currentAdminId) {
+        if(currentAdminId != null) {
+            String[] strings = currentAdminId.split("AD0");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "AD00"+id;
+            }else {
+                if (length < 3){
+                    return "AD0"+id;
+                }else {
+                    return "AD"+id;
+                }
+            }
+        }
+        return "AD001";
     }
 
     @Override
@@ -55,7 +85,25 @@ public class AdminSignupDAOImpl implements AdminSignupDAO {
 
     @Override
     public Admin search(String adminID) throws SQLException {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            Query<Admin> query = session.createQuery("FROM Admin WHERE adminID =?1", Admin.class);
+            query.setParameter(1, adminID);
+            Admin admin = query.uniqueResult();
+
+            transaction.commit();
+            return  admin;
+        } catch (HibernateException e) {
+            // Rollback transaction on error
+            transaction.rollback();
+            e.printStackTrace();
+            return null;
+        } finally {
+            // Close session
+            session.close();
+        }
     }
 
     @Override

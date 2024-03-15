@@ -20,9 +20,7 @@ public class UserSignupBOImpl implements UserSignUpBo{
                 dto.getFirstName(),
                 dto.getLastName(),
                 dto.getNic(),
-                dto.getEmailAddress(),
-                dto.getUsername(),
-                dto.getPassword())
+                dto.getEmailAddress())
         );
     }
 
@@ -33,9 +31,7 @@ public class UserSignupBOImpl implements UserSignUpBo{
                 dto.getFirstName(),
                 dto.getLastName(),
                 dto.getNic(),
-                dto.getEmailAddress(),
-                dto.getUsername(),
-                dto.getPassword())
+                dto.getEmailAddress())
         );
     }
 
@@ -65,10 +61,8 @@ public class UserSignupBOImpl implements UserSignUpBo{
                     user.getFirstName(),
                     user.getLastName(),
                     user.getNic(),
-                    user.getEmailAddress(),
-                    user.getUsername(),
-                    user.getPassword())
-            );
+                    user.getEmailAddress()
+            ));
         }
         return userSignupDTOS;
     }

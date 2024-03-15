@@ -22,9 +22,18 @@ public interface PlaceReservationBo {
 
     BookDTO searchBook(String bookID) throws SQLException;
 
-    boolean updateBookReservationDetails(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException;
+    boolean saveReservation(ReservationDTO dto) throws SQLException;
+
+    boolean updateReservation(ReservationDTO dto) throws SQLException;
+
+    boolean deleteReservation(String reservationID) throws SQLException;
 
     ReservationDTO searchReservation(String reservationID) throws SQLException;
+
+    List<ReservationDTO> getAllReservations() throws SQLException;
+
+    boolean updateBookReservationDetails(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException;
+
 
 
     //BookReservationDetailsDTO searchTransactions(String transactionID) throws SQLException;

@@ -37,7 +37,7 @@ public class LoadFormController  implements Initializable {
                 Label label = new Label();
                 Platform.runLater(() -> {
                     ((AnchorPane) progress.getParent()).getChildren().add(label);
-                    label.setText("Loading HR Navigator...");
+                    label.setText("Loading BookWorm Online Library ...");
                 });
                 updateProgress(10, 100);
                 Thread.sleep(500);
@@ -45,7 +45,7 @@ public class LoadFormController  implements Initializable {
                     updateProgress(i, 100);
                     Thread.sleep(20);
                 }
-                Platform.runLater(() -> label.setText("Opening SignIn Page..."));
+                Platform.runLater(() -> label.setText("Opening Admin Login Page..."));
                 updateProgress(90, 100);
                 Thread.sleep(500);
                 for (int i = 91; i <= 100; i++) {
@@ -63,7 +63,7 @@ public class LoadFormController  implements Initializable {
                 stage1.close();
 
                 Stage stage = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/MainWindow_From.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AdminLogin_Form.fxml"));
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

@@ -11,11 +11,10 @@ import java.time.LocalDate;
 @Setter
 @ToString
 public class TransactionCartTM {
-    private String bookID;
-    private String bookName;
+    private String ReservationID;
     private LocalDate borrowDate;
     private String dueDate;
     private String bookReturnDate;
-    private Button btn;
-
+    private String userID;
+    private String bookID;
 }

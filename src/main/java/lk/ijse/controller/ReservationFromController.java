@@ -1,4 +1,4 @@
-/*
+
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -12,10 +12,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.custom.impl.PlaceReservationBoImpl;
+import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BookReservationDetailsDTO;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.dto.tm.TransactionCartTM;
+import lk.ijse.entity.Reservation;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -176,14 +180,14 @@ public class ReservationFromController {
             for (int i=0 ; i<tblTransaction.getItems().size() ; i++){
                 if (colbookID.getCellData(i).equals(bookID)){
 
-                    */
-/*int colsupplierQuantity = (int) colQty.getCellData(i);
+
+               /* int colsupplierQuantity = (int) colQty.getCellData(i);
                     qty += colsupplierQuantity;
 
-                    obList.get(i).;
+                   *//* obList.get(i).;*//*
 
-                    calculateTotal();*//*
-
+                    calculateTotal();
+*/
                     tblTransaction.refresh();
                     return;
                 }
@@ -192,10 +196,10 @@ public class ReservationFromController {
         }
         var TransactionCartTM = new TransactionCartTM(bookID,bookName,borrowedDate,dueDate,bookReturnDate,btn);
         obList.add(TransactionCartTM);
-        tblTransaction.setItems(obList);
-       */
-/* calculateTotal();
-        txtSupplyQuantity.clear();*//*
+        /*tblTransaction.setItems(obList);*/
+
+            /* calculateTotal();
+                txtSupplyQuantity.clear();*/
 
 
     }
@@ -212,8 +216,8 @@ public class ReservationFromController {
 
                 obList.remove(focusedIndex);
                 tblTransaction.refresh();
-                */
-/*calculateTotal();*//*
+
+                /*calculateTotal();*/
 
 
             }
@@ -227,7 +231,38 @@ public class ReservationFromController {
 
     @FXML
     void btnPlaceReservationOnAction(ActionEvent event) {
-        String reservationID = txtReservationID.getText();
+
+        Session session  = null;
+        Transaction transaction = null;
+
+        try {
+            String userID = cmbUserId.getValue();
+            String bookID = cmbBookId.getValue();
+            String reservationID = txtReservationID.getText();
+            String borrowedDate = txtBorrowedDate.getText();
+            String dueDate = String.valueOf(txtDueDate.getValue());
+            String bookReturnDate = txtReturnDate.getText();
+
+            session = FactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+
+            Reservation reservation = new Reservation();
+            /*reservation.setUser(userID);*/
+
+            reservation.setReservationID(txtReservationID.getText());
+            reservation.setBorrowDate(borrowedDate);
+
+            session.save(reservation);
+
+            /*int i=0;
+            for (TransactionCartTM transactionCartTM : obList){
+                session.save(new )
+            }*/
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        /*String reservationID = txtReservationID.getText();
         boolean b = saveOrder(reservationID, LocalDate.now(), cmbUserId.getValue(),
                 tblTransaction.getItems().stream().map(tm -> new BookReservationDetailsDTO(tm.getBookID(),
                         tm.getBookName(), tm.getBorrowDate(), tm.getDueDate(), tm.getBookReturnDate())).collect(Collectors.toList()));
@@ -244,13 +279,13 @@ public class ReservationFromController {
         cmbBookId.getSelectionModel().clearSelection();
         tblTransaction.getItems().clear();
         txtQty.clear();
-        */
-/*calculateTotal();*//*
+
+        *//*calculateTotal();*/
 
     }
 
     public boolean saveOrder(String reservationID, LocalDate borrowDate, String userID, List<BookReservationDetailsDTO> bookReservationDetails) {
-        try {
+       /* try {
             return placeReservationBo.placeReservation(reservationID, borrowDate, userID, bookReservationDetails);
         } catch (SQLException e) {
            e.printStackTrace();
@@ -258,6 +293,7 @@ public class ReservationFromController {
             throw new RuntimeException(e);
         }
 
+        return false;*/
         return false;
     }
 
@@ -293,15 +329,15 @@ public class ReservationFromController {
     void cmbUserOnAction(ActionEvent event) {
         String userID = cmbUserId.getValue();
 
-        try {
+       try {
             UserSignupDTO dto = placeReservationBo.searchUser(userID);
 
             if (dto != null){
                 lblMemberName.setText(dto.getFirstName()+" "+dto.getLastName());
             }
-        } catch (SQLException e) {
+       } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+       }
 
     }
 
@@ -311,4 +347,4 @@ public class ReservationFromController {
     }
 
 }
-*/
+

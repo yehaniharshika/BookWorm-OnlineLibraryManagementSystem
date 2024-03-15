@@ -7,18 +7,23 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="LoadPane" prefHeight="929.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoadFormController">
+<AnchorPane fx:id="LoadPane" prefHeight="886.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.LoadFormController">
    <children>
-      <ImageView fitHeight="204.0" fitWidth="223.0" layoutX="484.0" layoutY="345.0">
+      <ImageView fitHeight="900.0" fitWidth="1600.0">
          <image>
-            <Image url="@../../../../../../My-Layered-Architecture/LibraSys-LibraryManagementSystem/src/main/resources/icon/education.png" />
+            <Image url="@../assets/main.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="754.0" layoutY="416.0" prefHeight="86.0" prefWidth="536.0" text="BookWarm" textFill="#0c0c0c">
+      <ImageView fitHeight="107.0" fitWidth="123.0" layoutX="56.0" layoutY="28.0">
+         <image>
+            <Image url="@../icon/education.png" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="progress" disable="true" layoutY="884.0" prefHeight="14.0" prefWidth="1600.0" progress="0.0" style="-fx-background-color: lightpink;" />
+      <Label layoutX="47.0" layoutY="127.0" prefHeight="33.0" prefWidth="156.0" text="BookWorm" textFill="#fff9f9">
          <font>
-            <Font name="MathJax_Main-Bold" size="70.0" />
+            <Font name="MathJax_Main-Bold" size="24.0" />
          </font>
       </Label>
-      <ProgressBar fx:id="progress" disable="true" layoutY="909.0" prefHeight="18.0" prefWidth="1400.0" progress="0.0" style="-fx-background-color: lightpink;" />
    </children>
 </AnchorPane>

@@ -1,4 +1,4 @@
-/*
+
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -7,17 +7,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.bo.custom.impl.BookBOImpl;
 import lk.ijse.bo.custom.impl.LibraryBranchBOImpl;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.LibraryBranchDTO;
+import lk.ijse.dto.tm.BookTM;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BookFormController {
 
@@ -35,6 +36,30 @@ public class BookFormController {
 
     @FXML
     private JFXButton btnUpdate;
+
+    @FXML
+    private TableColumn<?, ?> colAuthorName;
+
+    @FXML
+    private TableColumn<?, ?> colAvailabilityStatus;
+
+    @FXML
+    private TableColumn<?, ?> colBookGenre;
+
+    @FXML
+    private TableColumn<?, ?> colBookId;
+
+    @FXML
+    private TableColumn<?, ?> colBookName;
+
+    @FXML
+    private TableColumn<?, ?> colBranchId;
+    @FXML
+    private TableView<BookTM> tblBookDetails;
+
+    @FXML
+    private TableColumn<?, ?> colQtyOnHand;
+
 
     @FXML
     private Label lblBranchName;
@@ -73,6 +98,8 @@ public class BookFormController {
         loadAllBranchIDs();
         setAvailabilityStatus();
         generateNextBookID();
+        loadAllBooks();
+        setCellValueFactory();
 
         txtQty.textProperty().addListener((observable, oldValue, newValue) -> {
             setAvailabilityStatus();
@@ -80,6 +107,41 @@ public class BookFormController {
 
 
     }
+
+    private void setCellValueFactory() {
+        colBookId.setCellValueFactory(new PropertyValueFactory<>("bookID"));
+        colBookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        colAuthorName.setCellValueFactory(new PropertyValueFactory<>("authorName"));
+        colBookGenre.setCellValueFactory(new PropertyValueFactory<>("bookGenre"));
+        colQtyOnHand.setCellValueFactory(new PropertyValueFactory<>("qtyOnHand"));
+        colAvailabilityStatus.setCellValueFactory(new PropertyValueFactory<>("availabilityStatus"));
+        colBranchId.setCellValueFactory(new PropertyValueFactory<>("branchID"));
+    }
+
+    private void loadAllBooks() {
+        ObservableList<BookTM> obList = FXCollections.observableArrayList();
+
+        try {
+            List<BookDTO> bookList = bookBO.getAllBooks();
+
+            for (BookDTO dto : bookList){
+                obList.add(new BookTM(
+                        dto.getBookID(),
+                        dto.getBookName(),
+                        dto.getAuthorName(),
+                        dto.getBookGenre(),
+                        dto.getQtyOnHand(),
+                        dto.getAvailability(),
+                        dto.getBranchID()
+
+                ));
+            }
+            tblBookDetails.setItems(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void generateNextBookID() {
         try {
@@ -146,6 +208,8 @@ public class BookFormController {
                 new Alert(Alert.AlertType.CONFIRMATION,"deleted !!!").show();
                 clearFields();
                 generateNextBookID();
+                loadAllBooks();
+                setCellValueFactory();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not deleted !!!").show();
             }
@@ -171,6 +235,8 @@ public class BookFormController {
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
                 clearFields();
+                loadAllBooks();
+                setCellValueFactory();
                 generateNextBookID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
@@ -249,5 +315,5 @@ public class BookFormController {
     }
 
 }
-*/
+
 

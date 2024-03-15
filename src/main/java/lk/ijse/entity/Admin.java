@@ -25,6 +25,7 @@ public class Admin {
     @OneToMany(mappedBy = "admin",cascade = CascadeType.ALL)
     private List<LibraryBranch> libraryBranchList;
 
+
     public Admin(String adminID, String firstName, String lastName, String nic, String emailAddress, String username, String password) {
         this.adminID = adminID;
         this.firstName = firstName;

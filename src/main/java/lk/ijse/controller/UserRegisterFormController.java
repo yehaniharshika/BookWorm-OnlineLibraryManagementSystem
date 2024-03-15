@@ -1,22 +1,24 @@
 package lk.ijse.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lk.ijse.bo.custom.impl.UserSignupBOImpl;
 import lk.ijse.dto.UserSignupDTO;
+import lk.ijse.dto.tm.UserSignupTM;
 
-import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
-public class UserSignupFormController {
+public class UserRegisterFormController {
 
     @FXML
     private JFXButton btnCreateAccount;
@@ -40,13 +42,26 @@ public class UserSignupFormController {
     private TextField txtNIC;
 
     @FXML
-    private TextField txtPassword;
+    private TableColumn<?, ?> colEmailAddress;
+
+    @FXML
+    private TableColumn<?, ?> colFristName;
+
+    @FXML
+    private TableColumn<?, ?> colLastName;
+
+    @FXML
+    private TableColumn<?, ?> colNICNumber;
+
+    @FXML
+    private TableColumn<?, ?> colUserID;
+
+    @FXML
+    private TableView<UserSignupTM> tblUserDetails;
+
 
     @FXML
     private TextField txtUserID;
-
-    @FXML
-    private TextField txtUserName;
 
     @FXML
     private AnchorPane pane;
@@ -55,6 +70,37 @@ public class UserSignupFormController {
 
     public void initialize(){
         generateNextUserID();
+        loadAllUsers();
+        setCellValueFactory();
+    }
+
+    private void setCellValueFactory() {
+        colUserID.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        colFristName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        colLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        colNICNumber.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colEmailAddress.setCellValueFactory(new PropertyValueFactory<>("emailAddress"));
+    }
+
+    private void loadAllUsers() {
+        ObservableList<UserSignupTM> obList = FXCollections.observableArrayList();
+
+        try {
+
+            List<UserSignupDTO> userList = userSignupBO.getAllUsers();
+
+            for (UserSignupDTO dto : userList){
+                obList.add(new UserSignupTM(
+                        dto.getUserID(),
+                        dto.getFirstName(),
+                        dto.getLastName(),
+                        dto.getNic(),
+                        dto.getEmailAddress()));
+            }
+            tblUserDetails.setItems(obList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void generateNextUserID() {
@@ -73,10 +119,8 @@ public class UserSignupFormController {
         String lastName = txtLastname.getText();
         String nic = txtNIC.getText();
         String emailAddress = txtEmailAddress.getText();
-        String username = txtUserName.getText();
-        String password = txtPassword.getText();
 
-        var dto = new UserSignupDTO(userId,firstName,lastName,nic,emailAddress,username,password);
+        var dto = new UserSignupDTO(userId,firstName,lastName,nic,emailAddress);
 
         try {
             boolean isSaved = userSignupBO.saveUser(dto);
@@ -84,6 +128,8 @@ public class UserSignupFormController {
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
                 clearFields();
                 generateNextUserID();
+                loadAllUsers();
+                setCellValueFactory();
             }else {
                 new Alert(Alert.AlertType.ERROR,"Error!!!").show();
             }
@@ -99,8 +145,7 @@ public class UserSignupFormController {
         txtLastname.setText("");
         txtNIC.setText("");
         txtEmailAddress.setText("");
-        txtUserName.setText("");
-        txtPassword.setText("");
+
     }
 
     @FXML
@@ -113,6 +158,8 @@ public class UserSignupFormController {
                 new Alert(Alert.AlertType.INFORMATION,"Deleted !!!").show();
                 clearFields();
                 generateNextUserID();
+                loadAllUsers();
+                setCellValueFactory();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not Deleted !!!").show();
             }
@@ -129,15 +176,17 @@ public class UserSignupFormController {
         String lastName = txtLastname.getText();
         String nic = txtNIC.getText();
         String emailAddress = txtEmailAddress.getText();
-        String username = txtUserName.getText();
-        String password = txtPassword.getText();
 
-        var dto = new UserSignupDTO(userId,firstName,lastName,nic,emailAddress,username,password);
+        var dto = new UserSignupDTO(userId,firstName,lastName,nic,emailAddress);
 
         try {
             boolean isUpdated = userSignupBO.updateUser(dto);
             if (isUpdated){
                 new Alert(Alert.AlertType.INFORMATION,"updated!!!").show();
+                clearFields();
+                loadAllUsers();
+                setCellValueFactory();
+                generateNextUserID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not updated!!!").show();
             }
@@ -146,18 +195,6 @@ public class UserSignupFormController {
         }
     }
 
-    @FXML
-    void hyperLoginHereOnAction(ActionEvent event) throws IOException {
-        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/UserLogin_Form.fxml"));
-
-        Scene scene = new Scene(rootNode);
-
-        pane.getScene().getWindow();
-        Stage primaryStage = (Stage) pane.getScene().getWindow();
-
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Login Form");
-    }
 
     @FXML
     void txtAuthorIDOnAction(ActionEvent event) {
@@ -172,8 +209,6 @@ public class UserSignupFormController {
                 txtLastname.setText(dto.getLastName());
                 txtNIC.setText(dto.getNic());
                 txtEmailAddress.setText(dto.getEmailAddress());
-                txtUserName.setText(dto.getUsername());
-                txtPassword.setText(dto.getPassword());
             }else {
                 new Alert(Alert.AlertType.ERROR,"User not found!!!").show();
             }

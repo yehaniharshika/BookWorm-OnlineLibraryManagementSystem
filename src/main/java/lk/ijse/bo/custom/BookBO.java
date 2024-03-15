@@ -1,6 +1,7 @@
 package lk.ijse.bo.custom;
 
 import lk.ijse.dto.BookDTO;
+import lk.ijse.dto.LibraryBranchDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -12,6 +13,5 @@ public interface BookBO {
     BookDTO searchBook(String bookID) throws  SQLException;
     List<BookDTO> getAllBooks() throws SQLException;
     String generateNextBookId() throws SQLException;
-
-
+    List<LibraryBranchDTO> getAllLibraryBranches() throws SQLException;
 }

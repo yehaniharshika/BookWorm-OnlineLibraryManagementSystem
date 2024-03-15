@@ -10,5 +10,8 @@ import lombok.*;
 public class ReservationDTO {
     private String reservationID;
     private String BorrowDate;
+    private String dueDate;
+    private String bookReturnDate;
     private String userID;
+    private String bookID;
 }

@@ -14,8 +14,6 @@ public class UserSignupDTO {
     private String lastName;
     private String nic;
     private String emailAddress;
-    private String username;
-    private String password;
 
     public UserSignupDTO(User user) {
         this.userID = user.getUserID();
@@ -23,7 +21,5 @@ public class UserSignupDTO {
         this.lastName = user.getLastName();
         this.nic = user.getNic();
         this.emailAddress = user.getEmailAddress();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
     }
 }

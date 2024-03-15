@@ -1,9 +1,8 @@
 package lk.ijse.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class LibraryBranch {
@@ -16,14 +15,23 @@ public class LibraryBranch {
     @JoinColumn(name = "adminID")
     private Admin admin;
 
-    public LibraryBranch(Admin admin, String branchID, String branchName, String description, String location) {
+    @OneToMany(mappedBy = "libraryBranch")
+    private List<Book> bookList;
+
+
+    public LibraryBranch(Admin admin, List<Book> bookList, String branchID, String branchName, String location) {
         this.admin = admin;
+        this.bookList = bookList;
         this.branchID = branchID;
         this.branchName = branchName;
         this.location = location;
     }
 
     public LibraryBranch(String branchID, String branchName, String location, Admin adminID) {
+        this.branchID = branchID;
+        this.branchName = branchName;
+        this.location = location;
+        this.admin = adminID;
 
     }
 
@@ -31,12 +39,11 @@ public class LibraryBranch {
 
     }
 
-    public Admin getAdmin() {
+    public Admin getAdmin(){
         return admin;
     }
 
     public void setAdmin(Admin admin) {
-
         this.admin = admin;
     }
 
@@ -50,6 +57,14 @@ public class LibraryBranch {
 
     public String getBranchName() {
         return branchName;
+    }
+
+    public List<Book> getBookList() {
+        return bookList;
+    }
+
+    public void setBookList(List<Book> bookList) {
+        this.bookList = bookList;
     }
 
     public void setBranchName(String branchName) {

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.bo.custom.impl.AdminSignupBOImpl;
 import lk.ijse.dto.AdminSignupDTO;
+import lk.ijse.dto.BookDTO;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -51,6 +52,20 @@ public class AdminSignupFormController {
     private AnchorPane root;
 
     public AdminSignupBOImpl adminSignupBO = new AdminSignupBOImpl();
+
+    public void initialize(){
+        generateNextAdminID();
+    }
+
+    private void generateNextAdminID() {
+        try {
+            String AdminID = adminSignupBO.generateNextAdminId();
+            txtAdminID.setText(AdminID);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     @FXML
     void btnCreateAccountOnAction(ActionEvent event) {
@@ -130,8 +145,28 @@ public class AdminSignupFormController {
     }
 
     @FXML
-    void txtAuthorIDOnAction(ActionEvent event) {
+    void txtAdminIDOnAction(ActionEvent event) {
+        String adminID  = txtAdminID.getText();
 
+        try {
+            AdminSignupDTO dto = adminSignupBO.searchAdmin(adminID);
+
+            if (dto!= null){
+                txtAdminID.setText(dto.getAdminID());
+                txtFirstname.setText(dto.getFirstName());
+                txtLastname.setText(dto.getLastName());
+                txtNIC.setText(dto.getNic());
+                txtEmailAddress.setText(dto.getEmailAddress());
+                txtUserName.setText(dto.getUsername());
+                txtPassword.setText(dto.getPassword());
+            }else{
+                new Alert(Alert.AlertType.ERROR,"Admin not found!!!").show();
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

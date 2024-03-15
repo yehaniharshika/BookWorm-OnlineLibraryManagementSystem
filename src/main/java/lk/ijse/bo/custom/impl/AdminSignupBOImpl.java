@@ -4,7 +4,6 @@ import lk.ijse.bo.custom.AdminSignupBO;
 import lk.ijse.dao.custom.AdminSignupDAO;
 import lk.ijse.dao.custom.impl.AdminSignupDAOImpl;
 import lk.ijse.dto.AdminSignupDTO;
-import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.entity.Admin;
 
 import java.sql.SQLException;
@@ -43,12 +42,24 @@ public class AdminSignupBOImpl implements AdminSignupBO {
 
     @Override
     public boolean deleteAdmin(String adminID) throws SQLException {
-        return false;
+        return adminSignupDAO.delete(adminID);
     }
 
     @Override
-    public UserSignupDTO searchAdmin(String adminID) throws SQLException {
-        return null;
+    public AdminSignupDTO searchAdmin(String adminID) throws SQLException {
+        Admin admin =adminSignupDAO.search(adminID);
+
+
+        return new AdminSignupDTO(
+                admin.getAdminID(),
+                admin.getFirstName(),
+                admin.getLastName(),
+                admin.getNic(),
+                admin.getEmailAddress(),
+                admin.getUsername(),
+                admin.getPassword()
+
+        );
     }
 
     @Override
@@ -68,5 +79,10 @@ public class AdminSignupBOImpl implements AdminSignupBO {
             ));
         }
         return adminSignupDTOS;
+    }
+
+    @Override
+    public String generateNextAdminId() throws SQLException {
+        return adminSignupDAO.generateNextId();
     }
 }

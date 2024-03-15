@@ -2,98 +2,84 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane" prefHeight="900.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserSignupFormController">
+<AnchorPane fx:id="pane" prefHeight="887.0" prefWidth="1256.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 8;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.controller.UserRegisterFormController">
    <children>
-      <ImageView fitHeight="900.0" fitWidth="1400.0">
+      <JFXButton fx:id="btnDeleteAccount" layoutX="983.0" layoutY="246.0" onAction="#btnDeleteAccountOnAction" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="DELETE " textFill="#fcfafa">
+         <font>
+            <Font name="Gidugu" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnUpdateAccount" layoutX="983.0" layoutY="184.0" onAction="#btnUpdateAccountOnAction" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="UPDATE " textFill="#fcfafa">
+         <font>
+            <Font name="Gidugu" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton fx:id="btnCreateAccount" layoutX="983.0" layoutY="123.0" onAction="#btnCreateAccountOnAction" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #2d3436; -fx-background-radius: 22; -fx-border-radius: 22; -fx-border-color: #ffffff;" text="SAVE" textFill="#fcfafa">
+         <font>
+            <Font name="Gidugu" size="20.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <TextField fx:id="txtFirstname" layoutX="528.0" layoutY="134.0" prefHeight="50.0" prefWidth="387.0" promptText="First Name" style="-fx-background-color: white; -fx-border-color: black;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtNIC" layoutX="528.0" layoutY="196.0" prefHeight="50.0" prefWidth="387.0" promptText="NIC Number" style="-fx-background-color: white; -fx-border-color: black;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtEmailAddress" layoutX="300.0" layoutY="259.0" prefHeight="50.0" prefWidth="387.0" promptText="Email Address" style="-fx-background-color: white; -fx-border-color: black;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtUserID" layoutX="68.0" layoutY="134.0" onAction="#txtAuthorIDOnAction" prefHeight="50.0" prefWidth="387.0" promptText="User ID" style="-fx-background-color: white; -fx-border-color: black;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtLastname" layoutX="68.0" layoutY="196.0" prefHeight="50.0" prefWidth="387.0" promptText="Last name" style="-fx-background-color: white; -fx-border-color: black;">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </TextField>
+      <TableView fx:id="tblUserDetails" layoutX="22.0" layoutY="329.0" prefHeight="544.0" prefWidth="1216.0">
+         <columns>
+            <TableColumn fx:id="colUserID" prefWidth="104.0" text="User ID" />
+            <TableColumn fx:id="colFristName" prefWidth="292.0" text="Frist Name" />
+            <TableColumn fx:id="colLastName" prefWidth="193.0" text="Last Name" />
+            <TableColumn fx:id="colNICNumber" prefWidth="286.0" text="NIC Number" />
+            <TableColumn fx:id="colEmailAddress" prefWidth="340.0" text="Email Address" />
+         </columns>
+      </TableView>
+      <Label layoutX="362.0" layoutY="24.0" prefHeight="80.0" prefWidth="578.0" style="-fx-border-color: #222f3e; -fx-background-color: #1B97B0;" text="                      MEMBER  MANAGEMENT" textFill="#171717">
+         <font>
+            <Font name="System Bold" size="23.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="71.0" fitWidth="91.0" layoutX="427.0" layoutY="29.0">
          <image>
-            <Image url="@../assets/main.jpg" />
+            <Image url="@../icon/Member.png" />
          </image>
       </ImageView>
-      <AnchorPane layoutX="783.0" layoutY="65.0" prefHeight="771.0" prefWidth="536.0" style="-fx-background-color: #f5f6fa; -fx-background-radius: 2;">
-         <children>
-            <TextField fx:id="txtUserID" layoutX="93.0" layoutY="60.0" onAction="#txtAuthorIDOnAction" prefHeight="50.0" prefWidth="351.0" promptText="User ID" style="-fx-background-color: #1B97B0;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtFirstname" layoutX="93.0" layoutY="127.0" prefHeight="50.0" prefWidth="351.0" promptText="First Name" style="-fx-background-color: #1B97B0;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtLastname" layoutX="93.0" layoutY="192.0" prefHeight="50.0" prefWidth="351.0" promptText="Last name" style="-fx-background-color: #1B97B0;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtNIC" layoutX="93.0" layoutY="260.0" prefHeight="50.0" prefWidth="351.0" promptText="NIC Number" style="-fx-background-color: #1B97B0;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtEmailAddress" layoutX="93.0" layoutY="329.0" prefHeight="50.0" prefWidth="351.0" promptText="Email Address" style="-fx-background-color: #1B97B0;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtPassword" layoutX="93.0" layoutY="467.0" prefHeight="50.0" prefWidth="351.0" promptText="Password" style="-fx-background-color: #1B97B0;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="txtUserName" layoutX="93.0" layoutY="397.0" prefHeight="50.0" prefWidth="351.0" promptText="User Name" style="-fx-background-color: #1B97B0;">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </TextField>
-            <JFXButton fx:id="btnCreateAccount" layoutX="148.0" layoutY="544.0" onAction="#btnCreateAccountOnAction" prefHeight="47.0" prefWidth="214.0" style="-fx-background-color: #2d3436; -fx-background-radius: 22; -fx-border-radius: 22; -fx-border-color: #ffffff;" text="CREATE ACCOUNT" textFill="#fcfafa">
-               <font>
-                  <Font name="Gidugu" size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <Label layoutX="110.0" layoutY="602.0" prefHeight="21.0" prefWidth="214.0" text="Already have an account?" textFill="#636e72">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Hyperlink layoutX="324.0" layoutY="600.0" onAction="#hyperLoginHereOnAction" prefHeight="24.0" prefWidth="102.0" text="Login here">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Hyperlink>
-            <Label layoutX="114.0" layoutY="712.0" prefHeight="33.0" prefWidth="340.0" text="Books are a uniquely portable magic !!!!" textFill="#b51616">
-               <font>
-                  <Font name="MathJax_Main-Bold" size="17.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnUpdateAccount" layoutX="69.0" layoutY="641.0" onAction="#btnUpdateAccountOnAction" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="UPDATE ACCOUNT" textFill="#fcfafa">
-               <font>
-                  <Font name="Gidugu" size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="btnDeleteAccount" layoutX="284.0" layoutY="641.0" onAction="#btnDeleteAccountOnAction" prefHeight="50.0" prefWidth="181.0" style="-fx-background-color: #2d3436; -fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: #ffffff;" text="DELETE ACCOUNT" textFill="#fcfafa">
-               <font>
-                  <Font name="Gidugu" size="20.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

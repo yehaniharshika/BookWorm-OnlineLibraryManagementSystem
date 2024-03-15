@@ -50,18 +50,38 @@ public class LibraryBranchBOImpl implements LibraryBranchBO{
 
     @Override
     public LibraryBranchDTO searchLibraryBranch(String branchID) throws SQLException {
-
         LibraryBranch libraryBranch = libraryBranchDAO.search(branchID);
 
-       /* if (libraryBranch != null){
-            return new LibraryBranchDTO(libraryBranch);
-        }*/
-            return null;
+        if (libraryBranch != null) {
+            return new LibraryBranchDTO(
+                    libraryBranch.getBranchID(),
+                    libraryBranch.getBranchName(),
+                    libraryBranch.getLocation(),
+                    libraryBranch.getAdmin()
+            );
+        } else {
+            return null; // or throw an exception or handle the null case as appropriate for your application
+        }
     }
+
 
     @Override
     public ArrayList<LibraryBranchDTO> getAllLibraryBranches() throws SQLException {
-        return null;
+
+        ArrayList<LibraryBranch> branches = libraryBranchDAO.getAll();
+        ArrayList<LibraryBranchDTO> libraryBranchDTOS = new ArrayList<>();
+
+
+        for (LibraryBranch libraryBranch : branches) {
+            libraryBranchDTOS.add(new LibraryBranchDTO(
+                    libraryBranch.getBranchID(),
+                    libraryBranch.getBranchName(),
+                    libraryBranch.getLocation(),
+                    libraryBranch.getAdmin()
+
+            ));
+        }
+        return libraryBranchDTOS;
     }
 
     @Override

@@ -41,6 +41,9 @@ public class LibraryBranchFormController {
     @FXML
     private TableColumn<?, ?> colBranchName;
 
+    @FXML
+    private TableColumn<?, ?> colAdminID;
+
 
     @FXML
     private TableColumn<?, ?> colLocation;
@@ -65,7 +68,7 @@ public class LibraryBranchFormController {
 
     public void initialize(){
         loadAllAdminIds();
-        //getAllLibraryBranches();
+        getAllLibraryBranches();
         setCellValueFactory();
         generateNextLibraryBranchID();
         tableListener();
@@ -91,6 +94,8 @@ public class LibraryBranchFormController {
         colBranchId.setCellValueFactory(new PropertyValueFactory<>("branchID"));
         colBranchName.setCellValueFactory(new PropertyValueFactory<>("branchName"));
         colLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        colAdminID.setCellValueFactory(new PropertyValueFactory<>("adminID"));
+
     }
 
     private void generateNextLibraryBranchID() {
@@ -102,7 +107,7 @@ public class LibraryBranchFormController {
         }
     }
 
-   /* private void getAllLibraryBranches() {
+   private void getAllLibraryBranches() {
         ObservableList<LibraryBranchTM> obList = FXCollections.observableArrayList();
 
         try {
@@ -121,7 +126,7 @@ public class LibraryBranchFormController {
             e.printStackTrace();
         }
 
-    }*/
+    }
 
     private void loadAllAdminIds() {
         ObservableList<String> obList = FXCollections.observableArrayList();
@@ -161,9 +166,9 @@ public class LibraryBranchFormController {
             if (isDeleted){
                 new Alert(Alert.AlertType.INFORMATION,"deleted !!").show();
                 clearFields();
-                //getAllLibraryBranches();
+                getAllLibraryBranches();
                 setCellValueFactory();
-               // generateNextLibraryBranchID();
+                generateNextLibraryBranchID();
             }else {
                 new Alert(Alert.AlertType.ERROR,"not deleted !!").show();
             }
@@ -172,32 +177,6 @@ public class LibraryBranchFormController {
         }
     }
 
-    /*@FXML
-    void btnSaveOnAction(ActionEvent event) {
-        String branchID = txtBranchId.getText();
-        String branchName = txtBranchName.getText();
-        String location = txtLocation.getText();
-        String adminID = cmbAdminId.getValue();
-
-        var dto = new LibraryBranchDTO(branchID,branchName,location,adminID);
-
-        try {
-            boolean isSaved = libraryBranchBO.saveLibraryBranch(adminID,dto);
-
-            if (isSaved){
-                new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
-                clearFields();
-                getAllLibraryBranches();
-                setCellValueFactory();
-                generateNextLibraryBranchID();
-
-            }else {
-                new Alert(Alert.AlertType.ERROR,"adding not successfully!!!").show();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     @FXML
     void btnSaveOnAction(ActionEvent event) {
@@ -213,6 +192,11 @@ public class LibraryBranchFormController {
 
             if (isSaved){
                 new Alert(Alert.AlertType.CONFIRMATION,"Success!!!").show();
+                clearFields();
+                generateNextLibraryBranchID();
+                getAllLibraryBranches();
+                setCellValueFactory();
+
             }else {
                 new Alert(Alert.AlertType.ERROR,"adding not successfully!!!").show();
             }
@@ -236,7 +220,7 @@ public class LibraryBranchFormController {
             if (isUpdated){
                 new Alert(Alert.AlertType.CONFIRMATION,"Updated!!!").show();
                 clearFields();
-                //getAllLibraryBranches();
+                getAllLibraryBranches();
                 setCellValueFactory();
                 generateNextLibraryBranchID();
             }else {

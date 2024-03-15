@@ -1,19 +1,14 @@
 package lk.ijse.dao.custom.impl;
 
-import jakarta.transaction.HeuristicMixedException;
-import jakarta.transaction.HeuristicRollbackException;
-import jakarta.transaction.RollbackException;
-import jakarta.transaction.SystemException;
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dao.custom.UserSignUpDAO;
-import lk.ijse.entity.Admin;
+import lk.ijse.dto.AdminSignupDTO;
+import lk.ijse.entity.Book;
 import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,24 +26,31 @@ public class UserSignupDAOImpl implements UserSignUpDAO{
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        String hql = "select u.userID from User u order by u.userID desc limit 1";
-        Query query = session.createQuery(hql);
+        Query query = session.createQuery("select userID from User order by userID desc limit 1");
+        String id = (String) query.uniqueResult();
 
-        String ad_id = (String) query.getSingleResult();
         transaction.commit();
         session.close();
-        return splitId(ad_id);
+
+        return splitId(id);
     }
 
     private String splitId(String currentID) {
-        if (currentID != null && currentID.startsWith("U0")) {
+        if(currentID != null) {
             String[] strings = currentID.split("U0");
-            if (strings.length > 1) {
+            if(strings.length > 1) {
                 int id = Integer.parseInt(strings[1]);
                 id++;
-                return String.format("U%03d", id);
+                String ID = String.valueOf(id);
+                int length = ID.length();
+                if (length < 2){
+                    return "U00"+id;
+                } else if (length < 3) {
+                    return "U0"+id;
+                } else {
+                    return "U"+id;
+                }
             } else {
-                // Handle the case where splitting doesn't give the expected result
                 return "U001";
             }
         }
@@ -56,19 +58,18 @@ public class UserSignupDAOImpl implements UserSignUpDAO{
     }
 
 
+
     @Override
     public boolean save(User entity) throws SQLException {
        Session session = FactoryConfiguration.getInstance().getSession();
        Transaction transaction = session.beginTransaction();
 
-       Query query = session.createQuery("insert into User(userID,firstName,lastName,nic,emailAddress,username,password) values(:userID, :firstName,:lastName,:nic,:emailAddress, :username, :password)");
+       Query query = session.createQuery("insert into User(userID,firstName,lastName,nic,emailAddress) values(:userID, :firstName,:lastName,:nic,:emailAddress)");
        query.setParameter("userID", entity.getUserID());
        query.setParameter("firstName", entity.getFirstName());
        query.setParameter("lastName", entity.getLastName());
        query.setParameter("nic", entity.getNic());
        query.setParameter("emailAddress", entity.getEmailAddress());
-       query.setParameter("username", entity.getUsername());
-       query.setParameter("password", entity.getPassword());
 
        int i = query.executeUpdate();
 
@@ -83,14 +84,12 @@ public class UserSignupDAOImpl implements UserSignUpDAO{
        Session session = FactoryConfiguration.getInstance().getSession();
        Transaction transaction = session.beginTransaction();
 
-       Query query = session.createQuery("update User set firstName=?1,lastName=?2,nic=?3,emailAddress=?4,username=?5,password=?6 where userID=?7");
+       Query query = session.createQuery("update User set firstName=?1,lastName=?2,nic=?3,emailAddress=?4 where userID=?5");
        query.setParameter(1,entity.getFirstName());
        query.setParameter(2,entity.getLastName());
        query.setParameter(3,entity.getNic());
        query.setParameter(4,entity.getEmailAddress());
-       query.setParameter(5,entity.getUsername());
-       query.setParameter(6,entity.getPassword());
-       query.setParameter(7,entity.getUserID());
+       query.setParameter(5,entity.getUserID());
 
        int i = query.executeUpdate();
 
@@ -137,49 +136,56 @@ public class UserSignupDAOImpl implements UserSignUpDAO{
        User user = null;
 
        for (User u : userList) {
-           user = new User(u.getUserID(),
+           user = new User(
+                   u.getUserID(),
                    u.getFirstName(),
                    u.getLastName(),
                    u.getNic(),
-                   u.getEmailAddress(),
-                   u.getUsername(),
-                   u.getPassword()
-           );
+                   u.getEmailAddress());
        }
        transaction.commit();
        session.close();
        return user;
-        /*ResultSet resultSet = SQLUtil.execute("SELECT * FROM user WHERE userID=?",userID);
-        User entity = null;
 
-        if (resultSet.next()){
-            entity = new User(
-                    resultSet.getString("userID"),
-                    resultSet.getString("firstName"),
-                    resultSet.getString("lastName"),
-                    resultSet.getString("nic"),
-                    resultSet.getString("emailAddress"),
-                    resultSet.getString("username"),
-                    resultSet.getString("password")
-            );
-        }
-        return entity;*/
     }
 
     @Override
     public ArrayList<User> getAll() throws SQLException {
-        /*Session session = FactoryConfiguration.getInstance().getSession();
+        Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
-        Query query = session.createQuery("FROM Branch ");
-        ArrayList<User> list = (ArrayList<Branch>) query.list();
+        Query query = session.createQuery("FROM User ");
+        ArrayList<User> list = (ArrayList<User>) query.list();
 
         transaction.commit();
         session.close();
 
-        return list;*/
-        return null;
+        return list;
+
     }
 
 
+    @Override
+    public User getUser(String userID) throws SQLException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("FROM User WHERE userID=?1");
+        query.setParameter(1, userID);
+        List<User> userList = query.list();
+        User user = null;
+
+        for (User user1 : userList) {
+            user = new User(
+                    user1.getUserID(),
+                    user1.getFirstName(),
+                    user1.getLastName(),
+                    user1.getNic(),
+                    user1.getEmailAddress()
+            );
+        }
+        transaction.commit();
+        session.close();
+        return user;
+    }
 }

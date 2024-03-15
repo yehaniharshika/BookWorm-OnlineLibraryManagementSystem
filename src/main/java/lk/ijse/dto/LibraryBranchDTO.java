@@ -1,6 +1,6 @@
 package lk.ijse.dto;
 
-import lk.ijse.entity.LibraryBranch;
+import lk.ijse.entity.Admin;
 import lombok.*;
 
 
@@ -16,12 +16,21 @@ public class LibraryBranchDTO {
 
 
 
-
     public LibraryBranchDTO(String branchID, String branchName, String location, String adminID) {
         this.branchID = branchID;
         this.branchName = branchName;
         this.location = location;
         this.adminID = adminID;
+    }
 
+    public LibraryBranchDTO(String branchID, String branchName, String location, Admin admin) {
+        this.branchID = branchID;
+        this.branchName = branchName;
+        this.location = location;
+        if (admin != null) {
+            this.adminID = admin.getAdminID();
+        } else {
+            this.adminID = "Unknown"; // Set a default value
+        }
     }
 }
