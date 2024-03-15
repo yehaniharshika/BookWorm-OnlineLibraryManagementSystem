@@ -10,9 +10,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PlaceReservationBo {
-    boolean placeReservation(String reservationID, LocalDate borrowDate, String userID, List<BookReservationDetailsDTO> bookReservationsDetails) throws SQLException,ClassNotFoundException;
+   // boolean placeReservation(String reservationID, LocalDate borrowDate, String userID, List<BookReservationDetailsDTO> bookReservationsDetails) throws SQLException,ClassNotFoundException;
 
     String generateNextReservationId() throws SQLException;
+    String generateNextBookReservationDetailId() throws SQLException;
 
     List<UserSignupDTO> getAllUsers() throws SQLException;
 
@@ -22,17 +23,8 @@ public interface PlaceReservationBo {
 
     BookDTO searchBook(String bookID) throws SQLException;
 
-    boolean saveReservation(ReservationDTO dto) throws SQLException;
 
-    boolean updateReservation(ReservationDTO dto) throws SQLException;
-
-    boolean deleteReservation(String reservationID) throws SQLException;
-
-    ReservationDTO searchReservation(String reservationID) throws SQLException;
-
-    List<ReservationDTO> getAllReservations() throws SQLException;
-
-    boolean updateBookReservationDetails(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException;
+   // boolean updateBookReservationDetails(String reservationID, BookReservationDetailsDTO bookReservationsDetails) throws SQLException, ClassNotFoundException;
 
 
 

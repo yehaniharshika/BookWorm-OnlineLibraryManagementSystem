@@ -20,18 +20,35 @@ public class User {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Reservation> reservations;
 
-    public User(String userID, String firstName, String lastName, String nic, String emailAddress) {
-        this.userID = userID;
+
+    public User(String emailAddress, String firstName, String lastName, String nic, List<Reservation> reservations, String userID) {
         this.emailAddress = emailAddress;
         this.firstName = firstName;
         this.lastName = lastName;
         this.nic = nic;
         this.reservations = reservations;
-
+        this.userID = userID;
     }
 
     public User() {
 
+    }
+
+    public User(String userID, String firstName, String lastName, String nic, String emailAddress) {
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.nic = nic;
+        this.emailAddress = emailAddress;
+
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public String getEmailAddress() {
@@ -64,14 +81,6 @@ public class User {
 
     public void setNic(String nic) {
         this.nic = nic;
-    }
-
-    public List<Reservation> getReservations() {
-        return reservations;
-    }
-
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
     }
 
     public String getUserID() {

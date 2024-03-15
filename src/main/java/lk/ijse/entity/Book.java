@@ -19,7 +19,9 @@ public class Book {
     private LibraryBranch libraryBranch;
 
     @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
-    private List<Reservation> reservations;
+    private List<BookReservationDetail> bookReservationDetails;
+
+
     /*public Book(String authorName, String availability, String bookGenre, String bookID, String bookName, String branchID, LibraryBranch libraryBranch, int qtyOnHand) {
         this.authorName = authorName;
         this.availability = availability;
@@ -32,9 +34,6 @@ public class Book {
     }*/
 
 
-    public Book(String reservationID, String borrowDate, String dueDate, String date, String bookReturnDate, User user, Book book) {
-
-    }
 
 
     public Book(String bookID, String bookName, String authorName, String bookGenre, int qtyOnHand, String availability, LibraryBranch libraryBranch) {
@@ -47,16 +46,6 @@ public class Book {
         this.libraryBranch = libraryBranch;
     }
 
-    public Book(String authorName, String availability, String bookGenre, String bookID, String bookName, LibraryBranch libraryBranch, int qtyOnHand, List<Reservation> reservations) {
-        this.authorName = authorName;
-        this.availability = availability;
-        this.bookGenre = bookGenre;
-        this.bookID = bookID;
-        this.bookName = bookName;
-        this.libraryBranch = libraryBranch;
-        this.qtyOnHand = qtyOnHand;
-        this.reservations = reservations;
-    }
 
     public Book() {
 
@@ -72,12 +61,12 @@ public class Book {
         this.libraryBranch = branchID;
     }*/
 
-    public List<Reservation> getReservations() {
-        return reservations;
+    public List<BookReservationDetail> getBookReservationDetails() {
+        return bookReservationDetails;
     }
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setBookReservationDetails(List<BookReservationDetail> bookReservationDetails) {
+        this.bookReservationDetails = bookReservationDetails;
     }
 
     public LibraryBranch getLibraryBranch() {

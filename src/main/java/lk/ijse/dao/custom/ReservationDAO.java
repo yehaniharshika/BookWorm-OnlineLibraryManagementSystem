@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 public interface ReservationDAO extends crudDAO<Reservation> {
     //boolean save(String ReservationID, LocalDate borrowDate, String userID) throws SQLException, ClassNotFoundException;
-    boolean exist(String reservationID ) throws SQLException;
+    //boolean exist(String reservationID ) throws SQLException;
+    String generateNextBookReservationId() throws SQLException;
 
 }

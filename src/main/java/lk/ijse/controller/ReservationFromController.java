@@ -11,13 +11,17 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.custom.impl.BookBOImpl;
 import lk.ijse.bo.custom.impl.PlaceReservationBoImpl;
 import lk.ijse.config.FactoryConfiguration;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BookReservationDetailsDTO;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.dto.tm.TransactionCartTM;
+import lk.ijse.entity.Book;
+import lk.ijse.entity.BookReservationDetail;
 import lk.ijse.entity.Reservation;
+import lk.ijse.entity.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -105,12 +109,27 @@ public class ReservationFromController {
 
     public PlaceReservationBoImpl placeReservationBo = new PlaceReservationBoImpl();
 
+    public  User user=new User();
+    public  String  reservationDetailID ;
+    public BookBOImpl bookBO = new BookBOImpl();
+
     public void initialize(){
         loadAllBookID();
         loadAllUserID();
         setDate();
         generateNextReservationID();
         setCellValueFactory();
+        generateNextReservationDetailID();
+    }
+
+    private String generateNextReservationDetailID() {
+        try {
+            String reservationDetailID = placeReservationBo.generateNextBookReservationDetailId();
+            System.out.println(reservationDetailID);
+            return reservationDetailID;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setCellValueFactory() {
@@ -181,13 +200,6 @@ public class ReservationFromController {
                 if (colbookID.getCellData(i).equals(bookID)){
 
 
-               /* int colsupplierQuantity = (int) colQty.getCellData(i);
-                    qty += colsupplierQuantity;
-
-                   *//* obList.get(i).;*//*
-
-                    calculateTotal();
-*/
                     tblTransaction.refresh();
                     return;
                 }
@@ -196,10 +208,7 @@ public class ReservationFromController {
         }
         var TransactionCartTM = new TransactionCartTM(bookID,bookName,borrowedDate,dueDate,bookReturnDate,btn);
         obList.add(TransactionCartTM);
-        /*tblTransaction.setItems(obList);*/
-
-            /* calculateTotal();
-                txtSupplyQuantity.clear();*/
+        tblTransaction.setItems(obList);
 
 
     }
@@ -217,7 +226,6 @@ public class ReservationFromController {
                 obList.remove(focusedIndex);
                 tblTransaction.refresh();
 
-                /*calculateTotal();*/
 
 
             }
@@ -226,13 +234,7 @@ public class ReservationFromController {
 
     @FXML
     void btnBookReturnOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void btnPlaceReservationOnAction(ActionEvent event) {
-
-        Session session  = null;
+        Session session = null;
         Transaction transaction = null;
 
         try {
@@ -247,40 +249,114 @@ public class ReservationFromController {
             transaction = session.beginTransaction();
 
             Reservation reservation = new Reservation();
-            /*reservation.setUser(userID);*/
+            user.setUserID(userID);
 
             reservation.setReservationID(txtReservationID.getText());
-            reservation.setBorrowDate(borrowedDate);
-
+            reservation.setBorrowDate(txtBorrowedDate.getText());
+            reservation.setUser(user);
             session.save(reservation);
 
-            /*int i=0;
-            for (TransactionCartTM transactionCartTM : obList){
-                session.save(new )
-            }*/
+            Book book = new Book();
+            book.setBookID(bookID);
+
+            Reservation reservation1 = new Reservation();
+            reservation1.setReservationID(reservationID);
+
+
+            placeReservationBo.generateNextBookReservationDetailId();
+            for (TransactionCartTM transactionCartTm : obList){
+                session.save(new BookReservationDetail(
+                        generateNextReservationDetailID(),
+                        reservation.getBorrowDate(),
+                        transactionCartTm.getDueDate(),
+                        transactionCartTm.getBookReturnDate(),
+                        book,
+                        reservation1
+                ));
+            }
+
+            for (TransactionCartTM transactionCartTm : obList){
+                String id = transactionCartTm.getBookID();
+                book = session.get(Book.class,id);
+                book.setAvailability("Available");
+                session.update(book);
+
+            }
+            transaction.commit();
+            new Alert(Alert.AlertType.INFORMATION, "Book Returned successfully").show();
 
         } catch (Exception e) {
+            transaction.rollback();
             throw new RuntimeException(e);
-        }
-        /*String reservationID = txtReservationID.getText();
-        boolean b = saveOrder(reservationID, LocalDate.now(), cmbUserId.getValue(),
-                tblTransaction.getItems().stream().map(tm -> new BookReservationDetailsDTO(tm.getBookID(),
-                        tm.getBookName(), tm.getBorrowDate(), tm.getDueDate(), tm.getBookReturnDate())).collect(Collectors.toList()));
-
-        if (b) {
-            new Alert(Alert.AlertType.INFORMATION, "Order has been placed successfully").show();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Order has not been placed successfully").show();
+        }finally {
+            session.close();
         }
 
-        generateNextReservationID();
-        lblId.setText("Order Id: " + txtReservationID.getText());
-        cmbUserId.getSelectionModel().clearSelection();
-        cmbBookId.getSelectionModel().clearSelection();
-        tblTransaction.getItems().clear();
-        txtQty.clear();
 
-        *//*calculateTotal();*/
+    }
+
+    @FXML
+    void btnPlaceReservationOnAction(ActionEvent event) {
+
+        Session session  = null;
+        Transaction transaction = null;
+
+
+        try {
+            String userID = cmbUserId.getValue();
+            String bookID = cmbBookId.getValue();
+            String reservationID = txtReservationID.getText();
+            String borrowedDate = txtBorrowedDate.getText();
+            String dueDate = String.valueOf(txtDueDate.getValue());
+            String bookReturnDate = txtReturnDate.getText();
+
+            session = FactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+
+            Reservation reservation = new Reservation();
+            user.setUserID(userID);
+
+            reservation.setReservationID(txtReservationID.getText());
+            reservation.setBorrowDate(txtBorrowedDate.getText());
+            reservation.setUser(user);
+            session.save(reservation);
+
+            Book book = new Book();
+            book.setBookID(bookID);
+
+            Reservation reservation1 = new Reservation();
+            reservation1.setReservationID(reservationID);
+
+
+            placeReservationBo.generateNextBookReservationDetailId();
+            System.out.println(placeReservationBo.generateNextBookReservationDetailId()+"..........................");
+            for (TransactionCartTM transactionCartTm : obList){
+                session.save(new BookReservationDetail(
+                        generateNextReservationDetailID(),
+                        reservation.getBorrowDate(),
+                        transactionCartTm.getDueDate(),
+                        transactionCartTm.getBookReturnDate(),
+                        book,
+                        reservation1
+                ));
+            }
+
+            for (TransactionCartTM transactionCartTm : obList){
+                String id = transactionCartTm.getBookID();
+                book = session.get(Book.class,id);
+                book.setAvailability("Non Available");
+                session.update(book);
+
+            }
+            transaction.commit();
+            new Alert(Alert.AlertType.INFORMATION, "Book borrowed successfully").show();
+
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new RuntimeException(e);
+        }finally {
+            session.close();
+        }
 
     }
 
@@ -307,12 +383,14 @@ public class ReservationFromController {
     @FXML
     void cmbBookOnAction(ActionEvent event) {
         String bookID = cmbBookId.getValue();
+        System.out.println(bookID);
 
         try {
-            BookDTO dto = placeReservationBo.searchBook(bookID);
+            BookDTO dto = bookBO.searchBook(bookID);
 
             if (dto != null){
                 lblBookName.setText(dto.getBookName());
+                System.out.println(dto.getBookName());
                 lblQtyOnHand.setText(String.valueOf(dto.getQtyOnHand()));
             }
         } catch (SQLException e) {

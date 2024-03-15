@@ -1,5 +1,6 @@
 package lk.ijse.config;
 
+import lk.ijse.dto.BookDTO;
 import lk.ijse.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,6 +32,7 @@ public class FactoryConfiguration {
         configuration.addAnnotatedClass(Book.class);
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Reservation.class);
+        configuration.addAnnotatedClass(BookReservationDetail.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 

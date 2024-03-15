@@ -56,7 +56,7 @@ public class ReservationDAOImpl implements  ReservationDAO{
 
     @Override
     public boolean update(Reservation entity) throws SQLException {
-        Session session = FactoryConfiguration.getInstance().getSession();
+        /*Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
         Query query = session.createQuery("update  Reservation set BorrowDate=?1,dueDate=?2,bookReturnDate=?3,user=?4,book=?5 where reservationID=?6");
@@ -70,7 +70,8 @@ public class ReservationDAOImpl implements  ReservationDAO{
 
         transaction.commit();
         session.close();
-        return (i==1? true:false);
+        return (i==1? true:false);*/
+        return false;
     }
 
     @Override
@@ -126,16 +127,10 @@ public class ReservationDAOImpl implements  ReservationDAO{
         return list;
     }
 
-    @Override
-    public boolean exist(String reservationID ) throws SQLException{
-       /* ResultSet rst = SQLUtil.execute("SELECT reservationID FROM reservation WHERE reservationID=?",reservationID);
-        return rst.next();*/
-        return false;
-    }
 
     @Override
     public boolean save(Reservation entity) throws SQLException{
-        Session session = FactoryConfiguration.getInstance().getSession();
+       /* Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
 
         Query query = session.createQuery("insert into Reservation (reservationID,BorrowDate,dueDate,bookReturnDate,user,book) select :reservationID, :BorrowDate,:dueDate,:bookReturnDate,:user,:book");
@@ -152,6 +147,41 @@ public class ReservationDAOImpl implements  ReservationDAO{
         transaction.commit();
         session.close();
 
-        return (i==1? true:false);
+        return (i==1? true:false);*/
+        return false;
+    }
+
+    @Override
+    public String generateNextBookReservationId() throws SQLException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("select reservationDetailID from BookReservationDetail order by reservationDetailID desc limit 1");
+        String id = (String) query.uniqueResult();
+
+        transaction.commit();
+        session.close();
+
+        return splitReservationDetailId(id);
+    }
+
+    private String splitReservationDetailId(String  currentReservationDetailId) {
+        if(currentReservationDetailId != null) {
+            String[] strings = currentReservationDetailId.split("D0");
+            int id = Integer.parseInt(strings[1]);
+            id++;
+            String ID = String.valueOf(id);
+            int length = ID.length();
+            if (length < 2){
+                return "D00"+id;
+            }else {
+                if (length < 3){
+                    return "D0"+id;
+                }else {
+                    return "D"+id;
+                }
+            }
+        }
+        return "D001";
     }
 }

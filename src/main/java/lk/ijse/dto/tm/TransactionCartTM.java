@@ -6,15 +6,24 @@ import lombok.*;
 import java.time.LocalDate;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
 public class TransactionCartTM {
-    private String ReservationID;
+    private String bookID;
+    private String bookName;
     private LocalDate borrowDate;
     private String dueDate;
     private String bookReturnDate;
-    private String userID;
-    private String bookID;
+    private Button btn;
+
+
+    public TransactionCartTM(String bookID, String bookName, LocalDate borrowedDate, String dueDate, String bookReturnDate, Button btn) {
+        this.bookID = bookID;
+        this.bookName = bookName;
+        this.borrowDate = borrowedDate;
+        this.dueDate = dueDate;
+        this.bookReturnDate = bookReturnDate;
+        this.btn = btn;
+    }
 }

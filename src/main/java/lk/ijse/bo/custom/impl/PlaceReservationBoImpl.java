@@ -2,19 +2,14 @@ package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.PlaceReservationBo;
 import lk.ijse.dao.custom.impl.BookDAOImpl;
-import lk.ijse.dao.custom.impl.BookReservationDetailDAOImpl;
 import lk.ijse.dao.custom.impl.ReservationDAOImpl;
 import lk.ijse.dao.custom.impl.UserSignupDAOImpl;
 import lk.ijse.dto.BookDTO;
-import lk.ijse.dto.BookReservationDetailsDTO;
-import lk.ijse.dto.ReservationDTO;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.entity.Book;
 import lk.ijse.entity.User;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +18,12 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
     public BookDAOImpl bookDAO = new BookDAOImpl();
     public UserSignupDAOImpl userSignupDAO = new UserSignupDAOImpl();
     public ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-    public BookReservationDetailDAOImpl bookReservationDetailDAO = new BookReservationDetailDAOImpl();
+    //public BookReservationDetailDAOImpl bookReservationDetailDAO = new BookReservationDetailDAOImpl();
 
 
-    @Override
+/*    @Override
     public boolean placeReservation(String reservationID, LocalDate borrowDate, String userID, List<BookReservationDetailsDTO> bookReservationsDetails) throws SQLException,ClassNotFoundException {
-       /* Connection connection = null;
+       *//* Connection connection = null;
         connection = DBConnection.getInstance().getConnection();
         boolean isExist = reservationDAO.exist(reservationID);
 
@@ -71,14 +66,19 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
 
         connection.commit();
         connection.setAutoCommit(true);
-        return true;*/
+        return true;*//*
         return false;
-    }
+    }*/
 
 
     @Override
     public String generateNextReservationId() throws SQLException {
         return reservationDAO.generateNextId();
+    }
+
+    @Override
+    public String generateNextBookReservationDetailId() throws SQLException {
+        return  reservationDAO.generateNextBookReservationId();
     }
 
     @Override
@@ -149,7 +149,7 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
         }
         return null;
     }
-
+/*
     @Override
     public boolean saveReservation(ReservationDTO dto) throws SQLException {
         return reservationDAO.save(new Book(
@@ -187,7 +187,7 @@ public class PlaceReservationBoImpl implements PlaceReservationBo {
     @Override
     public List<ReservationDTO> getAllReservations() throws SQLException {
         return List.of();
-    }
+    }*/
 
 
 }

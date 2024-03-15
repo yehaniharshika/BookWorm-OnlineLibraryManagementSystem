@@ -9,22 +9,18 @@ public class Reservation {
     @Id
     private String reservationID;
     private String BorrowDate;
-    private String dueDate;
-    private String bookReturnDate;
+
 
     @ManyToOne
     @JoinColumn(name = "userID", insertable = false, updatable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "bookID", insertable = false, updatable = false)
-    private Book book;
+    @OneToMany(mappedBy = "reservation")
+    private List<BookReservationDetail> bookReservationDetails;
 
-    public Reservation(Book book, String bookReturnDatel, String borrowDate, String dueDate, String reservationID, User user) {
-        this.book = book;
-        this.bookReturnDate = bookReturnDatel;
+    public Reservation(List<BookReservationDetail> bookReservationDetails, String borrowDate, String reservationID, User user) {
+        this.bookReservationDetails = bookReservationDetails;
         BorrowDate = borrowDate;
-        this.dueDate = dueDate;
         this.reservationID = reservationID;
         this.user = user;
     }
@@ -33,29 +29,12 @@ public class Reservation {
 
     }
 
-
-   /* public Reservation(List<Book> books, String borrowDate, String reservationID, User user, String userID) {
-        this.books = books;
-        BorrowDate = borrowDate;
-        this.reservationID = reservationID;
-        this.user = user;
-        this.userID = userID;
-    }*/
-
-    public Book getBook() {
-        return book;
+    public List<BookReservationDetail> getBookReservationDetails() {
+        return bookReservationDetails;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public String getBookReturnDate() {
-        return bookReturnDate;
-    }
-
-    public void setBookReturnDate(String bookReturnDate) {
-        this.bookReturnDate = bookReturnDate;
+    public void setBookReservationDetails(List<BookReservationDetail> bookReservationDetails) {
+        this.bookReservationDetails = bookReservationDetails;
     }
 
     public String getBorrowDate() {
@@ -64,14 +43,6 @@ public class Reservation {
 
     public void setBorrowDate(String borrowDate) {
         BorrowDate = borrowDate;
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(String dueDate) {
-        this.dueDate = dueDate;
     }
 
     public String getReservationID() {
