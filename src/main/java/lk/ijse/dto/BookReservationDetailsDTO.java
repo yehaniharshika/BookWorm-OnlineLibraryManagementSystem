@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
+@Data
 public class BookReservationDetailsDTO {
     private String bookID;
     private String bookName;

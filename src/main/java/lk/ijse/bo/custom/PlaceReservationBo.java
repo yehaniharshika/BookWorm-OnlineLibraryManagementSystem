@@ -1,5 +1,6 @@
 package lk.ijse.bo.custom;
 
+import lk.ijse.bo.SuperBO;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.BookReservationDetailsDTO;
 import lk.ijse.dto.ReservationDTO;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-public interface PlaceReservationBo {
+public interface PlaceReservationBo extends SuperBO {
    // boolean placeReservation(String reservationID, LocalDate borrowDate, String userID, List<BookReservationDetailsDTO> bookReservationsDetails) throws SQLException,ClassNotFoundException;
 
     String generateNextReservationId() throws SQLException;

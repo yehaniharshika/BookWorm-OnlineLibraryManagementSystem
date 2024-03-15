@@ -10,6 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.BookBO;
+import lk.ijse.bo.custom.LibraryBranchBO;
 import lk.ijse.bo.custom.impl.BookBOImpl;
 import lk.ijse.bo.custom.impl.LibraryBranchBOImpl;
 import lk.ijse.dto.BookDTO;
@@ -85,13 +88,14 @@ public class BookFormController {
     @FXML
     private TextField txtQty;
 
-    public BookBOImpl bookBO =  new BookBOImpl();
-    public LibraryBranchBOImpl libraryBranchBO = new LibraryBranchBOImpl();
+    BookBO bookBO = (BookBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.BOOK);
+    LibraryBranchBO libraryBranchBO = (LibraryBranchBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.LIBRARY_BRANCH);
 
 
     @FXML
     void btnClearOnAction(ActionEvent event) {
         clearFields();
+        generateNextBookID();
     }
 
     public void  initialize(){

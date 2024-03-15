@@ -45,6 +45,8 @@ public class AdminDashboardFormController {
     @FXML
     private Label lblTime;
 
+    @FXML
+    private JFXButton btnTransactionHistory;
 
     @FXML
     private Label lblAuthorCount;
@@ -113,13 +115,15 @@ public class AdminDashboardFormController {
         this.Root.getChildren().add(node);
     }
 
+
     @FXML
-    void btnUserInformationOnAction(ActionEvent event) throws IOException {
-        Parent node = FXMLLoader.load(this.getClass().getResource("/view/User_Form.fxml"));
+    void btnTransactionHistoryOnAction(ActionEvent event) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/reservationHistory.fxml"));
 
         this.Root.getChildren().clear();
         this.Root.getChildren().add(node);
     }
+
 
     @FXML
     void btnUserTransactionOnAction(ActionEvent event) throws IOException {
@@ -144,6 +148,14 @@ public class AdminDashboardFormController {
     @FXML
     void btnUserOnAction(ActionEvent event) throws IOException {
         Parent node = FXMLLoader.load(this.getClass().getResource("/view/UserRegister_Form.fxml"));
+
+        this.Root.getChildren().clear();
+        this.Root.getChildren().add(node);
+    }
+
+    @FXML
+    void btnTimeOutOnAction(ActionEvent event) throws IOException {
+        Parent node = FXMLLoader.load(this.getClass().getResource("/view/timeOutList_Form.fxml"));
 
         this.Root.getChildren().clear();
         this.Root.getChildren().add(node);

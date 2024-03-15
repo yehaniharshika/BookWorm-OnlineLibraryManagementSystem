@@ -10,6 +10,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.AdminSignupBO;
 import lk.ijse.bo.custom.impl.AdminSignupBOImpl;
 import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.dto.BookDTO;
@@ -51,7 +53,8 @@ public class AdminSignupFormController {
     @FXML
     private AnchorPane root;
 
-    public AdminSignupBOImpl adminSignupBO = new AdminSignupBOImpl();
+     AdminSignupBO adminSignupBO = (AdminSignupBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.ADMIN);
+
 
     public void initialize(){
         generateNextAdminID();

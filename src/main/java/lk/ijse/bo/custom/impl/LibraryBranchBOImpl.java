@@ -1,6 +1,10 @@
 package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.LibraryBranchBO;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.AdminLoginDAO;
+import lk.ijse.dao.custom.AdminSignupDAO;
+import lk.ijse.dao.custom.LibraryBranchDAO;
 import lk.ijse.dao.custom.impl.AdminSignupDAOImpl;
 import lk.ijse.dao.custom.impl.LibraryBranchDAOImpl;
 import lk.ijse.dto.AdminSignupDTO;
@@ -14,8 +18,8 @@ import java.util.List;
 
 public class LibraryBranchBOImpl implements LibraryBranchBO{
 
-  public LibraryBranchDAOImpl libraryBranchDAO = new LibraryBranchDAOImpl();
-  public AdminSignupDAOImpl adminSignupDAO = new AdminSignupDAOImpl();
+  LibraryBranchDAO libraryBranchDAO = (LibraryBranchDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.LIBRARY_BRANCH);
+  AdminSignupDAO adminSignupDAO = (AdminSignupDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.ADMIN);
 
     @Override
     public String generateNextBranchId() throws SQLException {

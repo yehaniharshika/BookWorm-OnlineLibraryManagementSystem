@@ -1,6 +1,7 @@
 package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.AdminSignupBO;
+import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.AdminSignupDAO;
 import lk.ijse.dao.custom.impl.AdminSignupDAOImpl;
 import lk.ijse.dto.AdminSignupDTO;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class AdminSignupBOImpl implements AdminSignupBO {
 
-    private AdminSignupDAO adminSignupDAO = new AdminSignupDAOImpl();
+    AdminSignupDAO adminSignupDAO = (AdminSignupDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.ADMIN);
 
     @Override
     public boolean saveAdmin(AdminSignupDTO dto) throws SQLException {

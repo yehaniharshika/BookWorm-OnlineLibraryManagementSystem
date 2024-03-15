@@ -1,6 +1,8 @@
 package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.AdminLoginBO;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.AdminLoginDAO;
 import lk.ijse.dao.custom.impl.AdminLoginDAOImpl;
 
 import java.sql.SQLException;

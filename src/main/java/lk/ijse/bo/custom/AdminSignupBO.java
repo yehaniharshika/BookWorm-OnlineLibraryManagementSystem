@@ -1,11 +1,12 @@
 package lk.ijse.bo.custom;
 
+import lk.ijse.bo.SuperBO;
 import lk.ijse.dto.AdminSignupDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface AdminSignupBO {
+public interface AdminSignupBO  extends SuperBO {
     boolean saveAdmin(AdminSignupDTO dto) throws SQLException;
     boolean updateAdmin(AdminSignupDTO dto) throws SQLException;
     boolean deleteAdmin(String adminID) throws SQLException;

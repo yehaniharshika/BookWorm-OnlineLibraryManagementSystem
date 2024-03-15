@@ -1,6 +1,10 @@
 package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.PlaceReservationBo;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.BookDAO;
+import lk.ijse.dao.custom.ReservationDAO;
+import lk.ijse.dao.custom.UserSignUpDAO;
 import lk.ijse.dao.custom.impl.BookDAOImpl;
 import lk.ijse.dao.custom.impl.ReservationDAOImpl;
 import lk.ijse.dao.custom.impl.UserSignupDAOImpl;
@@ -15,61 +19,9 @@ import java.util.List;
 
 public class PlaceReservationBoImpl implements PlaceReservationBo {
 
-    public BookDAOImpl bookDAO = new BookDAOImpl();
-    public UserSignupDAOImpl userSignupDAO = new UserSignupDAOImpl();
-    public ReservationDAOImpl reservationDAO = new ReservationDAOImpl();
-    //public BookReservationDetailDAOImpl bookReservationDetailDAO = new BookReservationDetailDAOImpl();
-
-
-/*    @Override
-    public boolean placeReservation(String reservationID, LocalDate borrowDate, String userID, List<BookReservationDetailsDTO> bookReservationsDetails) throws SQLException,ClassNotFoundException {
-       *//* Connection connection = null;
-        connection = DBConnection.getInstance().getConnection();
-        boolean isExist = reservationDAO.exist(reservationID);
-
-        if (isExist) {
-            return false;
-        }
-
-        connection.setAutoCommit(false);
-
-        boolean isSaved = reservationDAO.save(reservationID, borrowDate, userID);
-
-        if (!isSaved) {
-            connection.rollback();
-            connection.setAutoCommit(true);
-            return false;
-        }
-
-        for (BookReservationDetailsDTO detail : bookReservationsDetails) {
-
-            boolean isReservationDetailsSaved = bookReservationDetailDAO.save(reservationID, detail);
-
-            if (!isReservationDetailsSaved) {
-                connection.rollback();
-                connection.setAutoCommit(true);
-                return false;
-            }
-
-
-            BookDTO book = searchBook(detail.getBookID());
-            book.setAvailability("not available");
-
-            boolean isUpdateQty = bookDAO.update(new Book(book.getBookID(), book.getBookName(), book.getAuthorName(), book.getBookGenre(),book.getQtyOnHand(),book.getAvailability(), book.getBranchID()));
-
-            if (!(isUpdateQty)) {
-                connection.rollback();
-                connection.setAutoCommit(true);
-                return false;
-            }
-        }
-
-        connection.commit();
-        connection.setAutoCommit(true);
-        return true;*//*
-        return false;
-    }*/
-
+    BookDAO bookDAO = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.BOOK);
+    UserSignUpDAO userSignupDAO = (UserSignUpDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.USER);
+    ReservationDAO reservationDAO = (ReservationDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.RESERVATION);
 
     @Override
     public String generateNextReservationId() throws SQLException {

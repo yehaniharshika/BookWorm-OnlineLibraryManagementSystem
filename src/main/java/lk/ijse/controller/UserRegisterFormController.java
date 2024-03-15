@@ -11,6 +11,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.UserSignUpBo;
 import lk.ijse.bo.custom.impl.UserSignupBOImpl;
 import lk.ijse.dto.UserSignupDTO;
 import lk.ijse.dto.tm.UserSignupTM;
@@ -66,7 +68,7 @@ public class UserRegisterFormController {
     @FXML
     private AnchorPane pane;
 
-    public UserSignupBOImpl userSignupBO = new UserSignupBOImpl();
+    UserSignUpBo userSignupBO = (UserSignUpBo) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.USER);
 
     public void initialize(){
         generateNextUserID();

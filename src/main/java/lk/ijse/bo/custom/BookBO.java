@@ -1,12 +1,13 @@
 package lk.ijse.bo.custom;
 
+import lk.ijse.bo.SuperBO;
 import lk.ijse.dto.BookDTO;
 import lk.ijse.dto.LibraryBranchDTO;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface BookBO {
+public interface BookBO extends SuperBO {
     boolean saveBook(BookDTO dto) throws SQLException;
     boolean updateBook(BookDTO dto) throws SQLException;
     boolean deleteBook(String bookID) throws SQLException;

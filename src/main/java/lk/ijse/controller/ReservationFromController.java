@@ -11,6 +11,8 @@ import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.bo.BOFactory;
+import lk.ijse.bo.custom.PlaceReservationBo;
 import lk.ijse.bo.custom.impl.BookBOImpl;
 import lk.ijse.bo.custom.impl.PlaceReservationBoImpl;
 import lk.ijse.config.FactoryConfiguration;
@@ -107,7 +109,7 @@ public class ReservationFromController {
 
     ObservableList<TransactionCartTM> obList = FXCollections.observableArrayList();
 
-    public PlaceReservationBoImpl placeReservationBo = new PlaceReservationBoImpl();
+    PlaceReservationBo placeReservationBo = (PlaceReservationBo) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.RESERVATION);
 
     public  User user=new User();
     public  String  reservationDetailID ;

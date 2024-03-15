@@ -1,12 +1,13 @@
 package lk.ijse.bo.custom;
 
+import lk.ijse.bo.SuperBO;
 import lk.ijse.dto.AdminSignupDTO;
 import lk.ijse.dto.LibraryBranchDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public interface LibraryBranchBO {
+public interface LibraryBranchBO extends SuperBO {
     String generateNextBranchId() throws SQLException;
 
     boolean saveLibraryBranch(LibraryBranchDTO dto) throws SQLException;

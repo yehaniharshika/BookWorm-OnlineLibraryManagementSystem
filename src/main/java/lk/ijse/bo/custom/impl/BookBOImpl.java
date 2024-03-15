@@ -1,6 +1,9 @@
 package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.BookBO;
+import lk.ijse.dao.DAOFactory;
+import lk.ijse.dao.custom.BookDAO;
+import lk.ijse.dao.custom.LibraryBranchDAO;
 import lk.ijse.dao.custom.impl.BookDAOImpl;
 import lk.ijse.dao.custom.impl.LibraryBranchDAOImpl;
 import lk.ijse.dto.BookDTO;
@@ -14,8 +17,8 @@ import java.util.List;
 
 public class BookBOImpl implements BookBO{
 
-    public BookDAOImpl bookDAO = new BookDAOImpl();
-    public LibraryBranchDAOImpl libraryBranchDAO = new LibraryBranchDAOImpl();
+    BookDAO bookDAO = (BookDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.BOOK);
+    LibraryBranchDAO libraryBranchDAO = (LibraryBranchDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.LIBRARY_BRANCH);
 
     @Override
     public boolean saveBook(BookDTO dto) throws SQLException {

@@ -1,6 +1,7 @@
 package lk.ijse.bo.custom.impl;
 
 import lk.ijse.bo.custom.UserSignUpBo;
+import lk.ijse.dao.DAOFactory;
 import lk.ijse.dao.custom.UserSignUpDAO;
 import lk.ijse.dao.custom.impl.UserSignupDAOImpl;
 import lk.ijse.dto.UserSignupDTO;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class UserSignupBOImpl implements UserSignUpBo{
 
-    public UserSignUpDAO userSignUpDAO = new UserSignupDAOImpl();
+    UserSignUpDAO userSignUpDAO = (UserSignUpDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DTOTypes.USER);
     @Override
     public boolean saveUser(UserSignupDTO dto) throws SQLException {
         return userSignUpDAO.save(new User(
